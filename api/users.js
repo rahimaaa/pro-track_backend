@@ -33,7 +33,7 @@ router.get('/:email', async (req, res, next) => {
   // Retrieving a specific user by email
   try {req.params.email;
     console.log(req.params)
-    const user = await users.findByPk(req.params.email);
+    const user = await users.findOne({ where: { email: req.params.email }});
 
     if (!users) {
   // If the users is not found, send a response with status code 404 

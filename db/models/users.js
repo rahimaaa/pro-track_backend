@@ -18,7 +18,7 @@ const users = db.define("users", {
       allowNull: true,
     },
     email: {
-        primaryKey: true,
+        unique: true,
         type: DataTypes.STRING,
         allowNull: true,
       },
