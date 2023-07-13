@@ -7,31 +7,32 @@ const users = db.define("users", {
     
     firstName:{
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull:true,
     },
     lastName:{
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull:true,
       },
     imageUrl: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
+        primaryKey: true,
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       userType: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       cohort_year: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       
 });
