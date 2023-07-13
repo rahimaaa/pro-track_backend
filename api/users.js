@@ -6,7 +6,7 @@ const { users } = require("../db/models");
 
 
 //Route handler for the GETAll for allUsers request
-router.get("/", async (req, res, next) => {
+router.get("/all", async (req, res, next) => {
   try { // Retrieve all users from the database
     const allUsers = await users.findAll();
 
@@ -29,12 +29,11 @@ router.get("/", async (req, res, next) => {
 
 
 //Route for get specific user with user email
-router.get('/', async (req, res, next) => {
+router.get('/:email', async (req, res, next) => {
   // Retrieving a specific user by email
-  try {
-    const userEmail = parseString(req.params.email);
+  try {req.params.email;
     console.log(req.params)
-    const users = await users.findByPk(userEmail);
+    const user = await users.findByPk(req.params.email);
 
     if (!users) {
   // If the users is not found, send a response with status code 404 
@@ -42,12 +41,13 @@ router.get('/', async (req, res, next) => {
       return res.status(404).json({ error: 'Users not found' });
     }
   // Sending a response with the retrieved users
-    res.json(users);
+    res.json(user);
   } catch (error) {
 // Pass any error to the error handling
     next(error);
   }
 });
+
 
 //Creation of a new user
 router.post('/', async (req, res, next) => {
@@ -66,9 +66,9 @@ router.post('/', async (req, res, next) => {
 });
 
 //Deletion of a User
-router.delete('/', async (req, res, next) => {
+router.delete('/:email', async (req, res, next) => {
   try {
-    const userEmail = req.params.email;
+    const userEmail = req.params.id;
 
 // Delete the campus with the provided ID from the database
     await users.destroy({ where: { email: userEmail } });
@@ -82,66 +82,33 @@ router.delete('/', async (req, res, next) => {
   }
 });
 
-//Updating a User
 
-router.put('/', async (req, res, next) => {
-  try {
-    const userEmail = req.params.email;
-    const { firstName, lastName, imageUrl, email, password, userType, cohort_year } = req.body;
-
-    // Find the User by email
-    const user = await users.findByPk(userEmail);
-
-    if (!users) {
-      // If the user is not found, send a response with status code 404 and the error message (User not found)
-      return res.status(404).json({ error: 'User not found' });
+router.put("/:email", async (req, res, next) => {
+    try {
+      const { firstName, lastName, imageUrl, email, password, userType, cohort_year } = req.body;
+      const updateduser = await users.update(
+        {
+          firstName,
+          lastName,
+          imageUrl,
+          email,
+          password,
+          userType,
+          cohort_year
+        },
+        {
+          where: { email: req.params.email },
+          returning: true,
+        }
+      );
+  
+      updateduser
+        ? res.status(200).send("user edited successfully")
+        : res.status(404).send("user Not Found");
+    } catch (error) {
+      next(error);
     }
-
-    // Update the user properties with the provided data
-      users.firstName = firstName;
-      users.lastName = lastName;
-      users.imageUrl = imageUrl; 
-      users.email = email; 
-      users.password = password; 
-      users.userType = userType;
-      users.cohort_year = cohort_year;
-   
-    // Save the updated user to the database
-    await user.save();
-
-    // Send a response with the updated campus
-    res.json(users);
-  } catch (error) {
-    // Handling any errors that occur
-    next(error);
-  }
-});  
+  });
 
 //Exports the router object.
 module.exports = router;
-
-/*
-router.get("/", async (req, res, next) => {
-  try {
-    const allUsers = await users.findAll();
-
-    allUsers
-      ? res.status(200).json(allUsers) 
-      : res.status(404).send("User List Not Found"); 
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.post("/AddUser", async (req, res, next) => {
-  try {
-    const createUser = await users.create(req.body);
-    res.status(201).json(createUser);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-module.exports = router;
-*/

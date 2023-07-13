@@ -3,8 +3,8 @@ const { users } = require("./db/models");
 
 const seedUsers = [
   {
-    first_name: "Rahima",
-    last_name: "Khabibullaeva",
+    firstName: "Rahima",
+    lastName: "Khabibullaeva",
     imageUrl: "fds ",
     email: "rahimahabib@gmail.com",
     password: "kal",
@@ -12,8 +12,8 @@ const seedUsers = [
     cohort_year: "2023"
   },
   {
-    first_name: "bruno",
-    last_name: "ogbennya",
+    firstName: "bruno",
+    lastName: "ogbennya",
     imageUrl: "fds ",
     email: "brunosdhf@gmail.com",
     password: "989",
