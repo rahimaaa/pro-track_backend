@@ -50,5 +50,25 @@ router.get('/:email', async (req, res, next) => {
   });
 
 
+//route to delete a specific help request with stud_email(student email)
+  router.delete('/:stud_email', async (req, res, next) => {
+    try { 
+      const student_email = req.params.stud_email;
+  
+  // Delete the help_request with the provided email from the database
+      await help_request.destroy({ where: { stud_email: student_email } });
+  
+      res.json({ message: 'Request resolved and deleted successfully' });
+  //Send response message (Request resolved and deleted successfully)
+    } catch (error) {
+  
+  //Handling any errors that occur
+      next(error);
+    }
+  });
+
+
+  
+
 //Exports the router object.
 module.exports = router;
