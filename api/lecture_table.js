@@ -25,8 +25,22 @@ router.get("/all", async (req, res, next) => {
     }
   });
 
-
-
-
+/*
+//Add post route to create new help_request
+router.post('/', async (req, res, next) => {
+    try { //deconstructing the constructor into the different fields
+        const { title, description, recordings, slides, lecture_date, posted_by } = req.body;
+  
+  // Creating a new user with the provided data
+        const newLecture = await lecture_table.create({ title, description, recordings, slides, lecture_date, posted_by });
+  
+        res.status(201).json(newLecture);
+  // Send a response with status code 201 and the newly created help request
+    } catch (error) {
+  //Handling any errors that occur
+        next(error);
+    }
+  });
+*/
 
 module.exports = router;
