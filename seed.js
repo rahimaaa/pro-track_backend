@@ -42,7 +42,7 @@ const seedRequests = [
 
 const seed = async () => {
     try {
-      await db.sync(); // Drops existing tables and recreates them
+      await db.sync({force:true}); // Drops existing tables and recreates them
       await users.bulkCreate(seedUsers);
       await help_request.bulkCreate(seedRequests);
       console.log("Seeding complete");
