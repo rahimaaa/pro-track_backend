@@ -4,7 +4,10 @@ const { assignmentStatus } = require("../db/models");
 
 // Root here is localhost:8080/api/assignmentStatus/all
 
-router.get("/all", async (req, res, next) => {
+
+
+//get all assignment statuses
+router.get("/", async (req, res, next) => {
   try {
     const allAssignments = await assignmentStatus.findAll();
 
@@ -15,21 +18,20 @@ router.get("/all", async (req, res, next) => {
       : res.status(404).send("No Assignments Statuses Found");
   } catch (error) {
     res.status(500).send("Internal Server Error");
-    //console.log(error);
-    // Log any errors that occur
+  
   }
 });
 
-router.put("/:email/:assignmentId/status", async (req, res, next) => {
+router.put("/:email/:assignmentId/", async (req, res, next) => {
   try {
-    const { status } = req.body;
+    const { status, feedback , submission } = req.body;
     const { email, assignmentId } = req.params;
-     
+
     const updatedStatus = await assignmentStatus.update(
-      { status },
+      { status, feedback , submission},
       {
-        where: { email, assignmentId },
-        returning: true,
+        where: { email, assignmentId : parseInt(assignmentId)},
+        // returning: true,
       }
     );
 
@@ -43,26 +45,31 @@ router.put("/:email/:assignmentId/status", async (req, res, next) => {
   }
 });
 
-
-//Add post route to create new help_request
 router.post("/", async (req, res, next) => {
   try {
-    //deconstructing the constructor into the different fields
-    const { stud_email, request, status, ta_email, accepted } = req.body;
-
-    // Creating a new user with the provided data
-    const newRequest = await help_request.create({
-      stud_email,
-      request,
+    const {
+      email,
+      assignmentId,
       status,
-      ta_email,
-      accepted,
+      groupId,
+      submission,
+      submissionDate,
+      feedback,
+    } = req.body;
+
+    const newAssignmentStatus = await assignmentStatus.create({
+      email,
+      assignmentId,
+      status,
+      groupId,
+      submission,
+      submissionDate,
+      feedback,
     });
 
-    res.status(201).json(newRequest);
-    // Send a response with status code 201 and the newly created help request
+    res.status(201).json(newAssignmentStatus);
   } catch (error) {
-    //Handling any errors that occur
+    
     next(error);
   }
 });

@@ -10,7 +10,7 @@ const assignmentStatus = db.define("assignmentStatus", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  AssignmentId: {
+  assignmentId: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
