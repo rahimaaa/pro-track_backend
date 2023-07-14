@@ -7,7 +7,7 @@ const { assignmentStatus } = require("../db/models");
 
 
 //get all assignment statuses
-router.get("/", async (req, res, next) => {
+router.get("/all", async (req, res, next) => {
   try {
     const allAssignments = await assignmentStatus.findAll();
 
@@ -21,6 +21,8 @@ router.get("/", async (req, res, next) => {
   
   }
 });
+
+///;email, /:email/:assignmentId/  , assignmentId/
 
 router.put("/:email/:assignmentId/", async (req, res, next) => {
   try {

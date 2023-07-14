@@ -7,28 +7,30 @@ const users = db.define("users", {
 
   firstName: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   lastName: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   imageUrl: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
+    defaultValue: "https://i.stack.imgur.com/l60Hf.png",
   },
   email: {
     unique: true,
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   userType: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
+    defaultValue: "student", 
   },
   cohort_year: {
     type: DataTypes.STRING,
