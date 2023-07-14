@@ -14,7 +14,8 @@ const db = new Sequelize(
     host: "localhost",
     dialect:
       "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
-  }
+      logging: false
+    }
 );
 
 module.exports = db;
