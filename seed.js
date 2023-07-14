@@ -22,6 +22,42 @@ const seedUsers = [
     userType: "student",
     cohort_year: "2023"
   },
+  {
+    firstName: "sabina",
+    lastName: "ismoilova",
+    imageUrl: "fds ",
+    email: "sabina@ttp.com",
+    password: "kal",
+    userType: "student",
+    cohort_year: "2023"
+  },
+  {
+    firstName: "tashi",
+    lastName: "sherpa",
+    imageUrl: "fds ",
+    email: "tashi@gmail.com",
+    password: "kal",
+    userType: "student",
+    cohort_year: "2023"
+  },
+  {
+    firstName: "kevin",
+    lastName: "yu",
+    imageUrl: "fds ",
+    email: "kevin@ttp.com",
+    password: "989",
+    userType: "TA",
+    cohort_year: "2023"
+  },
+  {
+    firstName: "allan",
+    lastName: "lapid",
+    imageUrl: "fds ",
+    email: "allan@ttp.com",
+    password: "989",
+    userType: "admin",
+    cohort_year: "2023"
+  },
 ];
 
 const seedRequests = [
