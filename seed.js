@@ -45,9 +45,9 @@ const seedRequests = [
 const seedAssignmentStatus = [
   {
     email: "rahimahabib@gmail.com",
-    assignmentId: null,
+    assignmentId: 1,
     groupId: null,
-    status: "done",
+    status: false,
     submission: "kal",
     submissionDate: "06.17.2023",
     feedback: "2023"

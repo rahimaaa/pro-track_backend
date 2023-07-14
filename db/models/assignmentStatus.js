@@ -19,8 +19,9 @@ const assignmentStatus = db.define("assignmentStatus", {
     allowNull: true,
   },
   status: {
-    type: DataTypes.STRING,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
+    defaultValue:false,
   },
   submission: {
     //link
