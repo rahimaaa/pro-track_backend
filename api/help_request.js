@@ -103,6 +103,21 @@ router.get('/:email', async (req, res, next) => {
     }
   });
   
+//Add post route to create new help_request
+  router.post('/', async (req, res, next) => {
+    try { //deconstructing the constructor into the different fields
+        const { stud_email, request, status, ta_email, accepted } = req.body;
+  
+  // Creating a new user with the provided data
+        const newRequest = await help_request.create({ stud_email, request, status, ta_email, accepted });
+  
+        res.status(201).json(newRequest);
+  // Send a response with status code 201 and the newly created help request
+    } catch (error) {
+  //Handling any errors that occur
+        next(error);
+    }
+  });
 
 
 
