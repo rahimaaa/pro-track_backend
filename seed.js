@@ -25,14 +25,14 @@ const seedUsers = [
 const seedRequests = [
   {
     stud_email: "rahimahabib@gmail.com",
-    help_request: "Please help me with postgress installation",
+    request: "Please help me with postgress installation",
     status: "In Progress ",
     ta_email: "kevinYu@gmail.com",
     accepted: "True"
   },
   {
     stud_email: "bruno2@gmail.com",
-    help_request: "Help with react don't understand",
+    request: "Help with react don't understand",
     status: "In Progress",
     ta_email: "johnhui@gmail.com",
     accepted: "False"

@@ -11,7 +11,7 @@ const help_request = db.define("help_request", {
       type: DataTypes.STRING,
       allowNull:true,
     },
-    help_request:{
+    request:{
         type: DataTypes.TEXT("long"),
         allowNull:true,
       },
@@ -19,15 +19,15 @@ const help_request = db.define("help_request", {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    ta_email: {
+    ta_email:{
         unique: true,
         type: DataTypes.STRING,
         allowNull: true,
       },
-      accepted: {
+      accepted:{
         type: DataTypes.BOOLEAN,
         allowNull: true,
-      },
+      }
       
 });
 
