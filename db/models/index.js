@@ -1,6 +1,7 @@
 const users = require("./users");
 const help_request = require("./help_request");
 
+const assignmentStatus = require("./assignmentStatus")
 
 // Associations Go Here
 
@@ -10,4 +11,5 @@ const help_request = require("./help_request");
 module.exports = {
   users,
   help_request,
+  assignmentStatus,
 };
