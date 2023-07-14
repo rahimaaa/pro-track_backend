@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { users } = require("../db/models");
 
-// Root here is localhost:8080/api/shoppers/
+// Root here is localhost:8080/api/users/
 
 
 //Route handler for the GETAll for allUsers request
@@ -68,9 +68,9 @@ router.post('/', async (req, res, next) => {
 //Deletion of a User
 router.delete('/:email', async (req, res, next) => {
   try {
-    const userEmail = req.params.id;
+    const userEmail = req.params.email;
 
-// Delete the campus with the provided ID from the database
+// Delete the user with the provided email from the database
     await users.destroy({ where: { email: userEmail } });
 
     res.json({ message: 'User removed successfully' });
@@ -101,9 +101,9 @@ router.put("/:email", async (req, res, next) => {
           returning: true,
         }
       );
-  
-      updateduser
-        ? res.status(200).send("user edited successfully")
+          // res.status(201).json(updateduser) Alternate to display updated User info
+      updateduser 
+        ? res.status(200).send("user updated successfully")
         : res.status(404).send("user Not Found");
     } catch (error) {
       next(error);

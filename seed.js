@@ -1,5 +1,5 @@
 const db = require("./db/db");
-const { users } = require("./db/models");
+const { users, help_request } = require("./db/models");
 
 const seedUsers = [
   {
@@ -22,13 +22,29 @@ const seedUsers = [
   },
 ];
 
-
+const seedRequests = [
+  {
+    stud_email: "rahimahabib@gmail.com",
+    request: "Please help me with postgress installation",
+    status: "In Progress ",
+    ta_email: "kevinYu@gmail.com",
+    accepted: "True"
+  },
+  {
+    stud_email: "bruno2@gmail.com",
+    request: "Help with react don't understand",
+    status: "In Progress",
+    ta_email: "johnhui@gmail.com",
+    accepted: "False"
+  },
+];
 
 
 const seed = async () => {
     try {
       await db.sync(); // Drops existing tables and recreates them
       await users.bulkCreate(seedUsers);
+      await help_request.bulkCreate(seedRequests);
       console.log("Seeding complete");
     } catch (error) {
       console.error("Seeding error:", error);
