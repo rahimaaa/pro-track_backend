@@ -12,7 +12,7 @@ const help_request = db.define("help_request", {
       allowNull:true,
     },
     help_request:{
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT("long"),
         allowNull:true,
       },
     status:{
