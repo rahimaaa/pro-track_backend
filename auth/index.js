@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../db/models");
-
+//auth/login
 router.post("/login", async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
@@ -32,7 +32,16 @@ router.post('/signup', async (req, res, next)=>{
 })
 
 router.post('/logout', async ( req,res,next)=> {
-req.logout((err))
+req.logout((err) => {
+    if(error){
+        return next(error);
+    }
+    res.redirect("/")
+})
+})
+
+router.get('/me', async (req, res, next)=> {
+    res.status(200).json(req.user);
 })
 
 module.exports = router;
