@@ -19,7 +19,7 @@ const seedUsers = [
     imageUrl: "fds ",
     email: "brunosdhf@gmail.com",
     password: "989",
-    userType: "student",
+    
     cohort_year: "2023"
   },
   {

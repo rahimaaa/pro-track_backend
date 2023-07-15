@@ -32,7 +32,7 @@ const users = db.define("users", {
     allowNull: false,
     defaultValue: "student", 
     type: DataTypes.ENUM( "student", "TA", "admin"),
-    allowNull: false,
+    
     defaultValue:"student",
   },
   cohort_year: {
