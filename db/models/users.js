@@ -28,7 +28,7 @@ const users = db.define("users", {
   },
   userType: {
     type: DataTypes.ENUM( "student", "TA", "admin"),
-    allowNull: false,
+    
     defaultValue:"student",
   },
   cohort_year: {
