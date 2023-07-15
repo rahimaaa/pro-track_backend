@@ -4,6 +4,7 @@ const router = require("express").Router();
 router.use("/users", require("./users"));
 router.use("/help_request", require("./help_request"));
 router.use("/lecture_table", require("./lecture_table"));
+router.use("/feed_table", require("./feed_table"));
 router.use("/assignmentStatus", require("./assignmentStatus"));
 
 
