@@ -1,5 +1,7 @@
 const db = require("./db/db");
-const { users, help_request } = require("./db/models");
+const { users, help_request , assignmentStatus} = require("./db/models");
+
+// const { AssignmentStatus } = require("./db/models");
 
 const seedUsers = [
   {
@@ -40,11 +42,26 @@ const seedRequests = [
 ];
 
 
+const seedAssignmentStatus = [
+  {
+    email: "rahimahabib@gmail.com",
+    assignmentId: null,
+    groupId: null,
+    status: "done",
+    submission: "kal",
+    submissionDate: "06.17.2023",
+    feedback: "2023"
+  },
+  
+];
+
+
 const seed = async () => {
     try {
       await db.sync({force:true}); // Drops existing tables and recreates them
       await users.bulkCreate(seedUsers);
       await help_request.bulkCreate(seedRequests);
+      await assignmentStatus.bulkCreate(seedAssignmentStatus);
       console.log("Seeding complete");
     } catch (error) {
       console.error("Seeding error:", error);
@@ -54,4 +71,5 @@ const seed = async () => {
   };
   
   seed();
+
   

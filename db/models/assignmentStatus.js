@@ -2,38 +2,39 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 const DEFAULTVALUE = " ";
 
-const users = db.define("users", {
+const assignmentStatus = db.define("assignmentStatus", {
   //add the table
 
-  firstName: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  lastName: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   email: {
-    unique: true,
+    //unique:true,
     type: DataTypes.STRING,
     allowNull: true,
   },
-  password: {
+  AssignmentId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  groupId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  status: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  userType: {
+  submission: {
+    //link
     type: DataTypes.STRING,
     allowNull: true,
   },
-  cohort_year: {
+  submissionDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  feedback: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 });
 
-module.exports = users;
+module.exports = assignmentStatus;
