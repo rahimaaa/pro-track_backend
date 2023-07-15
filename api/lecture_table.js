@@ -58,5 +58,48 @@ router.post('/', async (req, res, next) => {
     }
   });
 
+  //Get route for updating of Help request with the use of stud_email(student email)
+router.put("/:title", async (req, res, next) => {
+    try {
+      //console.log(req.body)
+      const { title, description, recordings, slides, lecture_date, posted_by } = req.body;
+  
+      //Self check
+      // Ensure that all required properties exist in the request body
+      /*
+      if (!stud_email || !request || !status || !ta_email || !accepted) {
+        return res.status(400).json({ message: "Missing required fields" });
+      } */
+  
+      // Find the help request to be updated
+      const existingLecture = await lecture_table.findOne({
+        where: { title: req.params.title },
+      });
+  
+      // If the help request doesn't exist, return a 404 Not Found response
+      if (!existingLecture) {
+        return res.status(404).json({ message: "lecture not found" });
+      }
+  
+      // Update the help request in the database
+      const updatedLecture = await existingLecture.update({
+         title, 
+         description,
+         recordings, 
+         slides, 
+         lecture_date, 
+         posted_by,
+      });
+  
+      // Send a response indicating successful update
+      res
+        .status(200)
+        .json({ message: "Request updated successfully", updatedLecture });
+    } catch (error) {
+      // Handle any errors that occur
+      next(error);
+    }
+  });
+
 
 module.exports = router;
