@@ -2,31 +2,30 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 const DEFAULTVALUE = " ";
 
-const assignmentTable = db.define("assignmentTable", {
+const resources_table = db.define("resourcesTable", {
   //add the table
 
-  assignmentName: {
-    unique:true,
+  title: {
+   
     type: DataTypes.STRING,
     allowNull: false,
   },
-  instruction: {
+  description: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  group: {
+  category: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  assignment_date: {
-    type: DataTypes.DATE,
+  content: {
+    type: DataTypes.STRING,
     allowNull: true,
   },
-  due_date: {
-   
-    type: DataTypes.DATE,
+  posted_by: {
+    type: DataTypes.STRING,
     allowNull: true,
   },
 });
 
-module.exports = assignmentTable;
+module.exports = resources_table;
