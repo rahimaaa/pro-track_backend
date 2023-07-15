@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 // Already mounted on /api/
-router.use("/users", require("./users"));
+router.use("/user", require("./user"));
 router.use("/help_request", require("./help_request"));
 router.use("/assignmentStatus", require("./assignmentStatus"));
 router.use("/assignmentTable", require("./assignmentTable"));

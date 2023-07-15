@@ -1,6 +1,6 @@
 const db = require("./db/db");
 const {
-  users,
+  user,
   help_request,
   assignmentStatus,
   assignmentTable,
@@ -33,7 +33,7 @@ const seedUsers = [
     lastName: "ismoilova",
     imageUrl: "fds ",
     email: "sabina@ttp.com",
-    password: "kal",
+    password: "fdfdf",
     userType: "student",
     cohort_year: "2023",
   },
@@ -42,7 +42,7 @@ const seedUsers = [
     lastName: "sherpa",
     imageUrl: "fds ",
     email: "tashi@gmail.com",
-    password: "kal",
+    password: "dfsfsdg",
     userType: "student",
     cohort_year: "2023",
   },
@@ -51,7 +51,7 @@ const seedUsers = [
     lastName: "yu",
     imageUrl: "fds ",
     email: "kevin@ttp.com",
-    password: "989",
+    password: "98dsfsd9",
     userType: "TA",
     cohort_year: "2023",
   },
@@ -60,7 +60,7 @@ const seedUsers = [
     lastName: "lapid",
     imageUrl: "fds ",
     email: "allan@ttp.com",
-    password: "989",
+    password: "9adfef89",
     userType: "admin",
     cohort_year: "2023",
   },
@@ -157,7 +157,7 @@ const seedResources = [
 const seed = async () => {
   try {
     await db.sync({ force: true }); // Drops existing tables and recreates them
-    await users.bulkCreate(seedUsers);
+    await user.bulkCreate(seedUsers);
     await help_request.bulkCreate(seedRequests);
     await assignmentStatus.bulkCreate(seedAssignmentStatus);
     await assignmentTable.bulkCreate(seedAssignmentTable);

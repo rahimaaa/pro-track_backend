@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 // Mount on API
 app.use("/api", require("./api"));
+app.use("/auth", require("./auth"));
 
 // Syncing DB Function
 const syncDB = () => db.sync();
