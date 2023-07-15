@@ -60,7 +60,7 @@ router.post("/", async (req, res, next) => {
       cohort_year,
     } = req.body;
 
-    const user = await users.findOne({ where: { email: req.params.email } });
+    const user = await users.findOne({ where: { email: email } });
     if (user) {
       return res.json(user);
     }
