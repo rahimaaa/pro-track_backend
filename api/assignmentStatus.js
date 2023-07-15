@@ -22,7 +22,62 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-///;email, /:email/:assignmentId/  , assignmentId/
+
+
+router.get("/email/:email", async (req, res, next) => {
+  try {
+    req.params.email;
+    console.log(req.params);
+    const assignment = await assignmentStatus.findAll({ where: { email: req.params.email } });
+
+    if (!assignmentStatus) {
+     
+      return res.status(404).json({ error: "assignmentStatus not found" });
+    }
+   
+    res.json(assignment);
+  } catch (error) {
+    // Pass any error to the error handling
+    next(error);
+  }
+});
+
+
+router.get("/:email/:assignmentId", async (req, res, next) => {
+  try {
+    const { email, assignmentId } = req.params;
+    const assignment = await assignmentStatus.findOne({ where: { email: req.params.email , assignmentId: req.params.assignmentId} });
+
+    if (!assignment) {
+     
+      return res.status(404).json({ error: "assignmentStatus not found" });
+    }
+   
+    res.json(assignment);
+  } catch (error) {
+    // Pass any error to the error handling
+    next(error);
+  }
+});
+
+
+// router.get("/:assignmentId", async (req, res, next) => {
+//   try {
+//     const assignmentId  = req.params;
+    
+//     const allStatuses = await assignmentStatus.findAll({ where: { assignmentId: parseInt(assignmentId)} });
+
+//     if (!allStatuses) {
+     
+//       return res.status(404).json({ error: "assignmentStatus not found" });
+//     }
+   
+//     res.json(allStatuses);
+//   } catch (error) { 
+//     // Pass any error to the error handling
+//     next(error);
+//   }
+// });
 
 router.put("/:email/:assignmentId/", async (req, res, next) => {
   try {

@@ -1,5 +1,5 @@
 const db = require("./db/db");
-const { users, help_request , assignmentStatus} = require("./db/models");
+const { users, help_request , assignmentStatus, assignmentTable} = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
 
@@ -41,6 +41,22 @@ const seedRequests = [
   },
 ];
 
+const seedAssignmentTable = [
+  {
+  assignmentName: "assignment1",
+  instruction : "live you life free of worries",
+  group : null,
+  assignment_date : null,
+  due_date: null,
+  },
+  {
+    assignmentName: "assignment2",
+    instruction : "do the routes and ifkdk, seed the table",
+    group : null,
+    assignment_date : null,
+    due_date: null,
+    }
+];
 
 const seedAssignmentStatus = [
   {
@@ -52,6 +68,25 @@ const seedAssignmentStatus = [
     submissionDate: "06.17.2023",
     feedback: "2023"
   },
+  {
+    email:"sabina@gmail.com",
+    assignmentId: 1,
+    groupId: null,
+    status: false,
+    submission: "linky",
+    submissionDate: "06.17.2023",
+    feedback: "2023"
+  },
+  {
+    email:"tashi@gmail.com",
+    assignmentId: 2,
+    groupId: null,
+    status: false,
+    submission: "linkydsjhak",
+    submissionDate: "06.17.2023",
+    feedback: "2023"
+  },
+  
   
 ];
 
@@ -62,6 +97,7 @@ const seed = async () => {
       await users.bulkCreate(seedUsers);
       await help_request.bulkCreate(seedRequests);
       await assignmentStatus.bulkCreate(seedAssignmentStatus);
+      await assignmentTable.bulkCreate(seedAssignmentTable);
       console.log("Seeding complete");
     } catch (error) {
       console.error("Seeding error:", error);

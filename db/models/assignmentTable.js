@@ -6,16 +6,16 @@ const assignmentTable = db.define("assignmentTable", {
   //add the table
 
   assignmentName: {
-    //unique:true,
+    unique:true,
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  instruction: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  instruction: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
   group: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   assignment_date: {

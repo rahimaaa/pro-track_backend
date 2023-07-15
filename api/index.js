@@ -4,6 +4,7 @@ const router = require("express").Router();
 router.use("/users", require("./users"));
 router.use("/help_request", require("./help_request"));
 router.use("/assignmentStatus", require("./assignmentStatus"));
+router.use("/assignmentTable", require("./assignmentTable"));
 
 
 // 404 Handling
