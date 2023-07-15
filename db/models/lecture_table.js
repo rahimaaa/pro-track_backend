@@ -27,7 +27,7 @@ const lecture_table = db.define("lecture_table", {
         allowNull: true,
       },
       posted_by:{
-        unique: true,
+        //unique: true,
         type: DataTypes.STRING,
         allowNull: true,
       }

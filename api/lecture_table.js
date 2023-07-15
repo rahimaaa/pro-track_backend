@@ -25,7 +25,7 @@ router.get("/all", async (req, res, next) => {
     }
   });
 
-/*
+
 //Add post route to create new help_request
 router.post('/', async (req, res, next) => {
     try { //deconstructing the constructor into the different fields
@@ -41,6 +41,22 @@ router.post('/', async (req, res, next) => {
         next(error);
     }
   });
-*/
+
+  //Delete route to delete a specific lecture with title
+  router.delete("/:title", async (req, res, next) => {
+    try {
+      const single_title = req.params.title;
+  
+      // Delete the help_request with the provided email from the database
+      await lecture_table.destroy({ where: { title: single_title } });
+  
+      res.json({ message: "Lecture has been Removed Successfully" });
+      //Send response message (Lecture has been Removed Successfully)
+    } catch (error) {
+      //Handling any errors that occur
+      next(error);
+    }
+  });
+
 
 module.exports = router;
