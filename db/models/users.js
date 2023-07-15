@@ -29,7 +29,7 @@ const users = db.define("users", {
   },
   userType: {
     type: DataTypes.STRING,
-    allowNull: false,
+    
     defaultValue: "student", 
     type: DataTypes.ENUM( "student", "TA", "admin"),
     
