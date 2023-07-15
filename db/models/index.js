@@ -2,6 +2,7 @@ const users = require("./users");
 const help_request = require("./help_request");
 const assignmentTable = require("./assignmentTable")
 const assignmentStatus = require("./assignmentStatus")
+const resources_table = require("./resources_table")
 
 // Associations Go Here
 
@@ -13,4 +14,5 @@ module.exports = {
   help_request,
   assignmentStatus,
   assignmentTable,
+  resources_table,
 };
