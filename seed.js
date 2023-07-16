@@ -1,6 +1,6 @@
 const db = require("./db/db");
 const {
-  user,
+  User,
   help_request,
   assignmentStatus,
   assignmentTable,
@@ -157,7 +157,7 @@ const seedResources = [
 const seed = async () => {
   try {
     await db.sync({ force: true }); // Drops existing tables and recreates them
-    await user.bulkCreate(seedUsers);
+    await User.bulkCreate(seedUsers);
     await help_request.bulkCreate(seedRequests);
     await assignmentStatus.bulkCreate(seedAssignmentStatus);
     await assignmentTable.bulkCreate(seedAssignmentTable);

@@ -2,8 +2,10 @@ const express = require("express");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const passport = require("passport");
+const LocalStrategy = require("passport-local")
 const cors = require("cors");
 const db = require("./db");
+const {User} = require("./db/models");
 
 const morgan = require("morgan");
 require("dotenv").config();
@@ -12,15 +14,18 @@ const PORT = process.env.PORT || "8080";
 const sessionStore = new SequelizeStore({ db });
 
 //helper functions
-const serializeUser = (user, done) => done(null, user.id);
-const deserializeUser = async (user, done) => {
-  try {
-    const user = await db.models.user.findByPk(id);
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-};
+// const serializeUser = (user, done) => done(null, user.id);
+// const deserializeUser = (user, done) => {
+//   try {
+//     console.log(user)
+//     // const user = await db.models.User.findByPk(id);
+//     done(null, user);
+//   } catch (error) {
+//     done(error);
+//   }
+// };
+
+
 
 const configSession = () => ({
   secret: "ttp2023summer",
@@ -45,8 +50,35 @@ const setUpMiddleware = (app) => {
 
 //passport setup
 const setUpPassport =() => {
-  passport.serializeUser(serializeUser);
-  passport.deserializeUser(deserializeUser)
+  passport.use(new LocalStrategy({usernameField: "email"},
+    function(email, password, done) {
+        User.findOne({ email: email }, function (err, user) {
+          console.log("found user", user)
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        if (!user.correctPassword(password)) { return done(null, false); }
+        console.log("correct password")
+        return done(null, user);
+      });
+    }
+  ));
+  
+  passport.serializeUser(function(user, done) {
+    process.nextTick(function() {
+      return done(null, {
+        id: user.id,
+        email: user.email,
+        picture: user.picture
+      });
+    });
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    process.nextTick(function() {
+      return done(null, user);
+    });
+  });
+  
 }
 
 const setUpRoutes = (app) => {

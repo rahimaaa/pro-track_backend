@@ -1,4 +1,4 @@
-const user = require("./user");
+const User = require("./user");
 const help_request = require("./help_request");
 const assignmentTable = require("./assignmentTable")
 const assignmentStatus = require("./assignmentStatus")
@@ -10,7 +10,7 @@ const resources_table = require("./resources_table")
 
 
 module.exports = {
-  user,
+  User,
   help_request,
   assignmentStatus,
   assignmentTable,

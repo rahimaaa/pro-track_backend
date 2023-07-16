@@ -1,24 +1,26 @@
-const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+
 
 const { Model, DataTypes } = require("sequelize");
 const db = require("../db");
-const DEFAULTVALUE = " ";
+
 
 class User extends Model {
   static async generateSalt() {
     return crypto.randomBytes(16).toString("base64");
   }
 
-  static async encryptPassword(pw, salt) {
-    return crypto
-      .createHash("RSA_SHA256")
-      .update(pw)
-      .update(salt)
-      .dygest("hex");
+  correctPassword(pwAttempt) {
+    return bcrypt.compare(pwAttempt, this.password)
   }
-
-  async correctPassword(pwAttempt) {
-    return User.enryptPassword(pwAttempt, this.salt) === this.password;
+}
+ async function hashPassword(user) {
+  console.log(user.email);
+  if (user.changed("password")) {
+    user.password = await bcrypt.hash(user.password, saltRounds);
+    console.log("password", user.password);
   }
 }
 
@@ -71,26 +73,18 @@ User.init(
   {
     sequelize: db,
     modelName: "User",
-    hook: {
-      beforeSave: async (user) => {
-        if (user.changed("password")) {
-          user.salt = await User.generateSalt();
-          user.password = await User.encryptPassword(user.password, user.salt);
-        }
-      },
+    hooks: {
+      beforeCreate: hashPassword,
+      beforeSave: hashPassword,
+      beforeUpdate: hashPassword,
       beforeBulkCreate: async (users) => {
-        users.forEach(async (user) => {
-          if (user.changed("password")) {
-            user.salt = await User.generateSalt();
-            user.password = await User.encryptPassword(
-              user.password,
-              user.salt
-            );
-          }
-        });
+       for( let i = 0; i< users.length; i++){
+          await hashPassword(users[i])
+       }
+      
       },
     },
   }
 );
-
+// User.beforeCreate(hashPassword)
 module.exports = User;

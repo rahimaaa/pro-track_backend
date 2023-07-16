@@ -4,7 +4,8 @@ const { User } = require("../db/models");
 router.post("/login", async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
-    if (!user || !user.correctPassword(req.body.password)) {
+    const isCorrectPassword = await user.correctPassword(req.body.password)
+    if (!user || !isCorrectPassword) {
       res.status(401).send("Invalid login attempt");
     } else {
       req.login(user, (err) => (err ? next(err) : res.status(200).json(user)));
