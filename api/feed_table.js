@@ -41,4 +41,29 @@ router.delete("/:id", async (req, res, next) => {
     }
   });
 
+
+  //Route handler for the GETAll for all requests
+router.get("/all", async (req, res, next) => {
+    try {
+      // Retrieve all users from the database
+      const allFeeds = await feed_table.findAll();
+  
+      console.log("these are all the requests: " + allFeeds);
+  
+      // If there are requests, send a response with status code 200
+      //and the Array of Requests
+  
+      allFeeds
+        ? res.status(200).json(allFeeds)
+        : //If there are no requests, send a response with status code 404
+          //And error message (No Request have been Made)
+          res.status(404).send("No Request have been Made");
+    } catch (error) {
+      console.log(error);
+      // Log any errors that occur
+    }
+  });
+  
+
+
 module.exports = router;
