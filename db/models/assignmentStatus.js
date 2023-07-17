@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
-const DEFAULTVALUE = " ";
+
 
 const assignmentStatus = db.define("assignmentStatus", {
   //add the table

@@ -11,7 +11,7 @@ const assignmentTable = db.define("assignmentTable", {
     allowNull: false,
   },
   instruction: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT("long"),
     allowNull: true,
   },
   group: {

@@ -64,6 +64,15 @@ const seedUsers = [
     userType: "admin",
     cohort_year: "2023",
   },
+  {
+    firstName: "Rahima",
+    lastName: "Khabibullaeva",
+    imageUrl: "fds ",
+    email: "217236587@madisonhs.org",
+    password: "Rahima",
+    userType: "student",
+    cohort_year: "2023",
+  },
 ];
 
 const seedRequests = [
