@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../db/models");
+const {isAdmin} = require("./middleware/isAdmin");
+
 
 // Root here is localhost:8080/api/users/
 
 //Route handler for the GETAll for allUsers request
-router.get("/all", async (req, res, next) => {
+router.get("/all",isAdmin, async (req, res, next) => {
   try {
     // Retrieve all users from the database
     const allUsers = await User.findAll();

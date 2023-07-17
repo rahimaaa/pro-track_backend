@@ -68,7 +68,7 @@ const setUpPassport =() => {
       return done(null, {
         id: user.id,
         email: user.email,
-        picture: user.picture
+        userType: user.userType,
       });
     });
   });
