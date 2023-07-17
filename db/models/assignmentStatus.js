@@ -12,7 +12,8 @@ const assignmentStatus = db.define("assignmentStatus", {
   },
   assignmentId: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
+    
   },
   groupId: {
     type: DataTypes.INTEGER,

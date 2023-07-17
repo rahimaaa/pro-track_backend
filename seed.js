@@ -94,14 +94,16 @@ const seedRequests = [
 
 const seedAssignmentTable = [
   {
-    assignmentName: "assignment1",
+    assignmentId: 1,
+    assignmentName: "this",
     instruction: "live you life free of worries",
     group: null,
     assignment_date: null,
     due_date: null,
   },
   {
-    assignmentName: "assignment2",
+    assignmentId:2,
+    assignmentName: "that",
     instruction: "do the routes and ifkdk, seed the table",
     group: null,
     assignment_date: null,
