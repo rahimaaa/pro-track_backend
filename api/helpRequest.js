@@ -27,13 +27,13 @@ router.get("/all", async (req, res, next) => {
 });
 
 //Route for getting a specific specific request with student email
-router.get("/:email", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   // Retrieving a specific request by email
   try {
-    req.params.email;
+    req.params.id;
     console.log(req.params);
     const oneRequest = await HelpRequest.findOne({
-      where: { stud_email: req.params.email },
+      where: { id: req.params.id },
     });
 
     if (!HelpRequest) {
@@ -50,12 +50,12 @@ router.get("/:email", async (req, res, next) => {
 });
 
 //route to delete a specific help request with stud_email(student email)
-router.delete("/:stud_email", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    const student_email = req.params.stud_email;
+    const studentId = req.params.id;
 
     // Delete the HelpRequest with the provided email from the database
-    await HelpRequest.destroy({ where: { stud_email: student_email } });
+    await HelpRequest.destroy({ where: { id: studentId } });
 
     res.json({ message: "Request resolved and deleted successfully" });
     //Send response message (Request resolved and deleted successfully)
@@ -66,20 +66,20 @@ router.delete("/:stud_email", async (req, res, next) => {
 });
 
 //Get route for updating of Help request with the use of stud_email(student email)
-router.put("/:stud_email", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     //console.log(req.body)
-    const { stud_email, request, status, ta_email, accepted } = req.body;
+    const { studentId, request, status, taId, accepted } = req.body;
 
     //Self check
     // Ensure that all required properties exist in the request body
-    if (!stud_email || !request || !status || !ta_email || !accepted) {
+    if (!studentId || !request || !status || !taId || !accepted) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     // Find the help request to be updated
     const existingRequest = await HelpRequest.findOne({
-      where: { stud_email: req.params.stud_email },
+      where: { id: req.params.id },
     });
 
     // If the help request doesn't exist, return a 404 Not Found response
@@ -89,10 +89,10 @@ router.put("/:stud_email", async (req, res, next) => {
 
     // Update the help request in the database
     const updatedRequest = await existingRequest.update({
-      stud_email,
+      studentId,
       request,
       status,
-      ta_email,
+      taId,
       accepted,
     });
 
@@ -110,14 +110,14 @@ router.put("/:stud_email", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { stud_email, request, status, ta_email, accepted } = req.body;
+    const { studentId, request, status, taId, accepted } = req.body;
 
     // Creating a new user with the provided data
     const newRequest = await HelpRequest.create({
-      stud_email,
+      studentId,
       request,
       status,
-      ta_email,
+      taId,
       accepted,
     });
 
