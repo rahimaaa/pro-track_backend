@@ -19,12 +19,12 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.get("/:title", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    req.params.title;
+    req.params.id;
 
     const resource = await Resource.findOne({
-      where: { title: req.params.title },
+      where: { id: req.params.id },
     });
 
     if (!resource) {
@@ -37,12 +37,12 @@ router.get("/:title", async (req, res, next) => {
   }
 });
 
-router.delete("/:title", isTA,  async (req, res, next) => {
+router.delete("/:id", isTA,  async (req, res, next) => {
   try {
     // const resource = req.params.title;
 
     // Delete the user with the provided email from the database
-    await Resource.destroy({ where: { title: req.params.title } });
+    await Resource.destroy({ where: { id: req.params.id } });
 
     res.json({ message: "resource removed successfully" });
     //Send response message (User removed successfully)
@@ -52,7 +52,7 @@ router.delete("/:title", isTA,  async (req, res, next) => {
   }
 });
 
-router.put("/:title", isTA, async (req, res, next) => {
+router.put("/:id", isTA, async (req, res, next) => {
   try {
     const { title, description, category, content, posted_by } = req.body;
     const updatedResource = await Resource.update(
@@ -64,7 +64,7 @@ router.put("/:title", isTA, async (req, res, next) => {
         posted_by,
       },
       {
-        where: { title: req.params.title },
+        where: { id: req.params.id },
         returning: true,
       }
     );
