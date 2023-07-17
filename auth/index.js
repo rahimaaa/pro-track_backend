@@ -32,7 +32,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/dashboard",
+    successRedirect: "http://localhost:3000/dashboard",
     failureRedirect: "/",
   })
 );
