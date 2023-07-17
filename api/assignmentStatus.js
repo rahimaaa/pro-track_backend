@@ -19,7 +19,7 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.get("/email/:email", async (req, res, next) => {
+router.get("/:email", async (req, res, next) => {
   try {
     req.params.email;
     console.log(req.params);

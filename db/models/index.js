@@ -21,6 +21,7 @@ const group_table = require("./group_table");
 // USER TO HELPREQUEST TABLE RELEATIONSHIP
 User.hasMany(help_request, {
   foreignKey: 'studentId', //'taId'
+  foreighKey: 'taId',
 });
 help_request.belongsTo(User);
 
@@ -58,15 +59,26 @@ user_group_table.belongsToMany(User, {
 
 
 //ASSIGNMENT TO ASSIGNMENT STATUS TABLE
-
+assignmentTable.hasMany(assignmentStatus, {
+  foreignKey: 'assignmentId', 
+});
+assignmentStatus.belongsTo(assignmentTable);
 
 
 
 //ASSIGNMENT STATUS TO GROUPTABLE
-
+assignmentStatus.hasMany(group_table, {
+  foreignKey: 'group_Id', 
+});
+group_table.belongsTo(assignmentStatus);
 
 
 //GROUP TABLE TO USER GROUP TABLE
+group_table.hasMany(user_group_table, {
+  foreignKey: 'group_id',
+});
+user_group_table.belongsTo(group_table);
+
 
 */
 module.exports = {
