@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { users } = require("../db/models");
+const { user } = require("../db/models");
 
 // Root here is localhost:8080/api/users/
 
@@ -8,7 +8,7 @@ const { users } = require("../db/models");
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allUsers = await users.findAll();
+    const allUsers = await user.findAll();
 
     console.log("these are all the users: " + allUsers);
 
@@ -32,15 +32,15 @@ router.get("/:email", async (req, res, next) => {
   try {
     req.params.email;
     console.log(req.params);
-    const user = await users.findOne({ where: { email: req.params.email } });
+    const User = await user.findOne({ where: { email: req.params.email } });
 
-    if (!users) {
+    if (!user) {
       // If the users is not found, send a response with status code 404
       //And the error message (Users not found)
       return res.status(404).json({ error: "Users not found" });
     }
     // Sending a response with the retrieved users
-    res.json(user);
+    res.json(User);
   } catch (error) {
     // Pass any error to the error handling
     next(error);

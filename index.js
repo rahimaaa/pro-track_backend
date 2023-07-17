@@ -1,30 +1,125 @@
 const express = require("express");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const passport = require("passport");
+const LocalStrategy = require("passport-local")
 const cors = require("cors");
 const db = require("./db");
+const {User} = require("./db/models");
+
 const morgan = require("morgan");
 require("dotenv").config();
 const PORT = process.env.PORT || "8080";
 
-const app = express();
-app.use(express.json());
-app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
+const sessionStore = new SequelizeStore({ db });
 
-app.use(cors());
-// Mount on API
-app.use("/api", require("./api"));
+//helper functions
+// const serializeUser = (user, done) => done(null, user.id);
+// const deserializeUser = (user, done) => {
+//   try {
+//     console.log(user)
+//     // const user = await db.models.User.findByPk(id);
+//     done(null, user);
+//   } catch (error) {
+//     done(error);
+//   }
+// };
 
-// Syncing DB Function
-const syncDB = () => db.sync();
 
-// Run server function
-const serverRun = () => {
-  app.listen(PORT, () => {
-    console.log(`Live on port: ${PORT}`);
-  });
+
+const configSession = () => ({
+  secret: "ttp2023summer",
+  store: sessionStore,
+  resave: false,
+  cookie: {
+    maxAge: 8 * 60 * 60 * 1000,
+  },
+});
+
+//middleware
+const setUpMiddleware = (app) => {
+  app.use(express.json());
+  app.use(morgan("dev"));
+  app.use(express.urlencoded({ extended: true }));
+  app.use(cors());
+  app.use(session(configSession()));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  return app;
 };
 
-syncDB();
-serverRun();
+//passport setup
+const setUpPassport =() => {
+  passport.use(new LocalStrategy({usernameField: "email"},
+    function(email, password, done) {
+        User.findOne({ email: email }, function (err, user) {
+          console.log("found user", user)
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        if (!user.correctPassword(password)) { return done(null, false); }
+        console.log("correct password")
+        return done(null, user);
+      });
+    }
+  ));
+  
+  passport.serializeUser(function(user, done) {
+    process.nextTick(function() {
+      return done(null, {
+        id: user.id,
+        email: user.email,
+        picture: user.picture
+      });
+    });
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    process.nextTick(function() {
+      return done(null, user);
+    });
+  });
+  
+}
 
-module.exports = app;
+const setUpRoutes = (app) => {
+  app.use("/api", require("./api"));
+app.use("/auth", require("./auth"));
+}
+
+
+const startServer = async (app, PORT)=>{
+  await db.sync()
+  app.listen(PORT, () => console.log(`server is on port: ${PORT}`))
+  return app;
+};
+
+//configure allfunctions
+const configureApp = async (PORT)=> {
+  const app = express();
+  setUpPassport();
+  setUpMiddleware(app);
+  await sessionStore.sync();
+  setUpRoutes(app);
+  return startServer(app, PORT);
+
+}
+
+
+
+module.exports = configureApp(PORT);
+// const app = express();
+// app.use(express.json());
+// app.use(morgan("dev"));
+// app.use(express.urlencoded({ extended: true }));
+// Syncing DB Function
+// const syncDB = () => db.sync();
+
+// // Run server function
+// const serverRun = () => {
+//   app.listen(PORT, () => {
+//     console.log(`Live on port: ${PORT}`);
+//   });
+// };
+
+// syncDB();
+// serverRun();
