@@ -28,7 +28,7 @@ router.get("/all", async (req, res, next) => {
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { title, description, recordings, slides, lecture_date, posted_by } =
+    const { title, description, recordings, slides, lecture_date, userId } =
       req.body;
 
     // Creating a new user with the provided data
@@ -38,7 +38,7 @@ router.post("/", isTA, async (req, res, next) => {
       recordings,
       slides,
       lecture_date,
-      posted_by,
+      userId,
     });
 
     res.status(201).json(newLecture);
@@ -50,12 +50,12 @@ router.post("/", isTA, async (req, res, next) => {
 });
 
 //Delete route to delete a specific lecture with title
-router.delete("/:title", isTA, async (req, res, next) => {
+router.delete("/:id", isTA, async (req, res, next) => {
   try {
-    const single_title = req.params.title;
+    const single_title = req.params.id;
 
     // Delete the HelpRequest with the provided email from the database
-    await Lecture.destroy({ where: { title: single_title } });
+    await Lecture.destroy({ where: { id: single_title } });
 
     res.json({ message: "Lecture has been Removed Successfully" });
     //Send response message (Lecture has been Removed Successfully)
@@ -66,10 +66,10 @@ router.delete("/:title", isTA, async (req, res, next) => {
 });
 
 //Get route for updating of Help request with the use of stud_email(student email)
-router.put("/:title", isTA, async (req, res, next) => {
+router.put("/:id", isTA, async (req, res, next) => {
   try {
     //console.log(req.body)
-    const { title, description, recordings, slides, lecture_date, posted_by } =
+    const { title, description, recordings, slides, lecture_date, userId } =
       req.body;
 
     //Self check
@@ -81,7 +81,7 @@ router.put("/:title", isTA, async (req, res, next) => {
 
     // Find the help request to be updated
     const existingLecture = await Lecture.findOne({
-      where: { title: req.params.title },
+      where: { id: req.params.id },
     });
 
     // If the help request doesn't exist, return a 404 Not Found response
@@ -96,7 +96,7 @@ router.put("/:title", isTA, async (req, res, next) => {
       recordings,
       slides,
       lecture_date,
-      posted_by,
+      userId,
     });
 
     // Send a response indicating successful update
