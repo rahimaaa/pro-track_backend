@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { user } = require("../db/models");
+const { User } = require("../db/models");
 
 // Root here is localhost:8080/api/users/
 

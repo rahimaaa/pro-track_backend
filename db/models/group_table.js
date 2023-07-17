@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const group_table = require("./group_table", {
+const group_table = db.define("group_table", {
   group_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
