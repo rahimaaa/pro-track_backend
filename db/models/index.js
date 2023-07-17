@@ -7,9 +7,10 @@ const assignmentStatus = require("./assignmentStatus")
 const resources_table = require("./resources_table")
 
 // Associations Go Here
-const assignmentTable = require("./assignmentTable");
-const assignmentStatus = require("./assignmentStatus");
-const resources_table = require("./resources_table");
+//const assignmentTable = require("./assignmentTable");
+////const assignmentStatus = require("./assignmentStatus");
+//const resources_table = require("./resources_table");
+/*
 const user_group_table = require("./user_group_table");
 const group_table = require("./group_table");
 
@@ -67,7 +68,7 @@ user_group_table.belongsToMany(User, {
 
 //GROUP TABLE TO USER GROUP TABLE
 
-
+*/
 module.exports = {
   User,
   help_request,
@@ -76,6 +77,6 @@ module.exports = {
   assignmentStatus,
   assignmentTable,
   resources_table,
-  user_group_table,
-  group_table,
+  //user_group_table,
+  //group_table,
 };

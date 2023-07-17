@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { user } = require("../db/models");
+const { User } = require("../db/models");
 
 // Root here is localhost:8080/api/users/
 
@@ -8,7 +8,7 @@ const { user } = require("../db/models");
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allUsers = await user.findAll();
+    const allUsers = await User.findAll();
 
     console.log("these are all the users: " + allUsers);
 
@@ -27,12 +27,12 @@ router.get("/all", async (req, res, next) => {
 });
 
 //Route for get specific user with user email
-router.get("/:email", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   // Retrieving a specific user by email
   try {
-    req.params.email;
+    req.params.id;
     console.log(req.params);
-    const User = await user.findOne({ where: { email: req.params.email } });
+    const user = await User.findOne({ where: { id: req.params.id } });
 
     if (!user) {
       // If the users is not found, send a response with status code 404
@@ -40,7 +40,7 @@ router.get("/:email", async (req, res, next) => {
       return res.status(404).json({ error: "Users not found" });
     }
     // Sending a response with the retrieved users
-    res.json(User);
+    res.json(user);
   } catch (error) {
     // Pass any error to the error handling
     next(error);
@@ -60,12 +60,12 @@ router.post("/", async (req, res, next) => {
       cohort_year,
     } = req.body;
 
-    const user = await users.findOne({ where: { email: email } });
+    const user = await User.findOne({ where: { email: email } });
     if (user) {
       return res.json(user);
     }
     // Creating a new user with the provided data
-    const newUser = await users.create({
+    const newUser = await User.create({
       firstName,
       lastName,
       imageUrl,
@@ -84,12 +84,12 @@ router.post("/", async (req, res, next) => {
 });
 
 //Deletion of a User
-router.delete("/:email", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    const userEmail = req.params.email;
+    const userId = req.params.id;
 
     // Delete the user with the provided email from the database
-    await users.destroy({ where: { email: userEmail } });
+    await User.destroy({ where: { id: userId } });
 
     res.json({ message: "User removed successfully" });
     //Send response message (User removed successfully)
@@ -99,7 +99,7 @@ router.delete("/:email", async (req, res, next) => {
   }
 });
 
-router.put("/:email", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const {
       firstName,
@@ -110,7 +110,7 @@ router.put("/:email", async (req, res, next) => {
       userType,
       cohort_year,
     } = req.body;
-    const updateduser = await users.update(
+    const updateduser = await User.update(
       {
         firstName,
         lastName,
@@ -121,7 +121,7 @@ router.put("/:email", async (req, res, next) => {
         cohort_year,
       },
       {
-        where: { email: req.params.email },
+        where: { id: req.params.id },
         returning: true,
       }
     );
