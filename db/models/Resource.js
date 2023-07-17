@@ -2,11 +2,10 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 const DEFAULTVALUE = " ";
 
-const resources_table = db.define("resourcesTable", {
+const Resource = db.define("resource", {
   //add the table
 
   title: {
-   
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -22,10 +21,10 @@ const resources_table = db.define("resourcesTable", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  posted_by: {
+  userId: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 });
 
-module.exports = resources_table;
+module.exports = Resource;

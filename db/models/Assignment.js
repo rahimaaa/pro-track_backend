@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 const DEFAULTVALUE = " ";
 
-const assignmentTable = db.define("assignmentTable", {
+const Assignment = db.define("assignment", {
   //add the table
   assignmentId: {
     type: DataTypes.INTEGER,
@@ -32,4 +32,4 @@ const assignmentTable = db.define("assignmentTable", {
   },
 });
 
-module.exports = assignmentTable;
+module.exports = Assignment;

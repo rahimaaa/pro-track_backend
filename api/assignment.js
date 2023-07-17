@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { assignmentTable } = require("../db/models");
+const { Assignment } = require("../db/models");
 
 router.get("/all", async (req, res, next) => {
   try {
-    const allAssignments = await assignmentTable.findAll();
+    const allAssignments = await Assignment.findAll();
 
     console.log("these are all the users: " + allAssignments);
 
     if (!allAssignments) {
-        return res.status(404).json({ error: "Assignment not found" });
-      }
-  
-      res.json(allAssignments);
+      return res.status(404).json({ error: "Assignment not found" });
+    }
+
+    res.json(allAssignments);
     // allAssignments
     //   ? res.status(200).json(allAssignments)
     //   : res.status(404).send("No Assignments Statuses Found");
@@ -25,7 +25,7 @@ router.get("/:assignmentName", async (req, res, next) => {
   try {
     req.params.assignmentName;
     console.log(req.params);
-    const assignment = await assignmentTable.findOne({
+    const assignment = await Assignment.findOne({
       where: { assignmentName: req.params.assignmentName },
     });
 
@@ -44,7 +44,7 @@ router.delete("/:assignmentName", async (req, res, next) => {
     const name = req.params.assignmentName;
 
     // Delete the user with the provided email from the database
-    await assignmentTable.destroy({ where: { assignmentName: name } });
+    await Assignment.destroy({ where: { assignmentName: name } });
 
     res.json({ message: "Assignment removed successfully" });
     //Send response message (User removed successfully)
@@ -58,7 +58,7 @@ router.put("/:assignmentName", async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;
-    const updatedAssignment = await assignmentTable.update(
+    const updatedAssignment = await Assignment.update(
       {
         assignmentName,
         instruction,
@@ -85,14 +85,14 @@ router.post("/", async (req, res, next) => {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;
 
-    const assignment = await assignmentTable.findOne({
+    const assignment = await Assignment.findOne({
       where: { assignmentName: req.body.assignmentName },
     });
     if (assignment) {
       return res.json(assignment);
     }
-    
-    const newAssignment = await assignmentTable.create({
+
+    const newAssignment = await Assignment.create({
       assignmentName,
       instruction,
       group,
