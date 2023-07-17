@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { AssignmentStatus } = require("../db/models");
-
+const { isTA } = require("./middleware/isTa");
 // Root here is localhost:8080/api/AssignmentStatus/all
 
 //get all assignment statuses
-router.get("/all", async (req, res, next) => {
+router.get("/all", isTA, async (req, res, next) => {
   try {
     const allAssignments = await AssignmentStatus.findAll();
 
@@ -19,12 +19,12 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.get("/:email", async (req, res, next) => {
+router.get("/:id",  async (req, res, next) => {
   try {
-    req.params.email;
+    req.params.id;
     console.log(req.params);
     const assignment = await AssignmentStatus.findAll({
-      where: { email: req.params.email },
+      where: { id: req.params.id },
     });
 
     if (!AssignmentStatus) {
@@ -38,11 +38,11 @@ router.get("/:email", async (req, res, next) => {
   }
 });
 
-router.get("/:email/:assignmentId", async (req, res, next) => {
+router.get("/:id/:assignmentId", async (req, res, next) => {
   try {
-    const { email, assignmentId } = req.params;
+    const { id, assignmentId } = req.params;
     const assignment = await AssignmentStatus.findOne({
-      where: { email: req.params.email, assignmentId: req.params.assignmentId },
+      where: { id: req.params.id, assignmentId: req.params.assignmentId },
     });
 
     if (!assignment) {
@@ -74,15 +74,15 @@ router.get("/:email/:assignmentId", async (req, res, next) => {
 //   }
 // });
 
-router.put("/:email/:assignmentId/", async (req, res, next) => {
+router.put("/:id/:assignmentId/", async (req, res, next) => {
   try {
     const { status, feedback, submission } = req.body;
-    const { email, assignmentId } = req.params;
+    const { id, assignmentId } = req.params;
 
     const updatedStatus = await AssignmentStatus.update(
       { status, feedback, submission },
       {
-        where: { email, assignmentId: parseInt(assignmentId) },
+        where: { id, assignmentId: parseInt(assignmentId) },
         // returning: true,
       }
     );

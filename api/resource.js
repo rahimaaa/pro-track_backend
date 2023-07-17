@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Resource } = require("../db/models");
+const { isTA } = require("./middleware/isTa");
 
 router.get("/all", async (req, res, next) => {
   try {
@@ -36,7 +37,7 @@ router.get("/:title", async (req, res, next) => {
   }
 });
 
-router.delete("/:title", async (req, res, next) => {
+router.delete("/:title", isTA,  async (req, res, next) => {
   try {
     // const resource = req.params.title;
 
@@ -51,7 +52,7 @@ router.delete("/:title", async (req, res, next) => {
   }
 });
 
-router.put("/:title", async (req, res, next) => {
+router.put("/:title", isTA, async (req, res, next) => {
   try {
     const { title, description, category, content, posted_by } = req.body;
     const updatedResource = await Resource.update(
@@ -76,7 +77,7 @@ router.put("/:title", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", isTA, async (req, res, next) => {
   try {
     const { title, description, category, content, posted_by } = req.body;
 

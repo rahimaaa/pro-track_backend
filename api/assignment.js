@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Assignment } = require("../db/models");
+const {isTA} = require("./middleware/isTa");
 
 router.get("/all", async (req, res, next) => {
   try {
@@ -39,7 +40,7 @@ router.get("/:assignmentName", async (req, res, next) => {
   }
 });
 
-router.delete("/:assignmentName", async (req, res, next) => {
+router.delete("/:assignmentName", isTA, async (req, res, next) => {
   try {
     const name = req.params.assignmentName;
 
@@ -54,7 +55,7 @@ router.delete("/:assignmentName", async (req, res, next) => {
   }
 });
 
-router.put("/:assignmentName", async (req, res, next) => {
+router.put("/:assignmentName", isTA, async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;
@@ -80,7 +81,7 @@ router.put("/:assignmentName", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", isTA, async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;

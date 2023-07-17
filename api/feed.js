@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { Feed } = require("../db/models");
-
+const { isTA } = require("./middleware/isTa");
 //Add post route to create new HelpRequest
 
-router.post("/", async (req, res, next) => {
+router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
     const { title, content, link, posted_by } = req.body;
@@ -26,7 +26,7 @@ router.post("/", async (req, res, next) => {
 });
 
 //route to delete a specific announcement with stud_email(student email)
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", isTA,  async (req, res, next) => {
   try {
     const remove = req.params.id;
 

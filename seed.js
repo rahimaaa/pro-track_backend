@@ -16,7 +16,7 @@ const seedUsers = [
     imageUrl: "fds ",
     email: "rahimahabib@gmail.com",
     password: "kal",
-    userType: "student",
+    userType: "admin",
     cohort_year: "2023",
   },
   {

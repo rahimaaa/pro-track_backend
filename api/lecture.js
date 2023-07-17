@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Lecture } = require("../db/models");
-
+const { isTA } = require("./middleware/isTa");
 //Route handler for the GETAll for all requests
 router.get("/all", async (req, res, next) => {
   try {
@@ -25,7 +25,7 @@ router.get("/all", async (req, res, next) => {
 });
 
 //Add post route to create new HelpRequest
-router.post("/", async (req, res, next) => {
+router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
     const { title, description, recordings, slides, lecture_date, posted_by } =
@@ -50,7 +50,7 @@ router.post("/", async (req, res, next) => {
 });
 
 //Delete route to delete a specific lecture with title
-router.delete("/:title", async (req, res, next) => {
+router.delete("/:title", isTA, async (req, res, next) => {
   try {
     const single_title = req.params.title;
 
@@ -66,7 +66,7 @@ router.delete("/:title", async (req, res, next) => {
 });
 
 //Get route for updating of Help request with the use of stud_email(student email)
-router.put("/:title", async (req, res, next) => {
+router.put("/:title", isTA, async (req, res, next) => {
   try {
     //console.log(req.body)
     const { title, description, recordings, slides, lecture_date, posted_by } =
