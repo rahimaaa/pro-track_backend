@@ -6,9 +6,9 @@ const db = require ("../db");
 const help_request = db.define("help_request", {
    //adding columns to the table
     
-    stud_email:{
+    studentId:{
       unique: true,
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull:true,
     },
     request:{
@@ -19,9 +19,9 @@ const help_request = db.define("help_request", {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    ta_email:{
+    taId:{
         unique: true,
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       accepted:{
