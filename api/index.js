@@ -2,12 +2,12 @@ const router = require("express").Router();
 
 // Already mounted on /api/
 router.use("/user", require("./user"));
-router.use("/help_request", require("./help_request"));
-router.use("/lecture_table", require("./lecture_table"));
-router.use("/feed_table", require("./feed_table"));
-router.use("/assignmentStatus", require("./assignmentStatus"));
-router.use("/assignmentTable", require("./assignmentTable"));
-router.use("/resources_table", require("./resources_table"));
+router.use("/help-request", require("./helpRequest"));
+router.use("/lecture", require("./lecture"));
+router.use("/feed", require("./Feed"));
+router.use("/assignment-status", require("./assignmentStatus"));
+router.use("/assignment", require("./assignment"));
+router.use("/resource", require("./resource"));
 
 // 404 Handling
 router.use((req, res, next) => {

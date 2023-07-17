@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { resources_table } = require("../db/models");
+const { Resource } = require("../db/models");
+const { isTA } = require("./middleware/isTa");
 
 router.get("/all", async (req, res, next) => {
   try {
-    const allResources = await resources_table.findAll();
+    const allResources = await Resource.findAll();
 
     console.log("these are all the resources: " + allResources);
 
@@ -22,7 +23,7 @@ router.get("/:title", async (req, res, next) => {
   try {
     req.params.title;
 
-    const resource = await resources_table.findOne({
+    const resource = await Resource.findOne({
       where: { title: req.params.title },
     });
 
@@ -36,12 +37,12 @@ router.get("/:title", async (req, res, next) => {
   }
 });
 
-router.delete("/:title", async (req, res, next) => {
+router.delete("/:title", isTA,  async (req, res, next) => {
   try {
     // const resource = req.params.title;
 
     // Delete the user with the provided email from the database
-    await resources_table.destroy({ where: { title: req.params.title } });
+    await Resource.destroy({ where: { title: req.params.title } });
 
     res.json({ message: "resource removed successfully" });
     //Send response message (User removed successfully)
@@ -51,10 +52,10 @@ router.delete("/:title", async (req, res, next) => {
   }
 });
 
-router.put("/:title", async (req, res, next) => {
+router.put("/:title", isTA, async (req, res, next) => {
   try {
     const { title, description, category, content, posted_by } = req.body;
-    const updatedResource = await resources_table.update(
+    const updatedResource = await Resource.update(
       {
         title,
         description,
@@ -76,11 +77,11 @@ router.put("/:title", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", isTA, async (req, res, next) => {
   try {
     const { title, description, category, content, posted_by } = req.body;
 
-    const newResource = await resources_table.create({
+    const newResource = await Resource.create({
       title,
       description,
       category,
