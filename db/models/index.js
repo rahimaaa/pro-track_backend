@@ -1,8 +1,16 @@
 const User = require("./user");
 const help_request = require("./help_request");
-const assignmentTable = require("./assignmentTable");
-const assignmentStatus = require("./assignmentStatus");
-const resources_table = require("./resources_table");
+const lecture_table = require("./lecture_table");
+const feed_table = require("./feed_table");
+const assignmentTable = require("./assignmentTable")
+const assignmentStatus = require("./assignmentStatus")
+const resources_table = require("./resources_table")
+
+// Associations Go Here
+//const assignmentTable = require("./assignmentTable");
+////const assignmentStatus = require("./assignmentStatus");
+//const resources_table = require("./resources_table");
+/*
 const user_group_table = require("./user_group_table");
 const group_table = require("./group_table");
 
@@ -72,13 +80,15 @@ group_table.hasMany(user_group_table, {
 user_group_table.belongsTo(group_table);
 
 
-
+*/
 module.exports = {
   User,
   help_request,
+  lecture_table,
+  feed_table,
   assignmentStatus,
   assignmentTable,
   resources_table,
-  user_group_table,
-  group_table,
+  //user_group_table,
+  //group_table,
 };
