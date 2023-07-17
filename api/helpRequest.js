@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { help_request } = require("../db/models");
+const { HelpRequest } = require("../db/models");
 
-// Root here is localhost:8080/api/help_request/
+// Root here is localhost:8080/api/HelpRequest/
 
 //Route handler for the GETAll for all requests
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allRequests = await help_request.findAll();
+    const allRequests = await HelpRequest.findAll();
 
     console.log("these are all the requests: " + allRequests);
 
@@ -32,11 +32,11 @@ router.get("/:email", async (req, res, next) => {
   try {
     req.params.email;
     console.log(req.params);
-    const oneRequest = await help_request.findOne({
+    const oneRequest = await HelpRequest.findOne({
       where: { stud_email: req.params.email },
     });
 
-    if (!help_request) {
+    if (!HelpRequest) {
       // If the users is not found, send a response with status code 404
       //And the error message (Users not found)
       return res.status(404).json({ error: "Request not found" });
@@ -54,8 +54,8 @@ router.delete("/:stud_email", async (req, res, next) => {
   try {
     const student_email = req.params.stud_email;
 
-    // Delete the help_request with the provided email from the database
-    await help_request.destroy({ where: { stud_email: student_email } });
+    // Delete the HelpRequest with the provided email from the database
+    await HelpRequest.destroy({ where: { stud_email: student_email } });
 
     res.json({ message: "Request resolved and deleted successfully" });
     //Send response message (Request resolved and deleted successfully)
@@ -78,7 +78,7 @@ router.put("/:stud_email", async (req, res, next) => {
     }
 
     // Find the help request to be updated
-    const existingRequest = await help_request.findOne({
+    const existingRequest = await HelpRequest.findOne({
       where: { stud_email: req.params.stud_email },
     });
 
@@ -106,14 +106,14 @@ router.put("/:stud_email", async (req, res, next) => {
   }
 });
 
-//Add post route to create new help_request
+//Add post route to create new HelpRequest
 router.post("/", async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
     const { stud_email, request, status, ta_email, accepted } = req.body;
 
     // Creating a new user with the provided data
-    const newRequest = await help_request.create({
+    const newRequest = await HelpRequest.create({
       stud_email,
       request,
       status,

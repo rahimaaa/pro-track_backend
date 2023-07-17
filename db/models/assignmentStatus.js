@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 
 
-const assignmentStatus = db.define("assignmentStatus", {
+const AssignmentStatus = db.define("assignment_status", {
   //add the table
 
   email: {
@@ -39,4 +39,4 @@ const assignmentStatus = db.define("assignmentStatus", {
   },
 });
 
-module.exports = assignmentStatus;
+module.exports = AssignmentStatus;

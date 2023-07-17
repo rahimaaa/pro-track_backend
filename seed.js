@@ -1,10 +1,10 @@
 const db = require("./db/db");
 const {
   User,
-  help_request,
-  assignmentStatus,
-  assignmentTable,
-  resources_table,
+  HelpRequest,
+  AssignmentStatus,
+  Assignment,
+  Resource,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -92,7 +92,7 @@ const seedRequests = [
   },
 ];
 
-const seedAssignmentTable = [
+const seedAssignment = [
   {
     assignmentId: 1,
     assignmentName: "this",
@@ -102,7 +102,7 @@ const seedAssignmentTable = [
     due_date: null,
   },
   {
-    assignmentId:2,
+    assignmentId: 2,
     assignmentName: "that",
     instruction: "do the routes and ifkdk, seed the table",
     group: null,
@@ -169,10 +169,10 @@ const seed = async () => {
   try {
     await db.sync({ force: true }); // Drops existing tables and recreates them
     await User.bulkCreate(seedUsers);
-    await help_request.bulkCreate(seedRequests);
-    await assignmentStatus.bulkCreate(seedAssignmentStatus);
-    await assignmentTable.bulkCreate(seedAssignmentTable);
-    await resources_table.bulkCreate(seedResources);
+    await HelpRequest.bulkCreate(seedRequests);
+    await Assignment.bulkCreate(seedAssignment);
+    await AssignmentStatus.bulkCreate(seedAssignmentStatus);
+    await Resource.bulkCreate(seedResources);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);
