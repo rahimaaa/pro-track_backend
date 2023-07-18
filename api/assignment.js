@@ -22,12 +22,12 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.get("/:assignmentName", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    req.params.assignmentName;
+    req.params.id;
     console.log(req.params);
-    const assignment = await Assignment.findOne({
-      where: { assignmentName: req.params.assignmentName },
+    const assignment = await Assignment.findByPk({
+      where: { id: req.params.id },
     });
 
     if (!assignment) {
@@ -40,12 +40,12 @@ router.get("/:assignmentName", async (req, res, next) => {
   }
 });
 
-router.delete("/:assignmentName", isTA, async (req, res, next) => {
+router.delete("/:id", isTA, async (req, res, next) => {
   try {
-    const name = req.params.assignmentName;
+    
 
     // Delete the user with the provided email from the database
-    await Assignment.destroy({ where: { assignmentName: name } });
+    await Assignment.destroy({ where: { id: req.params.id } });
 
     res.json({ message: "Assignment removed successfully" });
     //Send response message (User removed successfully)
@@ -55,7 +55,7 @@ router.delete("/:assignmentName", isTA, async (req, res, next) => {
   }
 });
 
-router.put("/:assignmentName", isTA, async (req, res, next) => {
+router.put("/:id", isTA, async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;
@@ -68,7 +68,7 @@ router.put("/:assignmentName", isTA, async (req, res, next) => {
         due_date,
       },
       {
-        where: { assignmentName: req.params.assignmentName },
+        where: { id: req.params.id },
         returning: true,
       }
     );
