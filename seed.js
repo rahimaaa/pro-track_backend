@@ -5,6 +5,7 @@ const {
   AssignmentStatus,
   Assignment,
   Resource,
+  Feed,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -75,20 +76,38 @@ const seedUsers = [
   },
 ];
 
-const seedRequests = [
+
+const seedFeed = [
   {
-    stud_email: "rahimahabib@gmail.com",
-    request: "Please help me with postgress installation",
-    status: "In Progress ",
-    ta_email: "kevinYu@gmail.com",
-    accepted: "True",
+    title: "lovestory",
+    content: "Story of a boy in love",
+    link: "completed.com",
+    UserId: "4",
   },
   {
-    stud_email: "bruno2@gmail.com",
+    title: "HardTimes flies",
+    content: "I don't understand",
+    link: "InProgress.com",
+    UserId: "1",
+  },
+];
+
+const seedRequests = [
+  {
+    studentId: "1",
+    request: "Please help me with postgress installation",
+    status: "Pending",
+    //ta_email: "kevinYu@gmail.com",
+    accepted: "True",
+    UserId: "6"
+  },
+  {
+    studentId: "3",
     request: "Help with react don't understand",
     status: "In Progress",
-    ta_email: "johnhui@gmail.com",
+    //ta_email: "johnhui@gmail.com",
     accepted: "False",
+    UserId: "4"
   },
 ];
 
@@ -173,6 +192,7 @@ const seed = async () => {
     await Assignment.bulkCreate(seedAssignment);
     await AssignmentStatus.bulkCreate(seedAssignmentStatus);
     await Resource.bulkCreate(seedResources);
+    await Feed.bulkCreate(seedFeed);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);

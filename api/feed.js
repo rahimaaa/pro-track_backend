@@ -7,14 +7,14 @@ const { isTA } = require("./middleware/isTa");
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { title, content, link, userId } = req.body;
+    const { title, content, link } = req.body;
 
     // Creating a new user with the provided data
     const newFeed = await Feed.create({
       title,
       content,
       link,
-      userId,
+      //userId,
     });
 
     res.status(201).json(newFeed);
