@@ -27,7 +27,7 @@ const seedUsers = [
     imageUrl: "fds ",
     email: "brunosdhf@gmail.com",
     password: "989",
-
+    userType: "student",
     cohort_year: "2023",
   },
   {
@@ -212,7 +212,7 @@ const seedResources = [
 
 const seed = async () => {
   try {
-    await db.sync({ force: true }); // Drops existing tables and recreates them
+    // await db.sync({force:true}); // Drops existing tables and recreates them
     await User.bulkCreate(seedUsers);
     await HelpRequest.bulkCreate(seedRequests);
     await Assignment.bulkCreate(seedAssignment);

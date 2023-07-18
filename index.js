@@ -2,10 +2,11 @@ const express = require("express");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const passport = require("passport");
-const LocalStrategy = require("passport-local")
+const LocalStrategy = require("passport-local");
 const cors = require("cors");
 const db = require("./db");
-const {User} = require("./db/models");
+const { User } = require("./db/models");
+const GoogleStrategy = require("passport-google-oidc");
 
 const morgan = require("morgan");
 require("dotenv").config();
@@ -24,8 +25,6 @@ const sessionStore = new SequelizeStore({ db });
 //     done(error);
 //   }
 // };
-
-
 
 const configSession = () => ({
   secret: "ttp2023summer",
@@ -49,22 +48,48 @@ const setUpMiddleware = (app) => {
 };
 
 //passport setup
-const setUpPassport =() => {
-  passport.use(new LocalStrategy({usernameField: "email"},
-    function(email, password, done) {
-        User.findOne({ email: email }, function (err, user) {
-          console.log("found user", user)
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.correctPassword(password)) { return done(null, false); }
-        console.log("correct password")
+const setUpPassport = () => {
+  passport.use(
+    new LocalStrategy({ usernameField: "email" }, function (
+      email,
+      password,
+      done
+    ) {
+      User.findOne({ email: email }, function (err, user) {
+        console.log("found user", user);
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false);
+        }
+        if (!user.correctPassword(password)) {
+          return done(null, false);
+        }
+        console.log("correct password");
         return done(null, user);
       });
-    }
-  ));
-  
-  passport.serializeUser(function(user, done) {
-    process.nextTick(function() {
+    })
+  );
+
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "http://localhost:8080/auth/google/callback",
+        passReqToCallback: true,
+      },
+      authUser
+    )
+  );
+
+  function authUser(request, accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+  }
+
+  passport.serializeUser(function (user, done) {
+    process.nextTick(function () {
       return done(null, {
         id: user.id,
         email: user.email,
@@ -72,39 +97,34 @@ const setUpPassport =() => {
       });
     });
   });
-  
-  passport.deserializeUser(function(user, done) {
-    process.nextTick(function() {
+
+  passport.deserializeUser(function (user, done) {
+    process.nextTick(function () {
       return done(null, user);
     });
   });
-  
-}
+};
 
 const setUpRoutes = (app) => {
   app.use("/api", require("./api"));
-app.use("/auth", require("./auth"));
-}
+  app.use("/auth", require("./auth"));
+};
 
-
-const startServer = async (app, PORT)=>{
-  await db.sync()
-  app.listen(PORT, () => console.log(`server is on port: ${PORT}`))
+const startServer = async (app, PORT) => {
+  await db.sync();
+  app.listen(PORT, () => console.log(`server is on port: ${PORT}`));
   return app;
 };
 
 //configure allfunctions
-const configureApp = async (PORT)=> {
+const configureApp = async (PORT) => {
   const app = express();
   setUpPassport();
   setUpMiddleware(app);
   await sessionStore.sync();
   setUpRoutes(app);
   return startServer(app, PORT);
-
-}
-
-
+};
 
 module.exports = configureApp(PORT);
 // const app = express();

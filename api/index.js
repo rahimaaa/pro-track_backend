@@ -4,7 +4,7 @@ const router = require("express").Router();
 router.use("/user", require("./user"));
 router.use("/help-request", require("./helpRequest"));
 router.use("/lecture", require("./lecture"));
-router.use("/feed", require("./Feed"));
+router.use("/feed", require("./feed"));
 router.use("/assignment-status", require("./assignmentStatus"));
 router.use("/assignment", require("./assignment"));
 router.use("/resource", require("./resource"));

@@ -6,6 +6,7 @@ require("dotenv").config();
 // const db = new Sequelize(`postgres://postgres:"6120"@localhost:5432/${name}`, {
 //   logging: false,
 // });
+console.log(process.env.DATABASE);
 const db = new Sequelize(
   `${process.env.DATABASE}`,
   `${process.env.USER_NAME}`,
@@ -14,8 +15,8 @@ const db = new Sequelize(
     host: "localhost",
     dialect:
       "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
-      logging: false
-    }
+    logging: false,
+  }
 );
 
 module.exports = db;

@@ -1,33 +1,43 @@
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-
-
 const { Model, DataTypes } = require("sequelize");
 const db = require("../db");
 
-
 class User extends Model {
-  static async generateSalt() {
-    return crypto.randomBytes(16).toString("base64");
+  //   async correctPassword(pwAttempt) {
+  //     console.log("password Attemp", pwAttempt);
+  //     console.log("Correct password", this.password);
+  //     console.log(await bcrypt.compare(pwAttempt, this.password));
+  //     return await bcrypt.compare(pwAttempt, this.password);
+  //   }
+  // }
+  // async function hashPassword(user) {
+  //   console.log(user.email);
+  //   if (user.changed("password")) {
+  //     user.password = await bcrypt.hash(user.password, saltRounds);
+  //     console.log("password", user.password);
+  //   }
+  // }
+
+  // static async generateSalt(saltRounds) {
+  //   return await bcrypt.genSalt(saltRounds);
+  // }
+
+  static async encryptPassword(password) {
+    const hash = await bcrypt.hash(password, saltRounds);
+    console.log(this);
   }
 
-  correctPassword(pwAttempt) {
-    return bcrypt.compare(pwAttempt, this.password)
+  async correctPassword(pwAttempt) {
+    console.log("password Attemp", pwAttempt);
+    console.log("Correct password", this.password);
+    return await bcrypt.compare(pwAttempt, this.password);
   }
 }
- async function hashPassword(user) {
-  console.log(user.email);
-  if (user.changed("password")) {
-    user.password = await bcrypt.hash(user.password, saltRounds);
-    console.log("password", user.password);
-  }
-}
-
 User.init(
   {
     //add the table
-
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -49,7 +59,6 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     salt: {
       type: DataTypes.STRING,
@@ -74,14 +83,41 @@ User.init(
     sequelize: db,
     modelName: "User",
     hooks: {
-      beforeCreate: hashPassword,
-      beforeSave: hashPassword,
-      beforeUpdate: hashPassword,
+      //   // beforeCreate: encryptPassword,
+      //   // beforeSave: encryptPassword,
+      //   // beforeUpdate: encryptPassword,
+      //   // beforeBulkCreate: async (users) => {
+      //   //   for (let i = 0; i < users.length; i++) {
+      //   //     await encryptPassword(users[i]);
+      //   //   }
+      //   // },
+      //   // beforeCreate: async (user) => {
+      //   //   if (user.changed("password")) {
+      //   //     const salt = await User.generateSalt(saltRounds);
+      //   //     console.log("Salt", salt);
+      //   //     user.password = await User.encryptPassword(user.password, salt);
+      //   //     user.salt = salt;
+      //   //   }
+      //   // },
+      beforeSave: async (user) => {
+        if (user.changed("password")) {
+          user.password = await bcrypt.hash(user.password, saltRounds);
+        }
+      },
       beforeBulkCreate: async (users) => {
-       for( let i = 0; i< users.length; i++){
-          await hashPassword(users[i])
-       }
-      
+        // await users.forEach(async (user) => {
+        //   if (user.changed("password")) {
+        //     user.password = await bcrypt.hash(user.password, saltRounds);
+        //   }
+        // });
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].changed("password")) {
+            users[i].password = await bcrypt.hash(
+              users[i].password,
+              saltRounds
+            );
+          }
+        }
       },
     },
   }
