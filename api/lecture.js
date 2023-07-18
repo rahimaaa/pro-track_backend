@@ -28,7 +28,7 @@ router.get("/all", async (req, res, next) => {
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { title, description, recordings, slides, lecture_date, userId } =
+    const { title, description, recordings, slides, lecture_date } =
       req.body;
 
     // Creating a new user with the provided data
@@ -38,7 +38,7 @@ router.post("/", isTA, async (req, res, next) => {
       recordings,
       slides,
       lecture_date,
-      userId,
+      //userId,
     });
 
     res.status(201).json(newLecture);
@@ -69,7 +69,7 @@ router.delete("/:id", isTA, async (req, res, next) => {
 router.put("/:id", isTA, async (req, res, next) => {
   try {
     //console.log(req.body)
-    const { title, description, recordings, slides, lecture_date, userId } =
+    const { title, description, recordings, slides, lecture_date } =
       req.body;
 
     //Self check
@@ -96,7 +96,7 @@ router.put("/:id", isTA, async (req, res, next) => {
       recordings,
       slides,
       lecture_date,
-      userId,
+      //userId,
     });
 
     // Send a response indicating successful update

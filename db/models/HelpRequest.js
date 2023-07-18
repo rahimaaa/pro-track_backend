@@ -19,11 +19,11 @@ const HelpRequest = db.define("help_request", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  taId: {
-    unique: true,
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
+  // taId: {
+  //   unique: true,
+  //   type: DataTypes.INTEGER,
+  //   allowNull: true,
+  // },
   accepted: {
     type: DataTypes.BOOLEAN,
     allowNull: true,

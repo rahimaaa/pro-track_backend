@@ -5,6 +5,8 @@ const {
   AssignmentStatus,
   Assignment,
   Resource,
+  Feed,
+  Lecture,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -75,20 +77,36 @@ const seedUsers = [
   },
 ];
 
-const seedRequests = [
+
+const seedFeed = [
   {
-    stud_email: "rahimahabib@gmail.com",
-    request: "Please help me with postgress installation",
-    status: "In Progress ",
-    ta_email: "kevinYu@gmail.com",
-    accepted: "True",
+    title: "lovestory",
+    content: "Story of a boy in love",
+    link: "completed.com",
+    UserId: "4",
   },
   {
-    stud_email: "bruno2@gmail.com",
+    title: "HardTimes flies",
+    content: "I don't understand",
+    link: "InProgress.com",
+    UserId: "1",
+  },
+];
+
+const seedRequests = [
+  {
+    studentId: "1",
+    request: "Please help me with postgress installation",
+    status: "Pending",
+    accepted: "True",
+    UserId: "6"
+  },
+  {
+    studentId: "3",
     request: "Help with react don't understand",
     status: "In Progress",
-    ta_email: "johnhui@gmail.com",
     accepted: "False",
+    UserId: "4"
   },
 ];
 
@@ -108,6 +126,33 @@ const seedAssignment = [
     group: null,
     assignment_date: null,
     due_date: null,
+  },
+];
+
+const seedLecture = [
+  {
+    title: "title 1",
+    description: "describe something",
+    recordings: "Pending recorded lecture 1",
+    slides: "True",
+    lecture_date: "12th July 2023",
+    UserId: "5"
+  },
+  {
+    title: "title 2",
+    description: "describe me",
+    recordings: "Pending recorded lecture",
+    slides: "None are here",
+    lecture_date: "12th June 2023",
+    UserId: "5"
+  },
+  {
+    title: "title 3",
+    description: "complete recorded lecture",
+    recordings: "done",
+    slides: "True",
+    lecture_date: "24th June 2023",
+    UserId: "4"
   },
 ];
 
@@ -144,24 +189,24 @@ const seedAssignmentStatus = [
 const seedResources = [
   {
     title: "How to git clone",
-    description: "blahslbaf ajdalkfj alfk j bsh skhbs s fjdhfkjh l",
+    description: "uwu uwu uwu uwu",
     category: "Git cloning",
     content: "link",
-    posted_by: "allan@ttp.com",
+    UserId: "6",
   },
   {
     title: "Deploying your app on vercel",
-    description: "blahslbaf ajdalkfj alfk j bsh skhbs s fjdhfkjh l",
+    description: "muah ha ha ha ha",
     category: "Deployment",
     content: "link",
-    posted_by: "allan@ttp.com",
+    UserId: "5",
   },
   {
     title: "How write git commit messages",
-    description: "blahslbaf ajdalkfj alfk j bsh skhbs s fjdhfkjh l",
+    description: "blah blah blah",
     category: "Git",
     content: "link",
-    posted_by: "allan@ttp.com",
+    UserId: "6"
   },
 ];
 
@@ -173,6 +218,8 @@ const seed = async () => {
     await Assignment.bulkCreate(seedAssignment);
     await AssignmentStatus.bulkCreate(seedAssignmentStatus);
     await Resource.bulkCreate(seedResources);
+    await Lecture.bulkCreate(seedLecture);
+    await Feed.bulkCreate(seedFeed);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);
@@ -182,3 +229,4 @@ const seed = async () => {
 };
 
 seed();
+

@@ -69,11 +69,11 @@ router.delete("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     //console.log(req.body)
-    const { studentId, request, status, taId, accepted } = req.body;
+    const { studentId, request, status, accepted } = req.body;
 
     //Self check
     // Ensure that all required properties exist in the request body
-    if (!studentId || !request || !status || !taId || !accepted) {
+    if (!studentId || !request || !status || !accepted) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -92,7 +92,7 @@ router.put("/:id", async (req, res, next) => {
       studentId,
       request,
       status,
-      taId,
+      //taId,
       accepted,
     });
 
@@ -110,14 +110,14 @@ router.put("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { studentId, request, status, taId, accepted } = req.body;
+    const { studentId, request, status, accepted } = req.body;
 
     // Creating a new user with the provided data
     const newRequest = await HelpRequest.create({
       studentId,
       request,
       status,
-      taId,
+      //taId,
       accepted,
     });
 

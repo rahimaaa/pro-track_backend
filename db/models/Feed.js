@@ -18,10 +18,10 @@ const Feed = db.define("feed", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
+  // userId: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: true,
+  // },
 });
 
 module.exports = Feed;
