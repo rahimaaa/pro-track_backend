@@ -26,11 +26,11 @@ const Lecture = db.define("lecture", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  userId: {
-    //unique: true,
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
+  // userId: {
+  //   //unique: true,
+  //   type: DataTypes.INTEGER,
+  //   allowNull: true,
+  // },
 });
 
 module.exports = Lecture;

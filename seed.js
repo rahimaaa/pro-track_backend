@@ -6,6 +6,7 @@ const {
   Assignment,
   Resource,
   Feed,
+  Lecture,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -97,7 +98,6 @@ const seedRequests = [
     studentId: "1",
     request: "Please help me with postgress installation",
     status: "Pending",
-    //ta_email: "kevinYu@gmail.com",
     accepted: "True",
     UserId: "6"
   },
@@ -105,7 +105,6 @@ const seedRequests = [
     studentId: "3",
     request: "Help with react don't understand",
     status: "In Progress",
-    //ta_email: "johnhui@gmail.com",
     accepted: "False",
     UserId: "4"
   },
@@ -127,6 +126,33 @@ const seedAssignment = [
     group: null,
     assignment_date: null,
     due_date: null,
+  },
+];
+
+const seedLecture = [
+  {
+    title: "title 1",
+    description: "describe something",
+    recording: "Pending recorded lecture 1",
+    slides: "True",
+    Lecture_date: "12th July 2023",
+    UserId: "5"
+  },
+  {
+    title: "title 2",
+    description: "describe me",
+    recording: "Pending recorded lecture",
+    slides: "None are here",
+    Lecture_date: "12th June 2023",
+    UserId: "5"
+  },
+  {
+    title: "1",
+    description: "complete recorded lecture",
+    recording: "done",
+    slides: "True",
+    Lecture_date: "24th June 2023",
+    UserId: "4"
   },
 ];
 
@@ -192,6 +218,7 @@ const seed = async () => {
     await Assignment.bulkCreate(seedAssignment);
     await AssignmentStatus.bulkCreate(seedAssignmentStatus);
     await Resource.bulkCreate(seedResources);
+    await Lecture.bulkCreate(seedLecture);
     await Feed.bulkCreate(seedFeed);
     console.log("Seeding complete");
   } catch (error) {
