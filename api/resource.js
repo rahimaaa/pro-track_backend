@@ -54,14 +54,13 @@ router.delete("/:id", isTA,  async (req, res, next) => {
 
 router.put("/:id", isTA, async (req, res, next) => {
   try {
-    const { title, description, category, content, posted_by } = req.body;
+    const { title, description, category, content } = req.body;
     const updatedResource = await Resource.update(
       {
         title,
         description,
         category,
-        content,
-        posted_by,
+        content
       },
       {
         where: { id: req.params.id },
@@ -79,14 +78,13 @@ router.put("/:id", isTA, async (req, res, next) => {
 
 router.post("/", isTA, async (req, res, next) => {
   try {
-    const { title, description, category, content, posted_by } = req.body;
+    const { title, description, category, content } = req.body;
 
     const newResource = await Resource.create({
       title,
       description,
       category,
-      content,
-      posted_by,
+      content
     });
 
     res.status(201).json(newResource);

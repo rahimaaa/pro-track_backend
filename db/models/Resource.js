@@ -21,10 +21,10 @@ const Resource = db.define("resource", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  userId: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+  // userId: {
+  //   type: DataTypes.STRING,
+  //   allowNull: true,
+  // },
 });
 
 module.exports = Resource;

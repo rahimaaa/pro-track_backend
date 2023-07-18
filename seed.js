@@ -133,25 +133,25 @@ const seedLecture = [
   {
     title: "title 1",
     description: "describe something",
-    recording: "Pending recorded lecture 1",
+    recordings: "Pending recorded lecture 1",
     slides: "True",
-    Lecture_date: "12th July 2023",
+    lecture_date: "12th July 2023",
     UserId: "5"
   },
   {
     title: "title 2",
     description: "describe me",
-    recording: "Pending recorded lecture",
+    recordings: "Pending recorded lecture",
     slides: "None are here",
-    Lecture_date: "12th June 2023",
+    lecture_date: "12th June 2023",
     UserId: "5"
   },
   {
-    title: "1",
+    title: "title 3",
     description: "complete recorded lecture",
-    recording: "done",
+    recordings: "done",
     slides: "True",
-    Lecture_date: "24th June 2023",
+    lecture_date: "24th June 2023",
     UserId: "4"
   },
 ];
@@ -189,24 +189,24 @@ const seedAssignmentStatus = [
 const seedResources = [
   {
     title: "How to git clone",
-    description: "blahslbaf ajdalkfj alfk j bsh skhbs s fjdhfkjh l",
+    description: "uwu uwu uwu uwu",
     category: "Git cloning",
     content: "link",
-    posted_by: "allan@ttp.com",
+    UserId: "6",
   },
   {
     title: "Deploying your app on vercel",
-    description: "blahslbaf ajdalkfj alfk j bsh skhbs s fjdhfkjh l",
+    description: "muah ha ha ha ha",
     category: "Deployment",
     content: "link",
-    posted_by: "allan@ttp.com",
+    UserId: "5",
   },
   {
     title: "How write git commit messages",
-    description: "blahslbaf ajdalkfj alfk j bsh skhbs s fjdhfkjh l",
+    description: "blah blah blah",
     category: "Git",
     content: "link",
-    posted_by: "allan@ttp.com",
+    UserId: "6"
   },
 ];
 
