@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../db/models");
-const {isAdmin} = require("./middleware/isAdmin");
-
+const { isAdmin } = require("./middleware/isAdmin");
 
 // Root here is localhost:8080/api/users/
 
 //Route handler for the GETAll for allUsers request
-router.get("/all",isAdmin, async (req, res, next) => {
+router.get("/all", isAdmin, async (req, res, next) => {
   try {
     // Retrieve all users from the database
     const allUsers = await User.findAll();
@@ -52,32 +51,16 @@ router.get("/:id", async (req, res, next) => {
 //Creation of a new user
 router.post("/", async (req, res, next) => {
   try {
-    const {
-      firstName,
-      lastName,
-      imageUrl,
-      email,
-      password,
-      userType,
-      cohort_year,
-    } = req.body;
+    const { email } = req.body;
 
     const user = await User.findOne({ where: { email: email } });
     if (user) {
       return res.json(user);
     }
     // Creating a new user with the provided data
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      imageUrl,
-      email,
-      password,
-      userType,
-      cohort_year,
-    });
+    const newUser = await User.create(req.body);
 
-    res.status(201).json(newUser);
+    return res.status(201).json(newUser);
     // Send a response with status code 201 and the newly created user
   } catch (error) {
     //Handling any errors that occur

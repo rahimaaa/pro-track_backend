@@ -6,7 +6,6 @@ const Assignment = require("./Assignment");
 const AssignmentStatus = require("./AssignmentStatus");
 const Resource = require("./Resource");
 
-
 // USER TO HELPREQUEST TABLE RELEATIONSHIP
 User.hasMany(HelpRequest, {
   foreignKey: "studentId",
@@ -36,12 +35,9 @@ AssignmentStatus.belongsToMany(User, {
   through: "user_assignment_status",
 });
 
-
-
 //ASSIGNMENT TO ASSIGNMENT STATUS TABLE
 Assignment.hasMany(AssignmentStatus);
 AssignmentStatus.belongsTo(Assignment);
-
 
 module.exports = {
   User,
@@ -51,5 +47,4 @@ module.exports = {
   AssignmentStatus,
   Assignment,
   Resource,
-  
 };

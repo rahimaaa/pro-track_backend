@@ -1,11 +1,19 @@
 const router = require("express").Router();
 const { User } = require("../db/models");
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 //auth/login
 router.post("/login", async (req, res, next) => {
+  console.log("Email:", req.body.email);
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
-    const isCorrectPassword = await user.correctPassword(req.body.password);
+    console.log("User: ", user);
+    console.log("Password: ", req.body.password);
+    const isCorrectPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    console.log("Is Correct Password", isCorrectPassword);
     if (!user || !isCorrectPassword) {
       res.status(401).send("Invalid login attempt");
     } else {
@@ -38,12 +46,16 @@ router.get(
 );
 
 router.post("/signup", async (req, res, next) => {
+  console.log(req.body);
   try {
     const { email, password } = req.body;
+    //check for created user
     if (!email || !password) {
       return res.status(400).send("Required fields missing");
     }
-    const user = await User.create(res.body);
+    console.log("Checked Required Field");
+    const user = await User.create(req.body);
+    console.log("User:", user);
     req.login(user, (err) => (err ? next(err) : res.status(200).json(user)));
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
