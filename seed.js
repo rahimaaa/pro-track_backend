@@ -143,6 +143,7 @@ const seedLecture = [
     title: "title 1",
     description: "describe something",
     recordings: "Pending recorded lecture 1",
+    password: "1234",
     slides: "True",
     lecture_date: "12th July 2023",
     userId: "5"
@@ -151,6 +152,7 @@ const seedLecture = [
     title: "title 2",
     description: "describe me",
     recordings: "Pending recorded lecture",
+    password: "5678",
     slides: "None are here",
     lecture_date: "12th June 2023",
     userId: "5"
@@ -159,6 +161,7 @@ const seedLecture = [
     title: "title 3",
     description: "complete recorded lecture",
     recordings: "done",
+    password: "1034",
     slides: "True",
     lecture_date: "24th June 2023",
     userId: "4"
