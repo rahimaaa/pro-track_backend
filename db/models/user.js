@@ -12,6 +12,8 @@ class User extends Model {
   //     return await bcrypt.compare(pwAttempt, this.password);
   //   }
   // }
+
+  
   // async function hashPassword(user) {
   //   console.log(user.email);
   //   if (user.changed("password")) {
