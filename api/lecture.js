@@ -28,7 +28,7 @@ router.get("/all", async (req, res, next) => {
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { title, description, recordings, slides, lecture_date } =
+    const { title, description, password, recordings, slides, lecture_date, userId} =
       req.body;
 
     // Creating a new user with the provided data
@@ -39,9 +39,10 @@ router.post("/", isTA, async (req, res, next) => {
       recordings,
       slides,
       lecture_date,
-      //userId,
+      userId,
     });
-
+    const user = await User.findByPk(req.user.id);
+    newLecture.dataValues.user = user;
     res.status(201).json(newLecture);
     // Send a response with status code 201 and the newly created help request
   } catch (error) {
