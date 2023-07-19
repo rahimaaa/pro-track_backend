@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { Resource } = require("../db/models");
+const { Resource, User} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 
 router.get("/all", async (req, res, next) => {
   try {
-    const allResources = await Resource.findAll();
+    const allResources = await Resource.findAll({include: User});
 
     console.log("these are all the resources: " + allResources);
 

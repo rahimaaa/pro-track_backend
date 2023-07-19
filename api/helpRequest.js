@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { HelpRequest } = require("../db/models");
+const { HelpRequest, User} = require("../db/models");
 
 // Root here is localhost:8080/api/HelpRequest/
 
@@ -8,7 +8,7 @@ const { HelpRequest } = require("../db/models");
 router.get("/", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allRequests = await HelpRequest.findAll();
+    const allRequests = await HelpRequest.findAll({include: User});
 
     console.log("these are all the requests: " + allRequests);
 

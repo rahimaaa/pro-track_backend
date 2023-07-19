@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { AssignmentStatus } = require("../db/models");
+const { AssignmentStatus, User} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 // Root here is localhost:8080/api/AssignmentStatus/all
 
 //get all assignment statuses
 router.get("/all", isTA, async (req, res, next) => {
   try {
-    const allAssignments = await AssignmentStatus.findAll();
+    const allAssignments = await AssignmentStatus.findAll({include: User});
 
     console.log("these are all the users: " + allAssignments);
 
