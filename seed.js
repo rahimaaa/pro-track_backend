@@ -92,13 +92,13 @@ const seedFeed = [
     title: "lovestory",
     content: "Story of a boy in love",
     link: "completed.com",
-    UserId: "4",
+    userId: "4",
   },
   {
     title: "HardTimes flies",
     content: "I don't understand",
     link: "InProgress.com",
-    UserId: "1",
+    userId: "1",
   },
 ];
 
@@ -108,14 +108,14 @@ const seedRequests = [
     request: "Please help me with postgress installation",
     status: "Pending",
     accepted: "True",
-    UserId: "6"
+    userId: "6"
   },
   {
     studentId: "3",
     request: "Help with react don't understand",
     status: "In Progress",
     accepted: "False",
-    UserId: "4"
+    userId: "4"
   },
 ];
 
@@ -145,7 +145,7 @@ const seedLecture = [
     recordings: "Pending recorded lecture 1",
     slides: "True",
     lecture_date: "12th July 2023",
-    UserId: "5"
+    userId: "5"
   },
   {
     title: "title 2",
@@ -153,7 +153,7 @@ const seedLecture = [
     recordings: "Pending recorded lecture",
     slides: "None are here",
     lecture_date: "12th June 2023",
-    UserId: "5"
+    userId: "5"
   },
   {
     title: "title 3",
@@ -161,7 +161,7 @@ const seedLecture = [
     recordings: "done",
     slides: "True",
     lecture_date: "24th June 2023",
-    UserId: "4"
+    userId: "4"
   },
 ];
 
@@ -201,21 +201,21 @@ const seedResources = [
     description: "uwu uwu uwu uwu",
     category: "Git cloning",
     content: "link",
-    UserId: "6",
+    userId: "6",
   },
   {
     title: "Deploying your app on vercel",
     description: "muah ha ha ha ha",
     category: "Deployment",
     content: "link",
-    UserId: "5",
+    userId: "5",
   },
   {
     title: "How write git commit messages",
     description: "blah blah blah",
     category: "Git",
     content: "link",
-    UserId: "6"
+    userId: "6"
   },
 ];
 
