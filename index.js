@@ -126,7 +126,8 @@ const configureApp = async (PORT) => {
   setUpMiddleware(app);
   await sessionStore.sync();
   setUpRoutes(app);
-  return startServer(app, PORT);
+  startServer(app, PORT);
+  return app;
 };
 
 module.exports = configureApp(PORT);
