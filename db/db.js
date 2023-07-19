@@ -8,7 +8,7 @@ require("dotenv").config();
 // });
 let db = null;
 if(process.env.POSTGRES_URL){
-   db = new Sequelize(process.env.POSTGRES_URL, {
+   db = new Sequelize(process.env.POSTGRES_URL+ "?sslmode=require", {
     logging: false,
   });
   
