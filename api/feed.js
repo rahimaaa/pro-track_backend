@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Feed } = require("../db/models");
+const { Feed, User} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 //Add post route to create new HelpRequest
 
@@ -45,7 +45,7 @@ router.delete("/:id", isTA,  async (req, res, next) => {
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allFeeds = await Feed.findAll();
+    const allFeeds = await Feed.findAll({include: User});
 
     console.log("these are all the requests: " + allFeeds);
 

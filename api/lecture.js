@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Lecture } = require("../db/models");
+const { Lecture, User} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 //Route handler for the GETAll for all requests
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allLectures = await Lecture.findAll();
+    const allLectures = await Lecture.findAll({include: User});
 
     console.log("these are all the requests: " + allLectures);
 
