@@ -5,7 +5,7 @@ const { HelpRequest } = require("../db/models");
 // Root here is localhost:8080/api/HelpRequest/
 
 //Route handler for the GETAll for all requests
-router.get("/all", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     // Retrieve all users from the database
     const allRequests = await HelpRequest.findAll();
