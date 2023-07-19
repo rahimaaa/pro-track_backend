@@ -76,6 +76,7 @@ router.post("/logout", async (req, res, next) => {
 });
 
 router.get("/me", async (req, res, next) => {
+  console.log("req.user", req.user);
   res.status(200).json(req.user);
 });
 
