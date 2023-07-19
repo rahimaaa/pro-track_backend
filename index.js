@@ -34,6 +34,7 @@ const configSession = () => ({
   store: sessionStore,
   resave: false,
   cookie: {
+    secure: process.env.NODE_ENV === "dev" ? false : true,
     maxAge: 8 * 60 * 60 * 1000,
   },
 });
@@ -43,10 +44,12 @@ const setUpMiddleware = (app) => {
   app.use(express.json());
   app.use(morgan("dev"));
   app.use(express.urlencoded({ extended: true }));
-  app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
-  }));
+  app.use(
+    cors({
+      origin: process.env.FRONTEND_URL || "http://localhost:3000",
+      credentials: true,
+    })
+  );
   app.use(session(configSession()));
   app.use(passport.initialize());
   app.use(passport.session());
