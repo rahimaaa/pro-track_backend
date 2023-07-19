@@ -6,8 +6,14 @@ require("dotenv").config();
 // const db = new Sequelize(`postgres://postgres:"6120"@localhost:5432/${name}`, {
 //   logging: false,
 // });
-console.log(process.env.DATABASE);
-const db = new Sequelize(
+let db = null;
+if(process.env.POSTGRES_URL){
+   db = new Sequelize(process.env.POSTGRES_URL, {
+    logging: false,
+  });
+  
+} else {
+ db = new Sequelize(
   `${process.env.DATABASE}`,
   `${process.env.USER_NAME}`,
   `${process.env.PASSWORD}`,
@@ -18,5 +24,6 @@ const db = new Sequelize(
     logging: false,
   }
 );
+}
 
 module.exports = db;

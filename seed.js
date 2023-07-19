@@ -75,6 +75,15 @@ const seedUsers = [
     userType: "student",
     cohort_year: "2023",
   },
+  {
+    firstName: "User",
+    lastName: "Test",
+    imageUrl: "fds ",
+    email: "user@gmail.com",
+    password: "password",
+    userType: "admin",
+    cohort_year: "2023",
+  },
 ];
 
 
