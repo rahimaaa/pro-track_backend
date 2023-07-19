@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -9,7 +10,9 @@ const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
 
 const morgan = require("morgan");
-require("dotenv").config();
+console.log("env:", process.env.GOOGLE_CLIENT_ID);
+console.log("env:", process.env.GOOGLE_CLIENT_SECRET);
+
 const PORT = process.env.PORT || "8080";
 
 const sessionStore = new SequelizeStore({ db });
