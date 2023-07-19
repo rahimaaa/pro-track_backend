@@ -35,6 +35,7 @@ router.post("/", isTA, async (req, res, next) => {
     const newLecture = await Lecture.create({
       title,
       description,
+      password,
       recordings,
       slides,
       lecture_date,
@@ -69,7 +70,7 @@ router.delete("/:id", isTA, async (req, res, next) => {
 router.put("/:id", isTA, async (req, res, next) => {
   try {
     //console.log(req.body)
-    const { title, description, recordings, slides, lecture_date } =
+    const { title, description,password, recordings, slides, lecture_date } =
       req.body;
 
     //Self check
@@ -93,6 +94,7 @@ router.put("/:id", isTA, async (req, res, next) => {
     const updatedLecture = await existingLecture.update({
       title,
       description,
+      password,
       recordings,
       slides,
       lecture_date,

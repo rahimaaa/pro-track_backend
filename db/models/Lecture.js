@@ -14,6 +14,10 @@ const Lecture = db.define("lecture", {
     type: DataTypes.TEXT("long"),
     allowNull: true,
   },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   recordings: {
     type: DataTypes.STRING,
     allowNull: true,
