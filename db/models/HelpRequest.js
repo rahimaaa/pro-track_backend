@@ -8,21 +8,17 @@ const HelpRequest = db.define("help_request", {
 
   studentId: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
   },
   request: {
     type: DataTypes.TEXT("long"),
-    allowNull: true,
+    allowNull: false,
   },
   status: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
+    defaultValue: "Pending",
   },
-  // taId: {
-  //   unique: true,
-  //   type: DataTypes.INTEGER,
-  //   allowNull: true,
-  // },
   accepted: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
