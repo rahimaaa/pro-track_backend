@@ -24,6 +24,27 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+//Route for get specific lecture with lecture id 
+router.get("/:id", async (req, res, next) => {
+  // Retrieving a specific lecture by lecture id 
+  try {
+    req.params.id;
+    console.log(req.params);
+    const lecture = await Lecture.findOne({ where: { id: req.params.id } });
+
+    if (!lecture) {
+      // If the lecture is not found, send a response with status code 404
+      //And the error message (Lecture not found)
+      return res.status(404).json({ error: "Lecture not found" });
+    }
+    // Sending a response with the retrieved users
+    res.json(lecture);
+  } catch (error) {
+    // Pass any error to the error handling
+    next(error);
+  }
+});
+
 //Add post route to create new HelpRequest
 router.post("/", isTA, async (req, res, next) => {
   try {
