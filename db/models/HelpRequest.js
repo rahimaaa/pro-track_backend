@@ -7,7 +7,6 @@ const HelpRequest = db.define("help_request", {
   //adding columns to the table
 
   studentId: {
-    unique: true,
     type: DataTypes.INTEGER,
     allowNull: true,
   },
