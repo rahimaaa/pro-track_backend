@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Resource, User} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
+const {  isAdmin } = require("./middleware/isAdmin");
 
 router.get("/all", async (req, res, next) => {
   try {
@@ -52,7 +53,7 @@ router.delete("/:id", isTA,  async (req, res, next) => {
   }
 });
 
-router.put("/:id", isTA, async (req, res, next) => {
+router.put("/:id", isTA || isAdmin, async (req, res, next) => {
   try {
     const { title, description, category, content } = req.body;
     const updatedResource = await Resource.update(
@@ -76,17 +77,20 @@ router.put("/:id", isTA, async (req, res, next) => {
   }
 });
 
-router.post("/", isTA, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const { title, description, category, content } = req.body;
-
+    
     const newResource = await Resource.create({
       title,
       description,
       category,
-      content
+      content,
+      userId : req.user.id
     });
 
+    const user = await User.findByPk(req.user.id);
+    newResource.dataValues.user = user;
     res.status(201).json(newResource);
   } catch (error) {
     //Handling any errors that occur
