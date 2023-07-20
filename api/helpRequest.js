@@ -78,7 +78,6 @@ router.delete("/:id", async (req, res, next) => {
 //Get route for updating of Help request with the use of stud_email(student email)
 router.put("/:id", async (req, res, next) => {
   try {
-    console.log(req.body);
     const { studentId, request, status, taId, accepted } = req.body;
 
     //Self check
@@ -105,7 +104,6 @@ router.put("/:id", async (req, res, next) => {
       taId,
       accepted,
     });
-
     // Send a response indicating successful update
     res
       .status(200)
@@ -121,16 +119,19 @@ router.post("/", async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
     const { studentId, request, status, accepted } = req.body;
-
+    console.log("req Body: ", req.body);
+    console.log("req Student: ", req.student);
     // Creating a new user with the provided data
     const newRequest = await HelpRequest.create({
       studentId,
       request,
       status,
-      //taId,
+      //taId
       accepted,
     });
 
+    const student = await User.findByPk(studentId);
+    newRequest.dataValues.student = student;
     res.status(201).json(newRequest);
     // Send a response with status code 201 and the newly created help request
   } catch (error) {
