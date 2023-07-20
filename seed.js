@@ -86,7 +86,6 @@ const seedUsers = [
   },
 ];
 
-
 const seedFeed = [
   {
     title: "lovestory",
@@ -108,14 +107,14 @@ const seedRequests = [
     request: "Please help me with postgress installation",
     status: "Pending",
     accepted: "True",
-    userId: "6"
+    userId: "6",
   },
   {
     studentId: "3",
     request: "Help with react don't understand",
     status: "In Progress",
     accepted: "False",
-    userId: "4"
+    taId: "4",
   },
 ];
 
@@ -146,7 +145,7 @@ const seedLecture = [
     password: "1234",
     slides: "True",
     lecture_date: "12th July 2023",
-    userId: "5"
+    userId: "5",
   },
   {
     title: "title 2",
@@ -155,7 +154,7 @@ const seedLecture = [
     password: "5678",
     slides: "None are here",
     lecture_date: "12th June 2023",
-    userId: "5"
+    userId: "5",
   },
   {
     title: "title 3",
@@ -164,7 +163,7 @@ const seedLecture = [
     password: "1034",
     slides: "True",
     lecture_date: "24th June 2023",
-    userId: "4"
+    userId: "4",
   },
 ];
 
@@ -218,13 +217,13 @@ const seedResources = [
     description: "blah blah blah",
     category: "Git",
     content: "link",
-    userId: "6"
+    userId: "6",
   },
 ];
 
 const seed = async () => {
   try {
-    await db.sync({force:true}); // Drops existing tables and recreates them
+    await db.sync({ force: true }); // Drops existing tables and recreates them
     await User.bulkCreate(seedUsers);
     await HelpRequest.bulkCreate(seedRequests);
     await Assignment.bulkCreate(seedAssignment);
@@ -241,4 +240,3 @@ const seed = async () => {
 };
 
 seed();
-

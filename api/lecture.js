@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Lecture, User} = require("../db/models");
+const { Lecture, User } = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 //Route handler for the GETAll for all requests
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allLectures = await Lecture.findAll({include: User});
+    const allLectures = await Lecture.findAll({ include: User });
 
     console.log("these are all the requests: " + allLectures);
 
@@ -49,8 +49,10 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
+
     const { title, description, password, recordings, slides, lecture_date, userId} =
       req.body;
+
 
     // Creating a new user with the provided data
     const newLecture = await Lecture.create({
@@ -92,7 +94,7 @@ router.delete("/:id", isTA, async (req, res, next) => {
 router.put("/:id", isTA, async (req, res, next) => {
   try {
     //console.log(req.body)
-    const { title, description,password, recordings, slides, lecture_date } =
+    const { title, description, password, recordings, slides, lecture_date } =
       req.body;
 
     //Self check

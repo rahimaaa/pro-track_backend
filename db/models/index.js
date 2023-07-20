@@ -9,9 +9,21 @@ const Resource = require("./Resource");
 // USER TO HELPREQUEST TABLE RELEATIONSHIP
 User.hasMany(HelpRequest, {
   foreignKey: "studentId",
-  foreighKey: "taId",
+  as: "studentRequest",
 });
-HelpRequest.belongsTo(User);
+HelpRequest.belongsTo(User, {
+  foreignKey: "studentId",
+  as: "student",
+});
+
+User.hasMany(HelpRequest, {
+  foreignKey: "taId",
+  as: "ta",
+});
+HelpRequest.belongsTo(User, {
+  foreignKey: "taId",
+  as: "ta",
+});
 
 //USER TO RESOURCES TABLE RELEATIONSHIP  //User.hasMany(Resource);
 User.hasMany(Resource);
