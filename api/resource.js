@@ -1,3 +1,5 @@
+//const linkPreview = require("link-preview-js");
+const axios = require('axios');
 const express = require("express");
 const router = express.Router();
 const { Resource, User} = require("../db/models");
@@ -79,14 +81,29 @@ router.put("/:id", isTA || isAdmin, async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { title, description, category, content } = req.body;
+    const { title, description, category, content, link } = req.body;
+
+    // Fetch link preview data from the API 
+    const apiKey = 'b24ea9a6a874078d04f0520fbc361a9b'; // Replace this with your actual API key
+    const apiUrl = `https://api.linkpreview.net/?key=${apiKey}&q=${encodeURIComponent(link)}`;
+    const response = await axios.get(apiUrl);
+
+
+    // Extract relevant information from the API response
+    const previewData = response.data;
+    const { description: linkDescription, images: linkPreviewImage } = previewData;
+    
+
     
     const newResource = await Resource.create({
       title,
       description,
       category,
       content,
-      userId : req.user.id
+      userId : req.user.id,
+      link,
+      linkDescription, // Add the link description to the Resource model
+      linkPreviewImage //images && images.length > 0 ? images[0] : null, // Add the first image as the link preview image (if available)
     });
 
     const user = await User.findByPk(req.user.id);

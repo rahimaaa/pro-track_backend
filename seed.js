@@ -261,6 +261,9 @@ const seedResources = [
     category: "Postgres Documentation",
     content: "psql-link",
     userId: "6",
+    link: "www.google.com",
+    linkDescription: "Testing link preview",
+    linkPreviewImage: "image-url"
   },
   {
     title: "Deploying your app on vercel",
@@ -268,6 +271,9 @@ const seedResources = [
     category: "Server Deployment",
     content: "server-link",
     userId: "5",
+    link: "www.google.com",
+    linkDescription: "Testing link preview",
+    linkPreviewImage: "image-url"
   },
   {
     title: "Authentication and Authorization",
@@ -275,6 +281,9 @@ const seedResources = [
     category: "Security Services",
     content: "security-link",
     userId: "6",
+    link: "www.google.com",
+    linkDescription: "Testing link preview",
+    linkPreviewImage: "image-url"
   },
 ];
 
