@@ -7,16 +7,18 @@ const { isTA } = require("./middleware/isTa");
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { title, content, link } = req.body;
+    const { title, content, link, userId} = req.body;
 
     // Creating a new user with the provided data
     const newFeed = await Feed.create({
       title,
       content,
       link,
-      //userId,
+      userId,
     });
 
+    const user = await User.findByPk(userId);
+    newFeed.dataValues.user = user;
     res.status(201).json(newFeed);
     // Send a response with status code 201 and the newly created help request
   } catch (error) {
