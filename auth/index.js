@@ -9,6 +9,7 @@ router.post("/login", async (req, res, next) => {
     const user = await User.findOne({ where: { email: req.body.email } });
     console.log("User: ", user);
     console.log("Password: ", req.body.password);
+    console.log("Correct password", user.password);
     const isCorrectPassword = await bcrypt.compare(
       req.body.password,
       user.password
