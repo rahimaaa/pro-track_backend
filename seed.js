@@ -76,15 +76,6 @@ const seedUsers = [
     cohort_year: "2023",
   },
   {
-    firstName: "User",
-    lastName: "Test",
-    imageUrl: "fds ",
-    email: "user@gmail.com",
-    password: "password",
-    userType: "admin",
-    cohort_year: "2023",
-  },
-  {
     firstName: "Admin",
     lastName: "Test",
     imageUrl: "fds ",
@@ -140,21 +131,18 @@ const seedRequests = [
     request: "Having trouble with useEffect updating the userprofile page",
     status: "Pending",
     accepted: "false",
-    userId: "8",
-  },
-  {
-    studentId: "3",
-    request: "Help routing in react-router-dom",
-    status: "In Progress",
-    accepted: "True",
-    taId: "4",
   },
   {
     studentId: "4",
     request: "Help populating fields in Mongoose",
     status: "Pending",
     accepted: "False",
-    taId: "7",
+  },
+  {
+    studentId: "2",
+    request: "Help with react don't understand",
+    status: "Pending",
+    accepted: "False",
   },
 ];
 
