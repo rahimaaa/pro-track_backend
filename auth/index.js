@@ -2,7 +2,11 @@ const router = require("express").Router();
 const { User } = require("../db/models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
+
 //auth/login
+
+
+
 router.post("/login", async (req, res, next) => {
   console.log("Email:", req.body.email);
   try {
@@ -72,13 +76,15 @@ router.post("/logout", async (req, res, next) => {
 
     if (error) {
       return next(error);
+      
     }
+    res.clearCookie("connect.sid");
     req.session.destroy((error)=>{
 
       if(error){
         return next(error);
       }
-      res.clearCookie("connect.sid");
+      // res.clearCookie("connect.sid");
 
       res.sendStatus(204);
     });
@@ -86,6 +92,7 @@ router.post("/logout", async (req, res, next) => {
 
   });
 });
+
 
 router.get("/me", async (req, res, next) => {
   console.log("req.user", req.user);
