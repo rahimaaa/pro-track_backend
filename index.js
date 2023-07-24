@@ -9,10 +9,7 @@ const db = require("./db");
 const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
 
-const cookieParser = require('cookie-parser');
-
-
-
+const cookieParser = require("cookie-parser");
 
 const morgan = require("morgan");
 console.log("env:", process.env.GOOGLE_CLIENT_ID);
@@ -96,11 +93,73 @@ const setUpPassport = () => {
       },
       authUser
     )
+
   );
 
-  function authUser(request, accessToken, refreshToken, profile, done) {
-    return done(null, profile);
+  async function authUser( accessToken, refreshToken, profile, done) {
+    try {
+              console.log("Profile", profile);
+              // Extract the relevant data from the profile object
+              const googleId = profile.id;
+              const email = profile.emails ? profile.emails[0].value : null;
+              const imageUrl = profile.photos ? profile.photos[0].value : null;
+              const firstName = profile.name ? profile.name.givenName : null;
+              const lastName = profile.name ? profile.name.familyName : null;
+          
+              // Try to find a user with the given Google ID
+              // If a user doesn't exist, create a new one
+              const [user] = await User.findOrCreate({
+                where: { googleId },
+                defaults: { email, imageUrl, firstName, lastName },
+              });
+    
+              // If the user was found or created successfully, call the done function
+              // with the user object
+              return done(null, user);
+            } catch (err) {
+              // If an error occurred, call the done function with the error
+              done(err);
+            }
   }
+
+  // passport.use(
+  //   new GoogleStrategy(
+  //     {
+  //       // Client ID and secret are set as environment variables
+  //       // These come from the Google API Console
+  //       clientID: process.env.GOOGLE_CLIENT_ID,
+  //       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  //       callbackURL: "http://localhost:8080/auth/google/callback",
+  //       scope: ["email", "profile"],
+  //     },
+  //     // This function will be called when a user has authenticated successfully
+  //     async (accessToken, refreshToken, profile, done) => {
+  //       try {
+  //         console.log("Profile", profile);
+  //         // Extract the relevant data from the profile object
+  //         const googleId = profile.id;
+  //         const email = profile.emails ? profile.emails[0].value : null;
+  //         const imageUrl = profile.photos ? profile.photos[0].value : null;
+  //         const firstName = profile.name ? profile.name.givenName : null;
+  //         const lastName = profile.name ? profile.name.familyName : null;
+      
+  //         // Try to find a user with the given Google ID
+  //         // If a user doesn't exist, create a new one
+  //         const [user] = await User.findOrCreate({
+  //           where: { googleId },
+  //           defaults: { email, imageUrl, firstName, lastName },
+  //         });
+
+  //         // If the user was found or created successfully, call the done function
+  //         // with the user object
+  //         done(null, user);
+  //       } catch (err) {
+  //         // If an error occurred, call the done function with the error
+  //         done(err);
+  //       }
+  //     }
+  //   )
+  // );
 
   passport.serializeUser(function (user, done) {
     process.nextTick(function () {

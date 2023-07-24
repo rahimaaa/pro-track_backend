@@ -45,9 +45,14 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/dashboard",
+    //successRedirect: "http://localhost:3000/dashboard",
     failureRedirect: "/",
-  })
+  }),
+  function (req, res, next) {
+    // Successful authentication, redirect home.
+    console.log("req.user", req.user);
+    res.redirect("http://localhost:3000/dashboard");
+  }
 );
 
 router.post("/signup", async (req, res, next) => {
