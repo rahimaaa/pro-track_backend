@@ -136,20 +136,23 @@ const configureApp = async (PORT) => {
   return app;
 };
 
+//Socket setup
+const { Server } = require("socket.io");
+
+const io = new Server({
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("someone has connected");
+
+  socket.on("disconnect", () => {
+    console.log("someone has left");
+  });
+});
+
+io.listen(5000);
+
 module.exports = configureApp(PORT);
-// const app = express();
-// app.use(express.json());
-// app.use(morgan("dev"));
-// app.use(express.urlencoded({ extended: true }));
-// Syncing DB Function
-// const syncDB = () => db.sync();
-
-// // Run server function
-// const serverRun = () => {
-//   app.listen(PORT, () => {
-//     console.log(`Live on port: ${PORT}`);
-//   });
-// };
-
-// syncDB();
-// serverRun();
