@@ -9,6 +9,11 @@ const db = require("./db");
 const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
 
+const cookieParser = require('cookie-parser');
+
+
+
+
 const morgan = require("morgan");
 console.log("env:", process.env.GOOGLE_CLIENT_ID);
 console.log("env:", process.env.GOOGLE_CLIENT_SECRET);
@@ -133,6 +138,7 @@ const configureApp = async (PORT) => {
   await sessionStore.sync();
   setUpRoutes(app);
   startServer(app, PORT);
+  app.use(cookieParser());
   return app;
 };
 

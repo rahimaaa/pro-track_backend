@@ -68,11 +68,22 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res, next) => {
-  req.logout((err) => {
+  req.logout((error) => {
+
     if (error) {
       return next(error);
     }
-    res.redirect("/");
+    req.session.destroy((error)=>{
+
+      if(error){
+        return next(error);
+      }
+      res.clearCookie("connect.sid");
+
+      res.sendStatus(204);
+    });
+    
+
   });
 });
 
