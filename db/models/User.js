@@ -73,7 +73,6 @@ User.init(
     },
     userType: {
       type: DataTypes.ENUM("student", "TA", "admin"),
-
       defaultValue: "student",
     },
     cohort_year: {

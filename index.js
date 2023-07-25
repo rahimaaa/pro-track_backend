@@ -8,6 +8,7 @@ const cors = require("cors");
 const db = require("./db");
 const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
+const io = require("./socketSetup");
 
 const morgan = require("morgan");
 console.log("env:", process.env.GOOGLE_CLIENT_ID);
@@ -94,6 +95,7 @@ const setUpPassport = () => {
   );
 
   function authUser(request, accessToken, refreshToken, profile, done) {
+    console.log("Profile:", profile);
     return done(null, profile);
   }
 
@@ -135,24 +137,5 @@ const configureApp = async (PORT) => {
   startServer(app, PORT);
   return app;
 };
-
-//Socket setup
-const { Server } = require("socket.io");
-
-const io = new Server({
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log("someone has connected");
-
-  socket.on("disconnect", () => {
-    console.log("someone has left");
-  });
-});
-
-io.listen(5000);
 
 module.exports = configureApp(PORT);
