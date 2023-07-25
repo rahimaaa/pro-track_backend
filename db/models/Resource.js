@@ -17,10 +17,10 @@ const Resource = db.define("resource", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  content: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+  // content: {
+  //   type: DataTypes.STRING,
+  //   allowNull: true,
+  // },
   link: {
     type: DataTypes.STRING,
     allowNull: true,

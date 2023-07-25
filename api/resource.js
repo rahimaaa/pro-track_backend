@@ -81,7 +81,7 @@ router.put("/:id", isTA || isAdmin, async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { title, description, category, content, link } = req.body;
+    const { title, description, category, link } = req.body;
 
     // Fetch link preview data from the API 
     const apiKey = 'b24ea9a6a874078d04f0520fbc361a9b'; // Replace this with your actual API key
@@ -91,7 +91,7 @@ router.post("/", async (req, res, next) => {
 
     // Extract relevant information from the API response
     const previewData = response.data;
-    const { description: linkDescription, images: linkPreviewImage } = previewData;
+    const { description: linkDescription, image: linkPreviewImage } = previewData;
     
 
     
@@ -99,7 +99,7 @@ router.post("/", async (req, res, next) => {
       title,
       description,
       category,
-      content,
+      //content,
       userId : req.user.id,
       link,
       linkDescription, // Add the link description to the Resource model
