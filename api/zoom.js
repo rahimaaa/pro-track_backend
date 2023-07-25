@@ -24,6 +24,26 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  // Retrieving a specific user by email
+  try {
+    req.params.id;
+    console.log(req.params);
+    const zoomLink = await Zoom.findOne({ where: { id: req.params.id } });
+
+    if (!zoomLink) {
+      // If the users is not found, send a response with status code 404
+      //And the error message (Users not found)
+      return res.status(404).json({ error: "Zoom link not found" });
+    }
+    // Sending a response with the retrieved users
+    res.json(zoomLink);
+  } catch (error) {
+    // Pass any error to the error handling
+    next(error);
+  }
+});
+
 router.put("/:id",  async (req, res, next) => {
   try {
     const { info, link } = req.body;
