@@ -5,6 +5,7 @@ const Feed = require("./Feed");
 const Assignment = require("./Assignment");
 const AssignmentStatus = require("./AssignmentStatus");
 const Resource = require("./Resource");
+const Zoom = require("./Zoom");
 
 // USER TO HELPREQUEST TABLE RELEATIONSHIP
 User.hasMany(HelpRequest, {
@@ -59,4 +60,5 @@ module.exports = {
   AssignmentStatus,
   Assignment,
   Resource,
+  Zoom,
 };

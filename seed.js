@@ -7,6 +7,7 @@ const {
   Resource,
   Feed,
   Lecture,
+  Zoom,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -76,15 +77,6 @@ const seedUsers = [
     cohort_year: "2023",
   },
   {
-    firstName: "User",
-    lastName: "Test",
-    imageUrl: "fds ",
-    email: "user@gmail.com",
-    password: "password",
-    userType: "admin",
-    cohort_year: "2023",
-  },
-  {
     firstName: "Admin",
     lastName: "Test",
     imageUrl: "fds ",
@@ -140,21 +132,18 @@ const seedRequests = [
     request: "Having trouble with useEffect updating the userprofile page",
     status: "Pending",
     accepted: "false",
-    userId: "8",
-  },
-  {
-    studentId: "3",
-    request: "Help routing in react-router-dom",
-    status: "In Progress",
-    accepted: "True",
-    taId: "4",
   },
   {
     studentId: "4",
     request: "Help populating fields in Mongoose",
     status: "Pending",
     accepted: "False",
-    taId: "7",
+  },
+  {
+    studentId: "2",
+    request: "Help with react don't understand",
+    status: "Pending",
+    accepted: "False",
   },
 ];
 
@@ -287,6 +276,13 @@ const seedResources = [
   },
 ];
 
+const seedZoom = [
+  {
+    info: "Zoom Meeting Link", 
+    link: "https://us06web.zoom.us/j/3698593234?pwd=TkJNVmlEU20rK3FMdXI3UU9GUEhqdz09",
+  }
+];
+
 const seed = async () => {
   try {
     await db.sync({ force: true }); // Drops existing tables and recreates them
@@ -297,6 +293,7 @@ const seed = async () => {
     await Resource.bulkCreate(seedResources);
     await Lecture.bulkCreate(seedLecture);
     await Feed.bulkCreate(seedFeed);
+    await Zoom.bulkCreate(seedZoom);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);

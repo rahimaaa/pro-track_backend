@@ -44,6 +44,16 @@ router.get("/:id", async (req, res, next) => {
     console.log(req.params);
     const oneRequest = await HelpRequest.findOne({
       where: { id: req.params.id },
+      include: [
+        {
+          model: User,
+          as: "student",
+        },
+        {
+          model: User,
+          as: "ta",
+        },
+      ],
     });
 
     if (!HelpRequest) {
@@ -77,6 +87,7 @@ router.delete("/:id", async (req, res, next) => {
 
 //Get route for updating of Help request with the use of stud_email(student email)
 router.put("/:id", async (req, res, next) => {
+  console.log("Request requested body:", req.body);
   try {
     const { studentId, request, status, taId, accepted } = req.body;
 
@@ -105,6 +116,10 @@ router.put("/:id", async (req, res, next) => {
       accepted,
     });
     // Send a response indicating successful update
+    const ta = await User.findByPk(taId);
+    updatedRequest.dataValues.ta = ta;
+    const student = await User.findByPk(studentId);
+    updatedRequest.dataValues.student = student;
     res
       .status(200)
       .json({ message: "Request updated successfully", updatedRequest });

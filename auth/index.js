@@ -2,13 +2,18 @@ const router = require("express").Router();
 const { User } = require("../db/models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
+
 //auth/login
+
+
+
 router.post("/login", async (req, res, next) => {
   console.log("Email:", req.body.email);
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
     console.log("User: ", user);
     console.log("Password: ", req.body.password);
+    console.log("Correct password", user.password);
     const isCorrectPassword = await bcrypt.compare(
       req.body.password,
       user.password
@@ -40,9 +45,14 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/dashboard",
+    //successRedirect: "http://localhost:3000/dashboard",
     failureRedirect: "/",
-  })
+  }),
+  function (req, res, next) {
+    // Successful authentication, redirect home.
+    console.log("req.user", req.user);
+    res.redirect("http://localhost:3000/dashboard");
+  }
 );
 
 router.post("/signup", async (req, res, next) => {
@@ -67,13 +77,27 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res, next) => {
-  req.logout((err) => {
+  req.logout((error) => {
+
     if (error) {
       return next(error);
+      
     }
-    res.redirect("/");
+    res.clearCookie("connect.sid");
+    req.session.destroy((error)=>{
+
+      if(error){
+        return next(error);
+      }
+      // res.clearCookie("connect.sid");
+
+      res.sendStatus(204);
+    });
+    
+
   });
 });
+
 
 router.get("/me", async (req, res, next) => {
   console.log("req.user", req.user);

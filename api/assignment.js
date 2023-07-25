@@ -85,7 +85,7 @@ router.post("/", isTA, async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;
-
+console.log("is hiting this route")
     const assignment = await Assignment.findOne({
       where: { assignmentName: req.body.assignmentName },
     });

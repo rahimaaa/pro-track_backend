@@ -4,10 +4,7 @@ const DEFAULTVALUE = " ";
 
 const Assignment = db.define("assignment", {
   //add the table
-  assignmentId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-},
+ 
   assignmentName: {
     unique:true,
     type: DataTypes.STRING,
