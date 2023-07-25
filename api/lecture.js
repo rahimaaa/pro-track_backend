@@ -8,8 +8,6 @@ router.get("/all", async (req, res, next) => {
     // Retrieve all users from the database
     const allLectures = await Lecture.findAll({ include: User });
 
-    console.log("these are all the requests: " + allLectures);
-
     // If there are requests, send a response with status code 200
     //and the Array of Requests
 
@@ -24,12 +22,11 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-//Route for get specific lecture with lecture id 
+//Route for get specific lecture with lecture id
 router.get("/:id", async (req, res, next) => {
-  // Retrieving a specific lecture by lecture id 
+  // Retrieving a specific lecture by lecture id
   try {
     req.params.id;
-    console.log(req.params);
     const lecture = await Lecture.findOne({ where: { id: req.params.id } });
 
     if (!lecture) {
@@ -50,9 +47,15 @@ router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
 
-    const { title, description, password, recordings, slides, lecture_date, userId} =
-      req.body;
-
+    const {
+      title,
+      description,
+      password,
+      recordings,
+      slides,
+      lecture_date,
+      userId,
+    } = req.body;
 
     // Creating a new user with the provided data
     const newLecture = await Lecture.create({
@@ -93,7 +96,6 @@ router.delete("/:id", isTA, async (req, res, next) => {
 //Get route for updating of Help request with the use of stud_email(student email)
 router.put("/:id", isTA, async (req, res, next) => {
   try {
-    //console.log(req.body)
     const { title, description, password, recordings, slides, lecture_date } =
       req.body;
 

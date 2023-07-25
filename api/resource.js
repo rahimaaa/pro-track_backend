@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Resource, User} = require("../db/models");
+const { Resource, User } = require("../db/models");
 const { isTA } = require("./middleware/isTa");
-const {  isAdmin } = require("./middleware/isAdmin");
+const { isAdmin } = require("./middleware/isAdmin");
 
 router.get("/all", async (req, res, next) => {
   try {
-    const allResources = await Resource.findAll({include: User});
-
-    console.log("these are all the resources: " + allResources);
+    const allResources = await Resource.findAll({ include: User });
 
     if (!allResources) {
       return res.status(404).json({ error: "Resources not found" });
@@ -38,7 +36,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", isTA,  async (req, res, next) => {
+router.delete("/:id", isTA, async (req, res, next) => {
   try {
     // const resource = req.params.title;
 
@@ -61,7 +59,7 @@ router.put("/:id", isTA || isAdmin, async (req, res, next) => {
         title,
         description,
         category,
-        content
+        content,
       },
       {
         where: { id: req.params.id },
@@ -80,13 +78,13 @@ router.put("/:id", isTA || isAdmin, async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const { title, description, category, content } = req.body;
-    
+
     const newResource = await Resource.create({
       title,
       description,
       category,
       content,
-      userId : req.user.id
+      userId: req.user.id,
     });
 
     const user = await User.findByPk(req.user.id);
