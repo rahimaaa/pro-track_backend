@@ -151,8 +151,11 @@ const configureApp = async (PORT) => {
 
 io.on("connection", (socket) => {
   socket.on("addNewRequest", (newRequest) => {
-    console.log(newRequest);
     socket.broadcast.emit("addNewRequest", newRequest);
+  });
+
+  socket.on("editRequest", (updatedRequest) => {
+    socket.broadcast.emit("editRequest", updatedRequest);
   });
 });
 
