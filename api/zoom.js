@@ -24,7 +24,7 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.put("/:id", isTA, async (req, res, next) => {
+router.put("/:id",  async (req, res, next) => {
   try {
     const { info, link } = req.body;
     const existingZoom = await Zoom.findOne({
@@ -45,11 +45,11 @@ router.put("/:id", isTA, async (req, res, next) => {
   }
 });
 
-router.post("/", isTA, async (req, res, next) => {
+router.post("/",  async (req, res, next) => {
   try {
     const { info, link } = req.body;
 
-    const newZoom = await Lecture.create({
+    const newZoom = await Zoom.create({
       info,
       link,
     });
@@ -62,7 +62,7 @@ router.post("/", isTA, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", isTA, async (req, res, next) => {
+router.delete("/:id",  async (req, res, next) => {
     try {
       const zoom = req.params.id;
   
