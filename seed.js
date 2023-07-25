@@ -150,7 +150,8 @@ const seedAssignment = [
   {
     assignmentId: 1,
     assignmentName: "Git knowledge Check",
-    instruction: "Create a simple git program",
+    instruction:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     group: null,
     assignment_date: "05.10.23",
     due_date: "05.11.23",
@@ -162,7 +163,7 @@ const seedAssignment = [
     group: "yes",
     assignment_date: "05.11.23",
     due_date: "05.12.23",
-  },  
+  },
   {
     assignmentId: 3,
     assignmentName: "Javascript Knowledge Check",
@@ -252,14 +253,16 @@ const seedResources = [
   },
   {
     title: "Deploying your app on vercel",
-    description: "This source shows you the steps to successfuly deploy a server",
+    description:
+      "This source shows you the steps to successfuly deploy a server",
     category: "Server Deployment",
     content: "server-link",
     userId: "5",
   },
   {
     title: "Authentication and Authorization",
-    description: "This provides different means of authentication and authorization",
+    description:
+      "This provides different means of authentication and authorization",
     category: "Security Services",
     content: "security-link",
     userId: "6",

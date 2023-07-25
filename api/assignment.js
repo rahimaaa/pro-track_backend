@@ -22,13 +22,29 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+// router.get("/:id", async (req, res, next) => {
+//   try {
+//     req.params.id;
+//     console.log(req.params);
+//     const assignment = await Assignment.findByPk({
+//       where: { id: req.params.id },
+//     });
+
+//     if (!assignment) {
+//       return res.status(404).json({ error: "Assignment not found" });
+//     }
+
+//     res.json(assignment);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 router.get("/:id", async (req, res, next) => {
   try {
-    req.params.id;
+    const assignmentId = req.params.id; // Get the ID from the URL parameters
     console.log(req.params);
-    const assignment = await Assignment.findByPk({
-      where: { id: req.params.id },
-    });
+    const assignment = await Assignment.findByPk(assignmentId);
 
     if (!assignment) {
       return res.status(404).json({ error: "Assignment not found" });
@@ -39,6 +55,7 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
 
 router.delete("/:id", isTA, async (req, res, next) => {
   try {
