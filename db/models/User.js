@@ -42,15 +42,12 @@ User.init(
     //add the table
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     imageUrl: {
       type: DataTypes.STRING,
-      allowNull: false,
       defaultValue: "https://i.stack.imgur.com/l60Hf.png",
     },
     email: {
@@ -60,7 +57,6 @@ User.init(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     salt: {
       type: DataTypes.STRING,
