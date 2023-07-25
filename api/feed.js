@@ -1,7 +1,7 @@
 //const linkPreview = require("link-preview-js");
 const express = require("express");
 const router = express.Router();
-const { Feed, User} = require("../db/models");
+const { Feed, User } = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 
 //Add post route to create new HelpRequest
@@ -9,7 +9,7 @@ const { isTA } = require("./middleware/isTa");
 router.post("/", isTA, async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
-    const { title, content, link, userId} = req.body;
+    const { title, content, link, userId } = req.body;
 
     // Fetch link preview data using the link-preview-js library
     // const previewData = await linkPreview.getPreview(link);
@@ -38,7 +38,7 @@ router.post("/", isTA, async (req, res, next) => {
 });
 
 //route to delete a specific announcement with stud_email(student email)
-router.delete("/:id", isTA,  async (req, res, next) => {
+router.delete("/:id", isTA, async (req, res, next) => {
   try {
     const remove = req.params.id;
 
@@ -57,9 +57,7 @@ router.delete("/:id", isTA,  async (req, res, next) => {
 router.get("/all", async (req, res, next) => {
   try {
     // Retrieve all users from the database
-    const allFeeds = await Feed.findAll({include: User});
-
-    console.log("these are all the requests: " + allFeeds);
+    const allFeeds = await Feed.findAll({ include: User });
 
     // If there are requests, send a response with status code 200
     //and the Array of Requests

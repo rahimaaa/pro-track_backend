@@ -11,8 +11,6 @@ router.get("/all", isAdmin, async (req, res, next) => {
     // Retrieve all users from the database
     const allUsers = await User.findAll();
 
-    console.log("these are all the users: " + allUsers);
-
     // If there are users, send a response with status code 200
     //and the Array of Users
 
@@ -31,8 +29,6 @@ router.get("/all", isAdmin, async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   // Retrieving a specific user by email
   try {
-    req.params.id;
-    console.log(req.params);
     const user = await User.findOne({ where: { id: req.params.id } });
 
     if (!user) {

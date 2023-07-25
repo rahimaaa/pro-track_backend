@@ -8,8 +8,6 @@ router.get("/all", async (req, res, next) => {
     // Retrieve all users from the database
     const allZoom = await Zoom.findAll();
 
-    console.log("these are all the zooms: " + allZoom);
-
     // If there are requests, send a response with status code 200
     //and the Array of Requests
 
@@ -27,8 +25,6 @@ router.get("/all", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   // Retrieving a specific user by email
   try {
-    req.params.id;
-    console.log(req.params);
     const zoomLink = await Zoom.findOne({ where: { id: req.params.id } });
 
     if (!zoomLink) {
@@ -44,28 +40,28 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/:id",  async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { info, link } = req.body;
     const existingZoom = await Zoom.findOne({
-        where: { id: req.params.id },
-      });
+      where: { id: req.params.id },
+    });
     const updatedZoom = await existingZoom.update({
-        info,
-        link,
-      });
-  
-      // Send a response indicating successful update
-      res
-        .status(200)
-        .json({ message: "Request updated successfully", updatedZoom });
+      info,
+      link,
+    });
+
+    // Send a response indicating successful update
+    res
+      .status(200)
+      .json({ message: "Request updated successfully", updatedZoom });
   } catch (error) {
     //Handling any errors that occur
     next(error);
   }
 });
 
-router.post("/",  async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const { info, link } = req.body;
 
@@ -82,19 +78,18 @@ router.post("/",  async (req, res, next) => {
   }
 });
 
-router.delete("/:id",  async (req, res, next) => {
-    try {
-      const zoom = req.params.id;
-  
-      // Delete the HelpRequest with the provided email from the database
-      await Zoom.destroy({ where: { id: zoom } });
-  
-      res.json({ message: "Lecture has been Removed Successfully" });
-      
-    } catch (error) {
-      //Handling any errors that occur
-      next(error);
-    }
-  });
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const zoom = req.params.id;
+
+    // Delete the HelpRequest with the provided email from the database
+    await Zoom.destroy({ where: { id: zoom } });
+
+    res.json({ message: "Lecture has been Removed Successfully" });
+  } catch (error) {
+    //Handling any errors that occur
+    next(error);
+  }
+});
 
 module.exports = router;

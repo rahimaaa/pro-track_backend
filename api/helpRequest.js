@@ -20,7 +20,6 @@ router.get("/", async (req, res, next) => {
         },
       ],
     });
-    console.log("these are all the requests: " + allRequests);
 
     // If there are requests, send a response with status code 200
     //and the Array of Requests
@@ -41,7 +40,6 @@ router.get("/:id", async (req, res, next) => {
   // Retrieving a specific request by email
   try {
     req.params.id;
-    console.log(req.params);
     const oneRequest = await HelpRequest.findOne({
       where: { id: req.params.id },
       include: [
@@ -87,7 +85,6 @@ router.delete("/:id", async (req, res, next) => {
 
 //Get route for updating of Help request with the use of stud_email(student email)
 router.put("/:id", async (req, res, next) => {
-  console.log("Request requested body:", req.body);
   try {
     const { studentId, request, status, taId, accepted } = req.body;
 
@@ -134,8 +131,6 @@ router.post("/", async (req, res, next) => {
   try {
     //deconstructing the constructor into the different fields
     const { studentId, request, status, accepted } = req.body;
-    console.log("req Body: ", req.body);
-    console.log("req Student: ", req.student);
     // Creating a new user with the provided data
     const newRequest = await HelpRequest.create({
       studentId,
