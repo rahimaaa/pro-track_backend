@@ -5,35 +5,11 @@ const { Model, DataTypes } = require("sequelize");
 const db = require("../db");
 
 class User extends Model {
-  //   async correctPassword(pwAttempt) {
-  //     console.log("password Attemp", pwAttempt);
-  //     console.log("Correct password", this.password);
-  //     console.log(await bcrypt.compare(pwAttempt, this.password));
-  //     return await bcrypt.compare(pwAttempt, this.password);
-  //   }
-  // }
-
-  
-  // async function hashPassword(user) {
-  //   console.log(user.email);
-  //   if (user.changed("password")) {
-  //     user.password = await bcrypt.hash(user.password, saltRounds);
-  //     console.log("password", user.password);
-  //   }
-  // }
-
-  // static async generateSalt(saltRounds) {
-  //   return await bcrypt.genSalt(saltRounds);
-  // }
-
   static async encryptPassword(password) {
     const hash = await bcrypt.hash(password, saltRounds);
-    console.log(this);
   }
 
   async correctPassword(pwAttempt) {
-    console.log("password Attemp", pwAttempt);
-    console.log("Correct password", this.password);
     return await bcrypt.compare(pwAttempt, this.password);
   }
 }
@@ -69,7 +45,6 @@ User.init(
     },
     userType: {
       type: DataTypes.ENUM("student", "TA", "admin"),
-
       defaultValue: "student",
     },
     cohort_year: {

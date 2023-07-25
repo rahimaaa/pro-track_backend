@@ -8,28 +8,21 @@ const cors = require("cors");
 const db = require("./db");
 const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
-
-const cookieParser = require("cookie-parser");
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true,
+  },
+});
 
 const morgan = require("morgan");
-console.log("env:", process.env.GOOGLE_CLIENT_ID);
-console.log("env:", process.env.GOOGLE_CLIENT_SECRET);
 
 const PORT = process.env.PORT || "8080";
 
 const sessionStore = new SequelizeStore({ db });
-
-//helper functions
-// const serializeUser = (user, done) => done(null, user.id);
-// const deserializeUser = (user, done) => {
-//   try {
-//     console.log(user)
-//     // const user = await db.models.User.findByPk(id);
-//     done(null, user);
-//   } catch (error) {
-//     done(error);
-//   }
-// };
 
 const configSession = () => ({
   secret: "ttp2023summer",
@@ -44,7 +37,7 @@ const configSession = () => ({
 //middleware
 const setUpMiddleware = (app) => {
   app.use(express.json());
-  app.use(morgan("dev"));
+  // app.use(morgan("dev"));
   app.use(express.urlencoded({ extended: true }));
   app.use(
     cors({
@@ -67,7 +60,6 @@ const setUpPassport = () => {
       done
     ) {
       User.findOne({ email: email }, function (err, user) {
-        console.log("found user", user);
         if (err) {
           return done(err);
         }
@@ -77,7 +69,6 @@ const setUpPassport = () => {
         if (!user.correctPassword(password)) {
           return done(null, false);
         }
-        console.log("correct password");
         return done(null, user);
       });
     })
@@ -93,73 +84,32 @@ const setUpPassport = () => {
       },
       authUser
     )
-
   );
 
-  async function authUser( accessToken, refreshToken, profile, done) {
+  async function authUser(accessToken, refreshToken, profile, done) {
     try {
-              console.log("Profile", profile);
-              // Extract the relevant data from the profile object
-              const googleId = profile.id;
-              const email = profile.emails ? profile.emails[0].value : null;
-              const imageUrl = profile.photos ? profile.photos[0].value : null;
-              const firstName = profile.name ? profile.name.givenName : null;
-              const lastName = profile.name ? profile.name.familyName : null;
-          
-              // Try to find a user with the given Google ID
-              // If a user doesn't exist, create a new one
-              const [user] = await User.findOrCreate({
-                where: { googleId },
-                defaults: { email, imageUrl, firstName, lastName },
-              });
-    
-              // If the user was found or created successfully, call the done function
-              // with the user object
-              return done(null, user);
-            } catch (err) {
-              // If an error occurred, call the done function with the error
-              done(err);
-            }
+      // Extract the relevant data from the profile object
+      const googleId = profile.id;
+      const email = profile.emails ? profile.emails[0].value : null;
+      const imageUrl = profile.photos ? profile.photos[0].value : null;
+      const firstName = profile.name ? profile.name.givenName : null;
+      const lastName = profile.name ? profile.name.familyName : null;
+
+      // Try to find a user with the given Google ID
+      // If a user doesn't exist, create a new one
+      const [user] = await User.findOrCreate({
+        where: { googleId },
+        defaults: { email, imageUrl, firstName, lastName },
+      });
+
+      // If the user was found or created successfully, call the done function
+      // with the user object
+      return done(null, user);
+    } catch (err) {
+      // If an error occurred, call the done function with the error
+      done(err);
+    }
   }
-
-  // passport.use(
-  //   new GoogleStrategy(
-  //     {
-  //       // Client ID and secret are set as environment variables
-  //       // These come from the Google API Console
-  //       clientID: process.env.GOOGLE_CLIENT_ID,
-  //       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  //       callbackURL: "http://localhost:8080/auth/google/callback",
-  //       scope: ["email", "profile"],
-  //     },
-  //     // This function will be called when a user has authenticated successfully
-  //     async (accessToken, refreshToken, profile, done) => {
-  //       try {
-  //         console.log("Profile", profile);
-  //         // Extract the relevant data from the profile object
-  //         const googleId = profile.id;
-  //         const email = profile.emails ? profile.emails[0].value : null;
-  //         const imageUrl = profile.photos ? profile.photos[0].value : null;
-  //         const firstName = profile.name ? profile.name.givenName : null;
-  //         const lastName = profile.name ? profile.name.familyName : null;
-      
-  //         // Try to find a user with the given Google ID
-  //         // If a user doesn't exist, create a new one
-  //         const [user] = await User.findOrCreate({
-  //           where: { googleId },
-  //           defaults: { email, imageUrl, firstName, lastName },
-  //         });
-
-  //         // If the user was found or created successfully, call the done function
-  //         // with the user object
-  //         done(null, user);
-  //       } catch (err) {
-  //         // If an error occurred, call the done function with the error
-  //         done(err);
-  //       }
-  //     }
-  //   )
-  // );
 
   passport.serializeUser(function (user, done) {
     process.nextTick(function () {
@@ -183,38 +133,27 @@ const setUpRoutes = (app) => {
   app.use("/auth", require("./auth"));
 };
 
-const startServer = async (app, PORT) => {
+const startServer = async (PORT) => {
   await db.sync();
-  app.listen(PORT, () => console.log(`server is on port: ${PORT}`));
-  return app;
+  server.listen(PORT, () => console.log(`server is on port: ${PORT}`));
+  return server;
 };
 
 //configure allfunctions
 const configureApp = async (PORT) => {
-  const app = express();
   setUpPassport();
   setUpMiddleware(app);
   await sessionStore.sync();
   setUpRoutes(app);
-  startServer(app, PORT);
-  app.use(cookieParser());
-  return app;
+  startServer(PORT);
+  return server;
 };
 
+io.on("connection", (socket) => {
+  socket.on("addNewRequest", (newRequest) => {
+    console.log(newRequest);
+    socket.broadcast.emit("addNewRequest", newRequest);
+  });
+});
+
 module.exports = configureApp(PORT);
-// const app = express();
-// app.use(express.json());
-// app.use(morgan("dev"));
-// app.use(express.urlencoded({ extended: true }));
-// Syncing DB Function
-// const syncDB = () => db.sync();
-
-// // Run server function
-// const serverRun = () => {
-//   app.listen(PORT, () => {
-//     console.log(`Live on port: ${PORT}`);
-//   });
-// };
-
-// syncDB();
-// serverRun();

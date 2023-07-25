@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { Assignment } = require("../db/models");
-const {isTA} = require("./middleware/isTa");
+const { isTA } = require("./middleware/isTa");
 
 router.get("/all", async (req, res, next) => {
   try {
     const allAssignments = await Assignment.findAll();
-
-    console.log("these are all the users: " + allAssignments);
 
     if (!allAssignments) {
       return res.status(404).json({ error: "Assignment not found" });
@@ -59,8 +57,6 @@ router.get("/:id", async (req, res, next) => {
 
 router.delete("/:id", isTA, async (req, res, next) => {
   try {
-    
-
     // Delete the user with the provided email from the database
     await Assignment.destroy({ where: { id: req.params.id } });
 
@@ -102,7 +98,6 @@ router.post("/", isTA, async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;
-console.log("is hiting this route")
     const assignment = await Assignment.findOne({
       where: { assignmentName: req.body.assignmentName },
     });

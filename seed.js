@@ -7,6 +7,7 @@ const {
   Resource,
   Feed,
   Lecture,
+  Zoom,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -269,6 +270,13 @@ const seedResources = [
   },
 ];
 
+const seedZoom = [
+  {
+    info: "Zoom Meeting Link", 
+    link: "https://us06web.zoom.us/j/3698593234?pwd=TkJNVmlEU20rK3FMdXI3UU9GUEhqdz09",
+  }
+];
+
 const seed = async () => {
   try {
     await db.sync({ force: true }); // Drops existing tables and recreates them
@@ -279,6 +287,7 @@ const seed = async () => {
     await Resource.bulkCreate(seedResources);
     await Lecture.bulkCreate(seedLecture);
     await Feed.bulkCreate(seedFeed);
+    await Zoom.bulkCreate(seedZoom);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);

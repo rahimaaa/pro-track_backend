@@ -9,8 +9,6 @@ router.get("/all", isTA, async (req, res, next) => {
   try {
     const allAssignments = await AssignmentStatus.findAll({include: User});
 
-    console.log("these are all the users: " + allAssignments);
-
     allAssignments
       ? res.status(200).json(allAssignments)
       : res.status(404).send("No Assignments Statuses Found");
@@ -22,7 +20,6 @@ router.get("/all", isTA, async (req, res, next) => {
 router.get("/:id",  async (req, res, next) => {
   try {
     req.params.id;
-    console.log(req.params);
     const assignment = await AssignmentStatus.findAll({
       where: { id: req.params.id },
     });
