@@ -10,21 +10,29 @@ const Resource = db.define("resource", {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,//("long"),
     allowNull: true,
   },
   category: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  content: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  // userId: {
+  // content: {
   //   type: DataTypes.STRING,
   //   allowNull: true,
   // },
+  link: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  //   linkDescription: {
+  //   type: DataTypes.TEXT("long"),
+  //   allowNull: true,
+  // },
+    image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = Resource;

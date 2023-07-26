@@ -1,7 +1,9 @@
+//const linkPreview = require("link-preview-js");
 const express = require("express");
 const router = express.Router();
 const { Feed, User } = require("../db/models");
 const { isTA } = require("./middleware/isTa");
+
 //Add post route to create new HelpRequest
 
 router.post("/", isTA, async (req, res, next) => {
@@ -9,12 +11,20 @@ router.post("/", isTA, async (req, res, next) => {
     //deconstructing the constructor into the different fields
     const { title, content, link, userId } = req.body;
 
+    // Fetch link preview data using the link-preview-js library
+    // const previewData = await linkPreview.getPreview(link);
+
+    // Extract relevant information from the previewData (e.g., description, image)
+   // const { description, images } = previewData;
+
     // Creating a new user with the provided data
     const newFeed = await Feed.create({
       title,
       content,
       link,
+      //description, // Add the description to the Feed model
       userId,
+      //previewImage: images && images.length > 0 ? images[0] : null, // Add the first image as the preview image (if available)
     });
 
     const user = await User.findByPk(userId);

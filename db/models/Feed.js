@@ -18,8 +18,8 @@ const Feed = db.define("feed", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  // userId: {
-  //   type: DataTypes.INTEGER,
+  // description: {
+  //   type: DataTypes.TEXT("long"),
   //   allowNull: true,
   // },
 });

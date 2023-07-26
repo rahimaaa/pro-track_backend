@@ -1,3 +1,5 @@
+
+const axios = require('axios');
 const express = require("express");
 const router = express.Router();
 const { Resource, User } = require("../db/models");
@@ -77,19 +79,35 @@ router.put("/:id", isTA || isAdmin, async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { title, description, category, content } = req.body;
+    const { category, link } = req.body;
+//("Its a home run");
+   // Fetch link preview data from the API 
+    const apiKey = 'b24ea9a6a874078d04f0520fbc361a9b'; // Replace this with your actual API key
+    const apiUrl = `https://api.linkpreview.net/?key=${apiKey}&q=${encodeURIComponent(link)}`;
+    const response = await axios.get(apiUrl);
 
+
+    // Extract relevant information from the API response
+    const previewData = response.data;
+    const {title, description, image } = previewData;
+    (title, description, image);
+
+    
     const newResource = await Resource.create({
       title,
       description,
       category,
-      content,
-      userId: req.user.id,
+      link,
+      userId : req.user.id,
+      image
     });
+
+
 
     const user = await User.findByPk(req.user.id);
     newResource.dataValues.user = user;
     res.status(201).json(newResource);
+    //res.sendStatus(200);
   } catch (error) {
     //Handling any errors that occur
     next(error);
