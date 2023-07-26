@@ -157,6 +157,10 @@ io.on("connection", (socket) => {
   socket.on("editRequest", (updatedRequest) => {
     socket.broadcast.emit("editRequest", updatedRequest);
   });
+
+  socket.on("addNewPost", (newFeed) => {
+    socket.broadcast.emit("addNewPost", newFeed);
+  });
 });
 
 module.exports = configureApp(PORT);
