@@ -10,7 +10,7 @@ const Resource = db.define("resource", {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,//("long"),
     allowNull: true,
   },
   category: {
@@ -25,11 +25,11 @@ const Resource = db.define("resource", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-    linkDescription: {
-    type: DataTypes.TEXT("long"),
-    allowNull: true,
-  },
-    linkPreviewImage: {
+  //   linkDescription: {
+  //   type: DataTypes.TEXT("long"),
+  //   allowNull: true,
+  // },
+    image: {
     type: DataTypes.STRING,
     allowNull: true,
   },

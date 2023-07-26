@@ -248,31 +248,31 @@ const seedResources = [
     title: "How to install Postgres",
     description: "This Source will show alternate ways to install Psql",
     category: "Postgres Documentation",
-    content: "psql-link",
+    // content: "psql-link",
     userId: "6",
     link: "www.google.com",
-    linkDescription: "Testing link preview",
-    linkPreviewImage: "image-url"
+    // linkDescription: "Testing link preview",
+    image: "image-url"
   },
   {
     title: "Deploying your app on vercel",
     description: "This source shows you the steps to successfuly deploy a server",
     category: "Server Deployment",
-    content: "server-link",
+    // content: "server-link",
     userId: "5",
-    link: "www.google.com",
-    linkDescription: "Testing link preview",
-    linkPreviewImage: "image-url"
+    link: "www.youtube.com",
+    // linkDescription: "Testing link preview",
+    image: "image-url"
   },
   {
     title: "Authentication and Authorization",
     description: "This provides different means of authentication and authorization",
     category: "Security Services",
-    content: "security-link",
+    // content: "security-link",
     userId: "6",
     link: "www.google.com",
-    linkDescription: "Testing link preview",
-    linkPreviewImage: "image-url"
+    // linkDescription: "Testing link preview",
+    image: "image-url"
   },
 ];
 
