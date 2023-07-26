@@ -8,6 +8,7 @@ const {
   Feed,
   Lecture,
   Zoom,
+  Group,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -209,7 +210,7 @@ const seedAssignmentStatus = [
   {
     email: "rahimahabib@gmail.com",
     assignmentId: 1,
-    groupId: null,
+    // groupId: null,
     status: true,
     submission: "submission of Assignment 1",
     submissionDate: "06.17.2023",
@@ -218,7 +219,7 @@ const seedAssignmentStatus = [
   {
     email: "sabina@gmail.com",
     assignmentId: 1,
-    groupId: 1,
+    // groupId: 1,
     status: false,
     submission: "submission of Assignment 1",
     submissionDate: "06.13.2023",
@@ -227,7 +228,7 @@ const seedAssignmentStatus = [
   {
     email: "tashi@gmail.com",
     assignmentId: 2,
-    groupId: null,
+    // groupId: null,
     status: false,
     submission: "lsubmission of Assignment 2",
     submissionDate: "06.18.2023",
@@ -236,7 +237,7 @@ const seedAssignmentStatus = [
   {
     email: "bruno@gmail.com",
     assignmentId: 3,
-    groupId: 1,
+    // groupId: 1,
     status: true,
     submission: "Submission of Assignment 3",
     submissionDate: "06.20.2023",
@@ -244,6 +245,29 @@ const seedAssignmentStatus = [
   },
 ];
 
+
+const seedGroup = [
+  {
+  userId: 1,
+  groupId: 1,
+  assignmentStatusId: 1,
+  },
+  {
+    userId: 2,
+    groupId: 1,
+    assignmentStatusId: 1,
+    },
+    {
+      userId: 3,
+      groupId: 1,
+      assignmentStatusId: 1,
+      },
+      {
+        userId: 4,
+        groupId: 1,
+        assignmentStatusId: 1,
+        },
+];
 const seedResources = [
   {
     title: "How to install Postgres",
@@ -287,6 +311,7 @@ const seed = async () => {
     await Resource.bulkCreate(seedResources);
     await Lecture.bulkCreate(seedLecture);
     await Feed.bulkCreate(seedFeed);
+    await Group.bulkCreate(seedGroup);
     await Zoom.bulkCreate(seedZoom);
     console.log("Seeding complete");
   } catch (error) {

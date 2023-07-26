@@ -61,7 +61,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", isTA, async (req, res, next) => {
   try {
     const { info, link } = req.body;
 
@@ -91,5 +91,8 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+
+
 
 module.exports = router;

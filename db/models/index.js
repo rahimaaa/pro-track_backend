@@ -6,6 +6,7 @@ const Assignment = require("./Assignment");
 const AssignmentStatus = require("./AssignmentStatus");
 const Resource = require("./Resource");
 const Zoom = require("./Zoom");
+const Group = require("./Group");
 
 // USER TO HELPREQUEST TABLE RELEATIONSHIP
 User.hasMany(HelpRequest, {
@@ -40,13 +41,19 @@ User.hasMany(Feed);
 Feed.belongsTo(User);
 
 // //USER TO assignment status TABLE RELEATIONSHIP
-User.belongsToMany(AssignmentStatus, {
-  through: "user_assignment_status",
-});
+// User.belongsToMany(AssignmentStatus, {
+//   through: "user_assignment_status",
+// });
 
-AssignmentStatus.belongsToMany(User, {
-  through: "user_assignment_status",
-});
+// AssignmentStatus.belongsToMany(User, {
+//   through: "user_assignment_status",
+// });
+User.hasMany(Group)
+Group.belongsTo(User);
+
+
+AssignmentStatus.hasMany(Group)
+Group.belongsTo(AssignmentStatus);
 
 //ASSIGNMENT TO ASSIGNMENT STATUS TABLE
 Assignment.hasMany(AssignmentStatus);
@@ -61,4 +68,5 @@ module.exports = {
   Assignment,
   Resource,
   Zoom,
+  Group,
 };

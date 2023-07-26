@@ -15,10 +15,10 @@ const AssignmentStatus = db.define("assignment_status", {
     allowNull: false,
     
   },
-  groupId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
+  // groupId: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: true,
+  // },
   status: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
