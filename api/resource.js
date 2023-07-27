@@ -55,11 +55,11 @@ router.delete("/:id", isTA, async (req, res, next) => {
 router.put("/:id", isTA || isAdmin, async (req, res, next) => {
   try {
     const { link, category } = req.body;
-    const apiKey = "b24ea9a6a874078d04f0520fbc361a9b"; // Replace this with your actual API key
-    const apiUrl = `https://api.linkpreview.net/?key=${apiKey}&q=${encodeURIComponent(
-      link
-    )}`;
-    const response = await axios.get(apiUrl);
+
+    // Fetch link preview data from the API
+    const response = await axios.get(
+      `${process.env.LINK_PREVIEW_API}${encodeURIComponent(link)}`
+    );
 
     // Extract relevant information from the API response
     const previewData = response.data;
@@ -83,13 +83,10 @@ router.put("/:id", isTA || isAdmin, async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const { category, link } = req.body;
-    //("Its a home run");
     // Fetch link preview data from the API
-    const apiKey = "b24ea9a6a874078d04f0520fbc361a9b"; // Replace this with your actual API key
-    const apiUrl = `https://api.linkpreview.net/?key=${apiKey}&q=${encodeURIComponent(
-      link
-    )}`;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get(
+      `${process.env.LINK_PREVIEW_API}${encodeURIComponent(link)}`
+    );
 
     // Extract relevant information from the API response
     const previewData = response.data;
