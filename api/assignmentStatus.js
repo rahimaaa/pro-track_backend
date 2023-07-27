@@ -1,13 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const { AssignmentStatus, User} = require("../db/models");
+const { AssignmentStatus, Assignment, User} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 // Root here is localhost:8080/api/AssignmentStatus/all
 
 //get all assignment statuses
-router.get("/all", isTA, async (req, res, next) => {
+router.get("/all", async (req, res, next) => {
   try {
-    const allAssignments = await AssignmentStatus.findAll({include: User});
+    const allAssignments = await AssignmentStatus.findAll({include: [
+      {
+        model: User,
+      },
+      {
+        model: Assignment,
+      },
+    ]});
 
     allAssignments
       ? res.status(200).json(allAssignments)
@@ -20,8 +27,8 @@ router.get("/all", isTA, async (req, res, next) => {
 router.get("/:id",  async (req, res, next) => {
   try {
     req.params.id;
-    const assignment = await AssignmentStatus.findAll({
-      where: { id: req.params.id },
+    const assignment = await AssignmentStatus.findOne({
+      where: { id: req.params.id }, include: [{model: User}, {model: Assignment}]
     });
 
     if (!AssignmentStatus) {

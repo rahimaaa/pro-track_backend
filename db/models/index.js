@@ -45,6 +45,9 @@ Feed.belongsTo(User);
 //   through: "user_assignment_status",
 // });
 
+User.hasMany(AssignmentStatus);
+AssignmentStatus.belongsTo(User);
+
 // AssignmentStatus.belongsToMany(User, {
 //   through: "user_assignment_status",
 // });

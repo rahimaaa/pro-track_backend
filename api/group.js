@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Group, AssignmentStatus, User} = require("../db/models");
+const { Group, AssignmentStatus, User } = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 
 // //GET all groups for 1 user by user id
@@ -11,7 +11,43 @@ router.get("/:assignmentId", async (req, res, next) => {
 
     //const {}
     // const groups = await Group.findAll({where: { }});
-    const assignments = await AssignmentStatus.findAll({where: { assignmentId: assignmentId}, include: {model: Group, include: User}})
+    const assignments = await AssignmentStatus.findAll({
+      where: { assignmentId: assignmentId },
+      include: [
+        {
+          model: User,
+          attributes: [
+            "id",
+            "firstName",
+            "lastName",
+            "imageUrl",
+            "email",
+            "userType",
+            "cohort_year",
+          ],
+        },
+        {
+          model: Group,
+          include: [
+            {
+              model: User,
+              attributes: [
+                "id",
+                "firstName",
+                "lastName",
+                "imageUrl",
+                "email",
+                "userType",
+                "cohort_year",
+              ],
+            },
+            {
+              model: AssignmentStatus,
+            },
+          ],
+        },
+      ],
+    });
 
     if (!assignments) {
       return res.status(404).json({ error: "Assignment not found" });
