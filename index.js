@@ -13,12 +13,13 @@ const http = require("http");
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
     credentials: true,
   },
 });
 
 const morgan = require("morgan");
+const { update } = require("./db/models/User");
 
 const PORT = process.env.PORT || "8080";
 
@@ -150,16 +151,27 @@ const configureApp = async (PORT) => {
 };
 
 io.on("connection", (socket) => {
+  //dashboard
+  socket.on("addNewPost", (newFeed) => {
+    socket.broadcast.emit("addNewPost", newFeed);
+  });
+
+  //lecture
+  socket.on("addNewLecture", (newLecture) => {
+    socket.broadcast.emit("addNewLecture", newLecture);
+  });
+
+  socket.on("editLecture", (updatedLecture) => {
+    socket.broadcast.emit("editLecture", updatedLecture);
+  });
+
+  //help request
   socket.on("addNewRequest", (newRequest) => {
     socket.broadcast.emit("addNewRequest", newRequest);
   });
 
   socket.on("editRequest", (updatedRequest) => {
     socket.broadcast.emit("editRequest", updatedRequest);
-  });
-
-  socket.on("addNewPost", (newFeed) => {
-    socket.broadcast.emit("addNewPost", newFeed);
   });
 });
 
