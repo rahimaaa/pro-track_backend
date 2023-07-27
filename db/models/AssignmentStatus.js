@@ -5,9 +5,9 @@ const db = require("../db");
 const AssignmentStatus = db.define("assignment_status", {
   //add the table
 
-  email: {
+  userId: {
     //unique:true,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
   assignmentId: {

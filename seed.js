@@ -34,7 +34,7 @@ const seedUsers = [
   },
   {
     firstName: "sabina",
-    lastName: "ismoilova",
+    lastName: "ismailova",
     imageUrl: "fds ",
     email: "sabina@ttp.com",
     password: "fdfdf",
@@ -208,7 +208,7 @@ const seedLecture = [
 
 const seedAssignmentStatus = [
   {
-    email: "rahimahabib@gmail.com",
+    userId: 1,
     assignmentId: 1,
     // groupId: null,
     status: true,
@@ -217,7 +217,7 @@ const seedAssignmentStatus = [
     feedback: "Awesome Job",
   },
   {
-    email: "sabina@gmail.com",
+    userId: 3,
     assignmentId: 1,
     // groupId: 1,
     status: false,
@@ -226,7 +226,7 @@ const seedAssignmentStatus = [
     feedback: "Nice work",
   },
   {
-    email: "tashi@gmail.com",
+    userId: 4,
     assignmentId: 2,
     // groupId: null,
     status: false,
@@ -235,7 +235,7 @@ const seedAssignmentStatus = [
     feedback: "Good job",
   },
   {
-    email: "bruno@gmail.com",
+    userId: 2,
     assignmentId: 3,
     // groupId: 1,
     status: true,
