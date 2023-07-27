@@ -8,6 +8,7 @@ const cors = require("cors");
 const db = require("./db");
 const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
+const { cookie } = require("./config");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
@@ -15,11 +16,13 @@ const io = require("socket.io")(server, {
   cors: {
     origin: process.env.FRONTEND_URL || "http://localhost:3000",
     credentials: true,
+    allowedHeaders:
+      "Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+    preflightContinue: true,
   },
 });
 
 const morgan = require("morgan");
-const { update } = require("./db/models/User");
 
 const PORT = process.env.PORT || "8080";
 
@@ -29,10 +32,7 @@ const configSession = () => ({
   secret: "ttp2023summer",
   store: sessionStore,
   resave: false,
-  cookie: {
-    secure: process.env.NODE_ENV === "dev" ? false : true,
-    maxAge: 8 * 60 * 60 * 1000,
-  },
+  cookie: cookie,
 });
 
 //middleware
@@ -44,11 +44,16 @@ const setUpMiddleware = (app) => {
     cors({
       origin: process.env.FRONTEND_URL || "http://localhost:3000",
       credentials: true,
+      allowedHeaders:
+        "Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+      preflightContinue: true,
     })
   );
   app.use(session(configSession()));
   app.use(passport.initialize());
   app.use(passport.session());
+  // trust proxy from hosting services like vercel to send cookies over https
+  app.enable("trust proxy");
   return app;
 };
 
@@ -80,8 +85,8 @@ const setUpPassport = () => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:8080/auth/google/callback",
-        passReqToCallback: true,
+        callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
+        // passReqToCallback: true,
       },
       authUser
     )
