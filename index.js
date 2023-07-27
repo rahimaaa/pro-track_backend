@@ -65,18 +65,22 @@ const setUpPassport = () => {
       password,
       done
     ) {
-      User.findOne({ email: email }, function (err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false);
-        }
-        if (!user.correctPassword(password)) {
-          return done(null, false);
-        }
-        return done(null, user);
-      });
+      try {
+        User.findOne({ email: email }, function (err, user) {
+          if (err) {
+            return done(err);
+          }
+          if (!user) {
+            return done(null, false);
+          }
+          if (!user.correctPassword(password)) {
+            return done(null, false);
+          }
+          return done(null, user);
+        });
+      } catch (error) {
+        next(err);
+      }
     })
   );
 
