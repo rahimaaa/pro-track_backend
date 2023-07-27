@@ -156,6 +156,15 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("addNewPost", newFeed);
   });
 
+  //resource
+  socket.on("addNewResource", (newResource) => {
+    socket.broadcast.emit("addNewResource", newResource);
+  });
+
+  socket.on("editResource", (updatedResource) => {
+    socket.broadcast.emit("editResource", updatedResource);
+  });
+
   //lecture
   socket.on("addNewLecture", (newLecture) => {
     socket.broadcast.emit("addNewLecture", newLecture);
