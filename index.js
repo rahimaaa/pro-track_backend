@@ -27,11 +27,11 @@ const morgan = require("morgan");
 const PORT = process.env.PORT || "8080";
 
 const sessionStore = new SequelizeStore({ db });
-
 const configSession = () => ({
   secret: "ttp2023summer",
   store: sessionStore,
   resave: false,
+  saveUninitialized: false,
   cookie: cookie,
 });
 
