@@ -10,6 +10,7 @@ router.use("/assignment", require("./assignment"));
 router.use("/resource", require("./resource"));
 router.use("/zoom", require("./zoom"));
 router.use("/group", require("./group"));
+router.use("/attendance", require("./attendance"));
 
 // 404 Handling
 router.use((req, res, next) => {

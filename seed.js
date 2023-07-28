@@ -9,6 +9,7 @@ const {
   Lecture,
   Zoom,
   Group,
+  Attendance,
 } = require("./db/models");
 
 // const { AssignmentStatus } = require("./db/models");
@@ -268,28 +269,27 @@ const seedAssignmentStatus = [
   },
 ];
 
-
 const seedGroup = [
   {
-  userId: 1,
-  groupId: 1,
-  assignmentStatusId: 1,
+    userId: 1,
+    groupId: 1,
+    assignmentStatusId: 1,
   },
   {
     userId: 2,
     groupId: 1,
     assignmentStatusId: 1,
-    },
-    {
-      userId: 3,
-      groupId: 1,
-      assignmentStatusId: 1,
-      },
-      {
-        userId: 4,
-        groupId: 1,
-        assignmentStatusId: 1,
-        },
+  },
+  {
+    userId: 3,
+    groupId: 1,
+    assignmentStatusId: 1,
+  },
+  {
+    userId: 4,
+    groupId: 1,
+    assignmentStatusId: 1,
+  },
 ];
 const seedResources = [
   {
@@ -300,7 +300,7 @@ const seedResources = [
     userId: "6",
     link: "www.google.com",
     // linkDescription: "Testing link preview",
-    image: "image-url"
+    image: "image-url",
   },
   {
     title: "Deploying your app on vercel",
@@ -311,7 +311,7 @@ const seedResources = [
     userId: "5",
     link: "www.youtube.com",
     // linkDescription: "Testing link preview",
-    image: "image-url"
+    image: "image-url",
   },
   {
     title: "Authentication and Authorization",
@@ -322,15 +322,38 @@ const seedResources = [
     userId: "6",
     link: "www.google.com",
     // linkDescription: "Testing link preview",
-    image: "image-url"
+    image: "image-url",
   },
 ];
 
 const seedZoom = [
   {
-    info: "Zoom Meeting Link", 
+    info: "Zoom Meeting Link",
     link: "https://us06web.zoom.us/j/3698593234?pwd=TkJNVmlEU20rK3FMdXI3UU9GUEhqdz09",
-  }
+  },
+];
+
+const seedAttendance = [
+  {
+    userId: 1,
+    M: "P",
+    T: "P",
+  },
+  {
+    userId: 2,
+    M: "P",
+    T: "P",
+  },
+  {
+    userId: 3,
+    M: "P",
+    T: "P",
+  },
+  {
+    userId: 4,
+    M: "P",
+    T: "P",
+  },
 ];
 
 const seed = async () => {
@@ -345,6 +368,7 @@ const seed = async () => {
     await Feed.bulkCreate(seedFeed);
     await Group.bulkCreate(seedGroup);
     await Zoom.bulkCreate(seedZoom);
+    await Attendance.bulkCreate(seedAttendance);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);

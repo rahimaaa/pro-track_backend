@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User } = require("../db/models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
+const { cookie } = require("../config");
 
 //auth/login
 
@@ -43,11 +44,10 @@ router.get(
   }),
   function (req, res, next) {
     // Successful authentication, redirect home.
-    res.redirect("http://localhost:3000/dashboard");
+    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+    // res.redirect("https://www.google.com");
   }
 );
-
-
 
 router.post("/signup", async (req, res, next) => {
   try {
@@ -72,13 +72,12 @@ router.post("/logout", async (req, res, next) => {
     if (error) {
       return next(error);
     }
-    res.clearCookie("connect.sid");
     req.session.destroy((error) => {
       if (error) {
         return next(error);
       }
       // res.clearCookie("connect.sid");
-
+      res.clearCookie("connect.sid", { ...cookie, maxAge: 0 });
       res.sendStatus(204);
     });
   });

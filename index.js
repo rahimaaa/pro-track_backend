@@ -8,6 +8,7 @@ const cors = require("cors");
 const db = require("./db");
 const { User } = require("./db/models");
 const GoogleStrategy = require("passport-google-oidc");
+const { cookie } = require("./config");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
@@ -15,24 +16,23 @@ const io = require("socket.io")(server, {
   cors: {
     origin: process.env.FRONTEND_URL || "http://localhost:3000",
     credentials: true,
+    allowedHeaders:
+      "Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+    preflightContinue: true,
   },
 });
 
 const morgan = require("morgan");
-const { update } = require("./db/models/User");
 
 const PORT = process.env.PORT || "8080";
 
 const sessionStore = new SequelizeStore({ db });
-
 const configSession = () => ({
   secret: "ttp2023summer",
   store: sessionStore,
   resave: false,
-  cookie: {
-    secure: process.env.NODE_ENV === "dev" ? false : true,
-    maxAge: 8 * 60 * 60 * 1000,
-  },
+  saveUninitialized: false,
+  cookie: cookie,
 });
 
 //middleware
@@ -44,11 +44,16 @@ const setUpMiddleware = (app) => {
     cors({
       origin: process.env.FRONTEND_URL || "http://localhost:3000",
       credentials: true,
+      allowedHeaders:
+        "Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+      preflightContinue: true,
     })
   );
   app.use(session(configSession()));
   app.use(passport.initialize());
   app.use(passport.session());
+  // trust proxy from hosting services like vercel to send cookies over https
+  app.enable("trust proxy");
   return app;
 };
 
@@ -60,18 +65,22 @@ const setUpPassport = () => {
       password,
       done
     ) {
-      User.findOne({ email: email }, function (err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false);
-        }
-        if (!user.correctPassword(password)) {
-          return done(null, false);
-        }
-        return done(null, user);
-      });
+      try {
+        User.findOne({ email: email }, function (err, user) {
+          if (err) {
+            return done(err);
+          }
+          if (!user) {
+            return done(null, false);
+          }
+          if (!user.correctPassword(password)) {
+            return done(null, false);
+          }
+          return done(null, user);
+        });
+      } catch (error) {
+        next(err);
+      }
     })
   );
 
@@ -80,7 +89,7 @@ const setUpPassport = () => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:8080/auth/google/callback",
+        callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
         passReqToCallback: true,
       },
       authUser
@@ -156,6 +165,10 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("addNewPost", newFeed);
   });
 
+  socket.on("deletePost", (id) => {
+    socket.broadcast.emit("deletePost", id);
+  });
+
   //resource
   socket.on("addNewResource", (newResource) => {
     socket.broadcast.emit("addNewResource", newResource);
@@ -165,13 +178,21 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("editResource", updatedResource);
   });
 
+  socket.on("deleteResource",(id)=>{
+    socket.broadcast.emit("deleteResource",id);
+  })
+
   //lecture
   socket.on("addNewLecture", (newLecture) => {
     socket.broadcast.emit("addNewLecture", newLecture);
-  });
+  }); 
 
   socket.on("editLecture", (updatedLecture) => {
     socket.broadcast.emit("editLecture", updatedLecture);
+  });
+
+  socket.on("deleteLecture", (id) => {
+    socket.broadcast.emit("deleteLecture", id);
   });
 
   //help request
@@ -181,6 +202,10 @@ io.on("connection", (socket) => {
 
   socket.on("editRequest", (updatedRequest) => {
     socket.broadcast.emit("editRequest", updatedRequest);
+  });
+
+  socket.on("deleteRequest", (id) => {
+    socket.broadcast.emit("deleteRequest", id);
   });
 });
 
