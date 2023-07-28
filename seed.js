@@ -155,6 +155,7 @@ const seedAssignment = [
     instruction:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     group: null,
+    assigned: true,
     assignment_date: "05.10.23",
     due_date: "05.11.23",
   },
@@ -162,7 +163,8 @@ const seedAssignment = [
     assignmentId: 2,
     assignmentName: "Github Account",
     instruction: "Create a github account and signup",
-    group: "yes",
+    group: null,
+    assigned: true,
     assignment_date: "05.11.23",
     due_date: "05.12.23",
   },
@@ -171,8 +173,29 @@ const seedAssignment = [
     assignmentName: "Javascript Knowledge Check",
     instruction: "Create a working javascript program",
     group: null,
+    assigned: true,
     assignment_date: "05.12.23",
     due_date: "05.18.23",
+  },
+  {
+    assignmentId: 4,
+    assignmentName: "Assignment #4: DOM Challenges II",
+    instruction:
+      `Complete and submit the following:
+      Create an HTML page with two buttons that argue with each other. When one button is clicked, the text "I'm right" should be placed next to it. When the other button is clicked, the text is replaced with, "No, I'm right!"
+      Create an HTML page with a large element on the page that says "Don't hover over me" inside of it. When you hover over the element, send an alert to the user that says, "Hey, I told you not to hover over me!
+      Create an HTML page with a form. It should include inputs for a username, email, and password. Also a submit button.
+      In a Javascript file, write a program which checks the following things:
+      checks that the password is 12345678
+      if the password is incorrect, send an alert message
+      Your page should also include an <h1> tag. If the information in the form is correct, have Javascript change the text in the <h1>.HTML page.
+      Add a CSS stylesheet that styles all of your pages.
+      BONUS: Create an HTML page with a form that asks the user to input the value of a sphere's radius. Write Javascript that gives them back the volume of the sphere. (There are many different ways to execute this. You can give the user information back in another input box on the page, as an alert, or any other way you can think of. You can look up how to use the Javascript Math object to simplify your calculations.)
+      `,
+    group: null,
+    assigned: false,
+    assignment_date: "06.14.23",
+    due_date: "06.15.23",
   },
 ];
 
