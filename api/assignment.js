@@ -68,15 +68,16 @@ router.delete("/:id", isTA, async (req, res, next) => {
   }
 });
 
-router.put("/:id", isTA, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    const { assignmentName, instruction, group, assignment_date, due_date } =
+    const { assignmentName, instruction, group, assigned, assignment_date, due_date } =
       req.body;
     const updatedAssignment = await Assignment.update(
       {
         assignmentName,
         instruction,
         group,
+        assigned,
         assignment_date,
         due_date,
       },
@@ -94,7 +95,7 @@ router.put("/:id", isTA, async (req, res, next) => {
   }
 });
 
-router.post("/", isTA, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const { assignmentName, instruction, group, assignment_date, due_date } =
       req.body;

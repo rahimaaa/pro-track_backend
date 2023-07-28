@@ -15,8 +15,13 @@ const Assignment = db.define("assignment", {
     allowNull: true,
   },
   group: {
-    type: DataTypes.STRING,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
+  },
+  assigned: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,
   },
   assignment_date: {
     type: DataTypes.DATE,
