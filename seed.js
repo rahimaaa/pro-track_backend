@@ -126,6 +126,30 @@ const seedFeed = [
     link: "getrated.com",
     userId: "4",
   },
+  {
+    title: "Due Date for CRUD APP",
+    content: "Each member is to have at least 20 commits (in sum) reflected on the remote repository/repositories).",
+    link: "",
+    userId: "6",
+  },
+  {
+    title: "Notice of Absence",
+    content: "If you are observing a religious holiday next week, please email me indicating the exact start time/start date and end time/end date. This will help make informed decisions regarding that. Thank you.",
+    link: "",
+    userId: "6",
+  },
+  {
+    title: "Google Form Inquiry",
+    content: "Please complete as soon as you see this. It is only one multiple choice question in a Google Form. Subject matter in subject line of email.",
+    link: "https://docs.google.com/forms",
+    userId: "6",
+  },
+  {
+    title: "Google Form Survey",
+    content: "Please complete this survey as soon as you see this.",
+    link: "https://docs.google.com/forms",
+    userId: "6",
+  },
 ];
 
 const seedRequests = [
@@ -144,6 +168,60 @@ const seedRequests = [
   {
     studentId: "2",
     request: "Help with react don't understand",
+    status: "Pending",
+    accepted: "False",
+  },
+  {
+    studentId: "3",
+    request: "Unable to connect to Server",
+    status: "In Progress",
+    accepted: "True",
+  },
+  {
+    studentId: "1",
+    request: "Github pages Deployment",
+    status: "In Progress",
+    accepted: "True",
+  },
+  {
+    studentId: "2",
+    request: "Need help with BankApp Assignment",
+    status: "Pending",
+    accepted: "False",
+  },
+  {
+    studentId: "4",
+    request: "Need help resolving this error; createdb: error: database creation failed: ERROR:  permission denied to create database",
+    status: "Done",
+    accepted: "True",
+  },
+  {
+    studentId: "1",
+    request: "Need help connecting with frontend Server from team member systems",
+    status: "Done",
+    accepted: "True",
+  },
+  {
+    studentId: "3",
+    request: "Help connecting backend to Redux ",
+    status: "In Progress",
+    accepted: "True",
+  },
+  {
+    studentId: "2",
+    request: "Need Help resolving internal network error 500 ",
+    status: "Pending",
+    accepted: "False",
+  },
+  {
+    studentId: "4",
+    request: "Need help to resolve 'serverless function crash/ 500 error after a manual npm install'.",
+    status: "Pending",
+    accepted: "False",
+  },
+  {
+    studentId: "2",
+    request: "Help with Authorization and Authentication",
     status: "Pending",
     accepted: "False",
   },
