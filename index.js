@@ -165,6 +165,10 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("addNewPost", newFeed);
   });
 
+  socket.on("deletePost", (id) => {
+    socket.broadcast.emit("deletePost", id);
+  });
+
   //resource
   socket.on("addNewResource", (newResource) => {
     socket.broadcast.emit("addNewResource", newResource);
@@ -174,13 +178,21 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("editResource", updatedResource);
   });
 
+  socket.on("deleteResource",(id)=>{
+    socket.broadcast.emit("deleteResource",id);
+  })
+
   //lecture
   socket.on("addNewLecture", (newLecture) => {
     socket.broadcast.emit("addNewLecture", newLecture);
-  });
+  }); 
 
   socket.on("editLecture", (updatedLecture) => {
     socket.broadcast.emit("editLecture", updatedLecture);
+  });
+
+  socket.on("deleteLecture", (id) => {
+    socket.broadcast.emit("deleteLecture", id);
   });
 
   //help request
@@ -190,6 +202,10 @@ io.on("connection", (socket) => {
 
   socket.on("editRequest", (updatedRequest) => {
     socket.broadcast.emit("editRequest", updatedRequest);
+  });
+
+  socket.on("deleteRequest", (id) => {
+    socket.broadcast.emit("deleteRequest", id);
   });
 });
 
