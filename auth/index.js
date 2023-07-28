@@ -45,6 +45,7 @@ router.get(
   function (req, res, next) {
     // Successful authentication, redirect home.
     res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+    // res.redirect("https://www.google.com");
   }
 );
 
