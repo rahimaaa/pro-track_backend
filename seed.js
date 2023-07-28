@@ -230,9 +230,16 @@ const seedRequests = [
 const seedAssignment = [
   {
     assignmentId: 1,
-    assignmentName: "Git knowledge Check",
+    assignmentName: "Assignment #1: COLLAB WORKSHOP",
     instruction:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      `Choose a cause that your group really cares about and put together a small informational 
+      website using HTML/CSS trying to convince people to donate to or help out this cause. 
+      This site should be 2-3 pages and look as professional as possible using modern design trends. 
+      Research similar websites to get inspiration. 
+      Once you have decided on a cause, begin by selecting one teammate to create a Git repo 
+      with an index.html file, push it to GitHub, then add the other teammates as collaborators on the repo. 
+      Throughout this workshop each teammate should be communicating often and using GitHub effectively. 
+      Remember no one should be working off Master so create branches, resolve merge conflicts, and create and close issues.`,
     group: null,
     assigned: true,
     assignment_date: "05.10.23",
@@ -240,8 +247,15 @@ const seedAssignment = [
   },
   {
     assignmentId: 2,
-    assignmentName: "Github Account",
-    instruction: "Create a github account and signup",
+    assignmentName: "Assignment #2: JS Assignment",
+    instruction: `The following (12) are some of the most popular and used methods in functional languages:
+    forEach Map Filter Some (Any) Every Reduce Includes indexOf Push lastIndexOf Object.keys() Object.values()
+    For this assignment, you will recreate these methods using JavaScript functions. Make sure to carefully
+     understand what each method is designed to do, and DO NOT use any of the respective native JS methods 
+     to implement your solutions. Also, keep in mind that these methods do not (except for push()) mutate
+      the input array. We highly suggest utilizing Mozilla Developer Network (MDN) Web Docs to understand 
+      how each method works and what arguments they take. Each doc entry is linked above. Also look into 
+      Array.prototype.pop(), Array.prototype.shift(), and other methods for your own enrichment.`,
     group: null,
     assigned: true,
     assignment_date: "05.11.23",
@@ -249,8 +263,20 @@ const seedAssignment = [
   },
   {
     assignmentId: 3,
-    assignmentName: "Javascript Knowledge Check",
-    instruction: "Create a working javascript program",
+    assignmentName: "Assignment #3: DOM CHALLENGE I",
+    instruction: `This is an exercise that will help get you acclimated to the DOM API. 
+                  For each individual prompt, write out the code necessary to achieve the 
+                  particular task at hand. Test it out, and then move forward. If you encounter
+                  a situation where you can use a previous prompt's solution for the one you are 
+                  currently working on, feel free to keep it DRY (Do-Not-Repeat-Yourself) and 
+                  leverage that reusable code. By the same token, if you encounter a situation 
+                  where a previous prompt's solution is a blocker (gets in the way of what you 
+                  are trying to achieve at the moment), then prioritize the current prompt. 
+                  You can comment out the code that's blocking, test out the current code that 
+                  you are working on, and after verifying that it works you can comment back in 
+                  the previous code. In this way, you'll be treating each prompt as an individual, 
+                  distinct task. The primary point is to become more familiar with the DOM methods 
+                  that allow you to interact and manipulate the Document Object Model.`,
     group: null,
     assigned: true,
     assignment_date: "05.12.23",
@@ -276,34 +302,315 @@ const seedAssignment = [
     assignment_date: "06.14.23",
     due_date: "06.15.23",
   },
+  {
+    assignmentId: 5,
+    assignmentName: "Assignment #5: DOM III",
+    instruction:
+      `For each user story, make a feature branch. Try to commit often and commit frequently on each feature branch. Please incorporate GitHub Projects as well, using the Automated Kanban template. Create a note for each user story and then convert that note to an issue. Remember, try to have your branches named as closely to the feature/ticket/issue it is intended to build out. Do not forget to type in “closes #” in the body of Pull Requests to close associated issues.
+
+      Click on a ticket/issue and explore the different sections such as “Assignees, Labels, and Projects” and make sure that your ticket is associated to your project, otherwise your PRs and Tickets won’t be automated and tethered together (this should be done for you already, but double-check). A few useful methods, properties, and events for this assignment:
+      
+      getElementById()
+      
+      addEventListener()
+      
+      getElementsByTagName()
+      
+      createElement()
+      
+      appendChild()
+      
+      event.target
+      
+      node.children
+      
+      Array.from()
+      
+      mousedown
+      
+      mouseover
+      
+      mouseup
+      
+      Assignment
+      Based on the in-class demonstration, complete the following user stories: As a user, I can:
+      
+       add rows to the grid
+       add columns to the grid
+       remove rows from the grid
+       remove columns from the grid
+       select a color from a dropdown menu of colors
+       click on a single cell, changing its color to the currently selected color
+       fill all uncolored cells with the currently selected color
+       fill all cells with the currently selected color
+       clear all cells/restore all cells to their original/initial color
+       click and hold (mouseover) from a single cell (start) to a different cell (end) 
+       such that all affected/hovered-over cells from start to end change to the currently selected color
+       `,
+    group: null,
+    assigned: false,
+    assignment_date: "06.14.23",
+    due_date: "06.15.23",
+  },
+  {
+    assignmentId: 6,
+    assignmentName: "Assignment #6: DOM III + ReactJS",
+    instruction:
+      `You'll be re-doing part of the functionality of the DOM Challenges III (grid/row/column/color) assignment, but with Create-React-App this time around. Instead of directly using the DOM API, you'll be managing state (hint: the currently selected color and the grid), writing methods within the class instead of standalone functions, and passing down bounded-event handlers to be fired off in the children components that have event listeners on them (note: since this will be bound in a parent, then any child component that receives the bound function as a passed down prop will be able to impact [perform calculations/operations relevant to the parent] the parent component). The MVP (minimum viable product) features can be achieved with four components: App.jsx, Table.jsx, TableCell.jsx, TableRow.jsx, where App.jsx is a stateful, class component and the other three components are purely presentational components. The MVP features are: a user can add a row, a user can add a column, and a user can select a color to change a single cell via click. As a user, I can add a row, add a column, select a color from a dropdown menu of colors, and click on individual cells to color in the cell. Stretch and optional features will be recreating the entirety (clear the grid, fill the grid, fill uncolored cells, etc) of DOM Challenges III, but in ReactJS. There should be a dedicated and individual feature branch for each function you plan on writing as well as a dedicated and individual feature branch for each component you write out.
+
+      Use this time to also do two things:
+      
+      Navigate to this extension for Google Chrome and install it: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en. This shows you the root React components that were rendered on the page, as well as the subcomponents that they ended up rendering. By selecting one of the components in the tree, you can inspect and edit its current props and state in the panel on the right. In the breadcrumbs you can inspect the selected component, the component that created it, the component that created that one, and so on. If you inspect a React element on the page using the regular Elements tab, then switch over to the React tab, that element will be automatically selected in the React tree.
+      Deploy this to GitHub Pages. Please refer to this link for guidance on this: https://codeburst.io/deploy-react-to-github-pages-to-create-an-amazing-website-42d8b09cd4d (debug as necessary)
+      More Direction/Suggestions
+      Put all of your components in a directory titled components
+      
+      Create an index.js file for that components directory so that you can have a central location of exporting (it will look something like this, not identically of course) (this is known as a barrel file)
+      
+      The above will allow you to import multiple components from this one file in your App.jsx (or any file that needs a component) in a convenient, semantic way that appears like so (disregard the names of the files and substitute the names of your particular components):
+      
+       import { HeaderView, MainView, FooterView, RoutesView } from "./components"; (index.js is automatically implied and interpreted)
+      App.jsx could maintain the state of the grid as well as the state of the selected color (stateful, class component)
+      
+      App.jsx could have methods (bound event handler functions) on the class which will be passed down to children components via props (the children components, presentational components, will have event listeners that will fire off the bound event handler functions
+      
+      App.jsx could render the dropdown menu as well as the Table Component (presentational component)
+      
+      Table.jsx could be the parent of TableRow.jsx (presentational component)
+      
+      TableRow.jsx could be the parent of TableCell.jsx (presentational component)
+      
+      The above are merely suggestions and by no means is a mandatory approach
+      
+      Assignment
+      Complete the following user stories (bold denotes an MVP/mandatory feature, whereas italics denotes a stretch/optional feature): As a user, I can:
+      
+       add rows to the grid
+       add columns to the grid
+       remove rows from the grid
+       remove columns from the grid
+       select a color from a dropdown menu of colors
+       click on a single cell, changing its color to the currently selected color
+       fill all uncolored cells with the currently selected color
+       fill all cells with the currently selected color
+       clear all cells/restore all cells to their original/initial color
+       click and hold (mouseover) from a single cell (start) to a different cell (end) such that all affected/hovered-over cells from start to end change to the currently selected color      
+      `,
+    group: null,
+    assigned: false,
+    assignment_date: "06.14.23",
+    due_date: "06.20.23",
+  },
+  {
+    assignmentId: 7,
+    assignmentName: "Assignment #7: API I",
+    instruction:
+      `The Zip and City search API (ctp-zip-api)
+      https://zip-api.eu/en/
+      
+      For this project we will be developing two simple applications, (1) the first app allows us to search for City names and details for a given zip code, and (2) the second app allows us to find the distance between 2 given zip codes.
+      
+      Below is a description of the relevant API endpoints for the projects:
+      
+      /radius/[country_code]-[postal_code]/[distance]/[unit] - find Cities associated with a zipcode within a given distance
+      https://zip-api.eu/api/v1/radius/US-11373/5/km
+      
+      You will receive a JSON response with an array containing an object for each city found.
+      
+      /info/[country_code]-[postal_code] - find city names associated with a zip code
+      https://zip-api.eu/api/v1/info/US-11373
+      
+      Project 1: Zip Code Search app
+      In this project you will build a simple Zip Code search app. We will need an input field where the user can enter a zip code, like in the following image:
+      
+      We will use the user input to search zip-api. If the zip code is valid the API will respond with an object. Use that response to display the relevant user information.
+      
+      Getting started
+      To get started run the following commands
+      
+      create-react-app zip-search
+      cd zip-search
+      npm start
+      At this point you should see the React hello world page running on your browser. You should leave it running in the background while you work on this project.
+      
+      Now open this folder (zip-search) in your text editor. You will see all of the code the create-react-app setup for us. Since this is the stock project we can begin editing the files as we see fit. You can start at App.js and you can also edit public/index.html (to add Bootstrap for example).
+      
+      Project 2: Distance between Zips
+      In this project we will allow the user to provide us two zip codes and we will display the distance between the 2 zip codes.
+      
+      To get started run the following commands
+      
+      create-react-app zip-distance
+      cd zip-distance
+      npm start
+      At this point you should see the React hello world page running on your browser. You should leave it running in the background while you work on this project.
+      
+      Now open this folder (zip-distance) in your text editor. You will see all of the code the create-react-app setup for us. Since this is the stock project we can begin editing the files as we see fit. You can start at App.js and you can also edit public/index.html (to add Bootstrap for example).
+      
+      Using the same API as project 1, we will build a zip-distance app, where given two zip codes, we will calculate the distance between the two zip codes.
+      
+      Primary Tasks
+      Using the same zip-api we used in project 1:
+      
+      Implement a distance calculator
+      it should allow US zip codes only
+      Display distance in a given metric
+      Stretch Features (Optional, but highly recommended)
+      Keep a history of recent searches
+      Let user choose between which measurement they want the output in(either miles or kilometers) 
+      `,
+    group: null,
+    assigned: false,
+    assignment_date: "06.14.23",
+    due_date: "06.16.23",
+  },
+  {
+    assignmentId: 8,
+    assignmentName: "Assignment #8: API II",
+    instruction:
+      `When App mounts, load trending gifs
+
+      DO NOT WRITE ALL COMPONENTS IN ONE FILE. Break out components into separate files, and make sure that they are imported/exported properly
+      
+      Consider using three components:
+      
+      App Component: has state with GIFS
+      
+      SearchField Component: has state with search field input
+      
+      GifCard Component: presentational component receiving GIF info as props
+      
+      In order to interact with the API, you will need to create a free developer account and create a new project to have an API key generated for you.
+      
+      To hit various GIPHY API Endpoints, you can use the following paths:
+      
+      Regular Search: http://api.giphy.com/v1/gifs/search?q=SEARCH+TERM+GOES+HERE&api_key=YOUR_API_KEY
+      
+      returns an array of gif objects
+      Trending Search: http://api.giphy.com/v1/gifs/trending?api_key=YOUR_API_KEY
+      
+      returns an array of gif objects
+      Random Search: http://api.giphy.com/v1/gifs/random?api_key=YOUR_API_KEY
+      
+      returns a singular gif object
+      `,
+    group: null,
+    assigned: false,
+    assignment_date: "06.14.23",
+    due_date: "06.17.23",
+  },
+  {
+    assignmentId: 9,
+    assignmentName: "Assignment #9: ReactRouter",
+    instruction:
+      `Client-side routing is a bit of a misnomer.
+
+      On the server, routing generally refers to the way we define the URLs and RESTful resources that make up our application. 
+      Whether we are asking for data from the database or persisting data, our server needs to know where the data lives. 
+      Server routes help us keep track of this information.
+      
+      In the browser, things are a little different. 
+      When we build Single-Page Applications, we render our data inside of the browser. 
+      The data lives on a server, so our data's "addresses" have been defined elsewhere. We only need to know what these pre-defined addresses are to consume them. We'll still have a lot of different views for our data, and we won't want to show all of them on the page at once. Client-side routing is how we'll describe which views we are showing on the page at any given time.
+      
+      Routing in React
+      React does not provide built-in functionality for client-side routing. 
+      However, we can use external libraries specifically designed for this purpose, 
+      such as React Router. React Router is a popular routing library that allows us to 
+      handle client-side routing seamlessly in our React applications.
+      
+      In this lesson, we will focus on React Router v6, the latest version of the library. 
+      React Router v6 introduced significant changes and improvements over previous versions. It offers a simpler and more intuitive API, 
+      enhanced nested routing capabilities, and improved programmatic navigation.
+
+      To get started with React Router v6, let's set it up in a new React application:
+      Create a new React application using npx create-react-app.
+      Navigate to the project directory.
+      Install React Router v6 using npm install react-router-dom@next
+      `,
+    group: null,
+    assigned: false,
+    assignment_date: "06.14.23",
+    due_date: "07.10.23",
+  },
+  {
+    assignmentId:10,
+    assignmentName: "Assignment #10: Database Practice",
+    instruction:
+      `Download and install PostgreSQL on your devices (for Mac users I recommend the app)
+
+      Using Figma/Lucidchart, create an ER Diagram of your database you plan to create
+      Create a brand new database with a specific topic (eg pizza, students, employees, etc.) with:
+      At least four different tables.
+      Each table should have a primary key
+      Each table should have at least four dummy tuples
+      Each table should be able to be joined with one other table in the database (this will make sense once you understand schemas)
+      Write an inner join query that joins two tables, one that joins three tables and one that joins all four tables (you can stack inner joins)
+      Finally using Postman, try to:
+      Post a brand new line of data
+      Get two different lines of dummy data that you placed inside the database. Take a screenshot of your work on Postman and put it inside of your repo.
+     You can do this by either setting up Express routes to hit (recommended) or straight through the database using xmysql package You don’t have to try running your code on the psql shell, but it is recommended so you can make sure that you understand sql properly. Highly recommend that you remember where you installed your postgres server on your windows pc, you need to add the postgres bin to your environmental variables to connect to postgres with libraries like node-postgres.
+      `,
+    group: null,
+    assigned: false,
+    assignment_date: "07.18.23",
+    due_date: "07.15.23",
+  },
 ];
 
 const seedLecture = [
   {
     title: "Lecture for 12th June",
-    description: "describe something",
-    recordings: "Recording completed",
-    password: "1234",
+    description: "June 12th: Pilot Assessment, Introductions, Orientation",
+    recordings: "https://us06web.zoom.us/rec/share/UpDoarolKxCNnCTEtqGqfO5kNvvHIoYLlkA0w3g9aXB1amfeSxYEJt6Yt06Wj6mx.joG1sQ8-kzEriU6j",
+    password: "fBn$4*A=",
     slides: "True",
     lecture_date: "12th July 2023",
     userId: "5",
   },
   {
-    title: "Lecture for 18th June",
-    description: "describe me",
-    recordings: "Pending recorded lecture",
-    password: "5678",
+    title: "Lecture for 13th June",
+    description: "June 13th: Collaborative Workflow (Git) and Introduction to JavaScript",
+    recordings: "https://us06web.zoom.us/rec/share/NGlcLYziFTFTg0ZXG1O9cOAbbHBUUc4qEIw3mFOtuClF22FGK1s3-UhfBXM79N1V.1SEq4f3B7K5-YRm5",
+    password: "j8vg@#$Q",
     slides: "False",
-    lecture_date: "18th June 2023",
+    lecture_date: "13th June 2023",
     userId: "5",
   },
   {
-    title: "Lecture for 24th June",
-    description: "Installation of Node.js",
-    recordings: "Class recording in Progress",
-    password: "1034",
+    title: "Lecture for 14th June",
+    description: "June 14th: DOM Manipulation",
+    recordings: "https://us06web.zoom.us/rec/share/FhxrtQF2bNUQYLGe77A6wW-g5KivKgdGYb80TjaEgRgIoPPdSCl6HMMdrxZOxO6j.b1PERfNeoamt4U8q",
+    password: "9#AudEdZ",
     slides: "True",
-    lecture_date: "24th June 2023",
+    lecture_date: "14th June 2023",
+    userId: "4",
+  },
+  {
+    title: "Lecture for 15th June",
+    description: "June 15th: Introduction to React",
+    recordings: "https://us06web.zoom.us/rec/share/yjyYaokbhPnQL1fIWIX38N_WtVhfttMgJm2BNyTkjEzgeG7jNdCZoQmixfh1YJQ0.kE8dj-BrmKrahRRM",
+    password: "ajAVW#T5",
+    slides: "True",
+    lecture_date: "15th June 2023",
+    userId: "4",
+  },
+  {
+    title: "Lecture for 16th June",
+    description: "June 16th: Introduction to External API Requests and ReactJS",
+    recordings: "https://us06web.zoom.us/rec/share/xL9gxfgCiDzaItGOYshPahqEnOALR-S-pYA4pxNuWBZ9LUTqad3eoKR0-M2SkMpS.zzyJNTI2y5xLymcF",
+    password: "ms+5qKYD",
+    slides: "True",
+    lecture_date: "16th June 2023",
+    userId: "4",
+  },
+  {
+    title: "Lecture for 20th June",
+    description: "June 20th: React Router",
+    recordings: "https://us06web.zoom.us/rec/share/hTY4ZPXVN8G2FaW7NnAtp8ElZSZvZhqMGyIwbs_KmZAVuA0tysNLDi63_4aASUvs.ktK6muT4xnXjU3sB",
+    password: "#MJ@#L@2",
+    slides: "True",
+    lecture_date: "20th June 2023",
     userId: "4",
   },
 ];
@@ -384,23 +691,48 @@ const seedResources = [
     title: "Deploying your app on vercel",
     description:
       "This source shows you the steps to successfuly deploy a server",
-    category: "Server Deployment",
+    category: "Vercel Server Deployment",
     // content: "server-link",
     userId: "5",
-    link: "www.youtube.com",
+    link: "https://vercel.com/guides/deploying-pusher-channels-with-vercel",
     // linkDescription: "Testing link preview",
-    image: "image-url",
+    image: " ",
   },
   {
-    title: "Authentication and Authorization",
+    title: "Grouping Requests in collections| Postman Learning Center",
     description:
-      "This provides different means of authentication and authorization",
-    category: "Security Services",
-    // content: "security-link",
+      "Grouping Requests in collections: Postman Documentation",
+    category: "Postman Issues",
     userId: "6",
-    link: "www.google.com",
-    // linkDescription: "Testing link preview",
-    image: "image-url",
+    link: "https://learning.postman.com/docs/sending-requests/intro-to-collections/",
+    image: "",
+  },
+  {
+    title: "Guide to React Debugging with Documentation",
+    description:
+      "",
+    category: "React Debugging",
+    userId: "6",
+    link: "https://dev.to/colocodes/how-to-debug-a-react-app-51l4",
+    image: "",
+  },
+  {
+    title: "Debugging in NodeJs",
+    description:
+      "",
+    category: "Node.Js Issues",
+    userId: "6",
+    link: "https://blog.logrocket.com/debug-node-js-chrome-devtools-watchers/",
+    image: "",
+  },
+  {
+    title: "What are Dependency Arrays in react",
+    description:
+      "",
+    category: "React Issues",
+    userId: "6",
+    link: "https://devtrium.com/posts/dependency-arrays",
+    image: "",
   },
 ];
 
