@@ -29,7 +29,7 @@ const Assignment = db.define("assignment", {
   },
   due_date: {
    
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: true,
   },
 });
