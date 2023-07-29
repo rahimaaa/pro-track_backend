@@ -242,8 +242,8 @@ const seedAssignment = [
       Remember no one should be working off Master so create branches, resolve merge conflicts, and create and close issues.`,
     group: null,
     assigned: true,
-    assignment_date: "05.10.23",
-    due_date: "05.11.23",
+    assignment_date: "05.10.2023",
+    due_date: "05.11.2023",
   },
   {
     assignmentId: 2,
@@ -258,8 +258,8 @@ const seedAssignment = [
       Array.prototype.pop(), Array.prototype.shift(), and other methods for your own enrichment.`,
     group: null,
     assigned: true,
-    assignment_date: "05.11.23",
-    due_date: "05.12.23",
+    assignment_date: "05.11.2023",
+    due_date: "05.12.2023",
   },
   {
     assignmentId: 3,
@@ -279,8 +279,8 @@ const seedAssignment = [
                   that allow you to interact and manipulate the Document Object Model.`,
     group: null,
     assigned: true,
-    assignment_date: "05.12.23",
-    due_date: "05.18.23",
+    assignment_date: "05.12.2023",
+    due_date: "05.18.2023",
   },
   {
     assignmentId: 4,
@@ -299,8 +299,8 @@ const seedAssignment = [
       `,
     group: null,
     assigned: false,
-    assignment_date: "06.14.23",
-    due_date: "06.15.23",
+    assignment_date: "06.14.2023",
+    due_date: "06.15.2023",
   },
   {
     assignmentId: 5,
@@ -349,8 +349,8 @@ const seedAssignment = [
        `,
     group: null,
     assigned: false,
-    assignment_date: "06.14.23",
-    due_date: "06.15.23",
+    assignment_date: "06.14.2023",
+    due_date: "06.15.2023",
   },
   {
     assignmentId: 6,
@@ -398,8 +398,8 @@ const seedAssignment = [
       `,
     group: null,
     assigned: false,
-    assignment_date: "06.14.23",
-    due_date: "06.20.23",
+    assignment_date: "06.14.2023",
+    due_date: "06.20.2023",
   },
   {
     assignmentId: 7,
@@ -461,8 +461,8 @@ const seedAssignment = [
       `,
     group: null,
     assigned: false,
-    assignment_date: "06.14.23",
-    due_date: "06.16.23",
+    assignment_date: "06.14.2023",
+    due_date: "06.16.2023",
   },
   {
     assignmentId: 8,
@@ -496,8 +496,8 @@ const seedAssignment = [
       `,
     group: null,
     assigned: false,
-    assignment_date: "06.14.23",
-    due_date: "06.17.23",
+    assignment_date: "06.14.2023",
+    due_date: "06.17.2023",
   },
   {
     assignmentId: 9,
@@ -530,8 +530,8 @@ const seedAssignment = [
       `,
     group: null,
     assigned: false,
-    assignment_date: "06.14.23",
-    due_date: "07.10.23",
+    assignment_date: "06.14.2023",
+    due_date: "07.10.2023",
   },
   {
     assignmentId:10,
@@ -553,8 +553,8 @@ const seedAssignment = [
       `,
     group: null,
     assigned: false,
-    assignment_date: "07.18.23",
-    due_date: "07.15.23",
+    assignment_date: "07.18.2023",
+    due_date: "07.15.2023",
   },
 ];
 
@@ -565,7 +565,7 @@ const seedLecture = [
     recordings: "https://us06web.zoom.us/rec/share/UpDoarolKxCNnCTEtqGqfO5kNvvHIoYLlkA0w3g9aXB1amfeSxYEJt6Yt06Wj6mx.joG1sQ8-kzEriU6j",
     password: "fBn$4*A=",
     slides: "True",
-    lecture_date: "12th July 2023",
+    lecture_date: "07.12.2023",
     userId: "5",
   },
   {
@@ -574,7 +574,7 @@ const seedLecture = [
     recordings: "https://us06web.zoom.us/rec/share/NGlcLYziFTFTg0ZXG1O9cOAbbHBUUc4qEIw3mFOtuClF22FGK1s3-UhfBXM79N1V.1SEq4f3B7K5-YRm5",
     password: "j8vg@#$Q",
     slides: "False",
-    lecture_date: "13th June 2023",
+    lecture_date: "06.13.2023",
     userId: "5",
   },
   {
@@ -583,7 +583,7 @@ const seedLecture = [
     recordings: "https://us06web.zoom.us/rec/share/FhxrtQF2bNUQYLGe77A6wW-g5KivKgdGYb80TjaEgRgIoPPdSCl6HMMdrxZOxO6j.b1PERfNeoamt4U8q",
     password: "9#AudEdZ",
     slides: "True",
-    lecture_date: "14th June 2023",
+    lecture_date: "06.14.2023",
     userId: "4",
   },
   {
@@ -592,7 +592,7 @@ const seedLecture = [
     recordings: "https://us06web.zoom.us/rec/share/yjyYaokbhPnQL1fIWIX38N_WtVhfttMgJm2BNyTkjEzgeG7jNdCZoQmixfh1YJQ0.kE8dj-BrmKrahRRM",
     password: "ajAVW#T5",
     slides: "True",
-    lecture_date: "15th June 2023",
+    lecture_date: "06.15.2023",
     userId: "4",
   },
   {
@@ -601,7 +601,7 @@ const seedLecture = [
     recordings: "https://us06web.zoom.us/rec/share/xL9gxfgCiDzaItGOYshPahqEnOALR-S-pYA4pxNuWBZ9LUTqad3eoKR0-M2SkMpS.zzyJNTI2y5xLymcF",
     password: "ms+5qKYD",
     slides: "True",
-    lecture_date: "16th June 2023",
+    lecture_date: "06.16.2023",
     userId: "4",
   },
   {
@@ -610,7 +610,7 @@ const seedLecture = [
     recordings: "https://us06web.zoom.us/rec/share/hTY4ZPXVN8G2FaW7NnAtp8ElZSZvZhqMGyIwbs_KmZAVuA0tysNLDi63_4aASUvs.ktK6muT4xnXjU3sB",
     password: "#MJ@#L@2",
     slides: "True",
-    lecture_date: "20th June 2023",
+    lecture_date: "06.20.2023",
     userId: "4",
   },
 ];
