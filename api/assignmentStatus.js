@@ -78,15 +78,14 @@ router.get("/:id/:assignmentId", async (req, res, next) => {
 //   }
 // });
 
-router.put("/:id/:assignmentId/", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { status, feedback, submission } = req.body;
-    const { id, assignmentId } = req.params;
 
     const updatedStatus = await AssignmentStatus.update(
       { status, feedback, submission },
       {
-        where: { id, assignmentId: parseInt(assignmentId) },
+        where: { id: req.params.id},
         // returning: true,
       }
     );
@@ -104,20 +103,18 @@ router.put("/:id/:assignmentId/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const {
-      email,
+      userId,
       assignmentId,
       status,
-      groupId,
       submission,
       submissionDate,
       feedback,
     } = req.body;
 
     const newAssignmentStatus = await AssignmentStatus.create({
-      email,
+      userId,
       assignmentId,
       status,
-      groupId,
       submission,
       submissionDate,
       feedback,

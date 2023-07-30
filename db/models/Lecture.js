@@ -27,7 +27,7 @@ const Lecture = db.define("lecture", {
     allowNull: true,
   },
   lecture_date: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
     allowNull: true,
   },
   // userId: {
