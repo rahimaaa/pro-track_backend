@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Attendance, User } = require("../db/models");
+const { isAdmin } = require("./middleware/isAdmin");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -47,7 +48,6 @@ router.post("/", async (req, res, next) => {
 
 router.put("/", async (req, res, next) => {
   try {
-    console.log(req.body);
     const { userId, day, status } = req.body;
     const userAttendance = await Attendance.findOne({
       where: { userId: userId },
@@ -62,6 +62,16 @@ router.put("/", async (req, res, next) => {
     res.json({ message: "Attendance updated successfully" });
   } catch (error) {
     console.log(error);
+  }
+});
+
+// Deleting/Resting the attendance table
+router.delete("/", isAdmin, async (req, res, next) => {
+  try {
+    await Attendance.destroy({ truncate: true });
+    res.json({ message: "Attendance cleared successfully" });
+  } catch (error) {
+    next(error);
   }
 });
 
