@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Group, AssignmentStatus, User } = require("../db/models");
+const { Group, AssignmentStatus, User, Assignment} = require("../db/models");
 const { isTA } = require("./middleware/isTa");
 
 // //GET all groups for 1 user by user id
@@ -42,10 +42,61 @@ router.get("/:assignmentId", async (req, res, next) => {
               ],
             },
             {
-              model: AssignmentStatus,
+              model: AssignmentStatus, include: Assignment
             },
           ],
         },
+      ],
+    });
+
+    if (!assignments) {
+      return res.status(404).json({ error: "Assignment not found" });
+    }
+
+    res.json(assignments);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/student/:userId", async (req, res, next) => {
+  try {
+    const userId = req.params.userId; // Get the ID from the URL parameters
+    console.log(req.params);
+
+    //const {}
+    // const groups = await Group.findAll({where: { }});
+    const assignments = await Group.findAll({
+      where: { userId: userId },
+      include: [
+        {
+          model: AssignmentStatus,
+          include: [
+            {
+              model: Assignment,
+            }
+          ]
+        },
+        // {
+        //   model: AssignmentStatus,
+        //   include: [
+        //     {
+        //       model: User,
+        //       attributes: [
+        //         "id",
+        //         "firstName",
+        //         "lastName",
+        //         "imageUrl",
+        //         "email",
+        //         "userType",
+        //         "cohort_year",
+        //       ],
+        //     },
+        //     {
+        //       model: AssignmentStatus, include: Assignment
+        //     },
+        //   ],
+        // },
       ],
     });
 
