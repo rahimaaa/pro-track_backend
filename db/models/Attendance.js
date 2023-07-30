@@ -4,6 +4,7 @@ const db = require("../db");
 const Attendance = db.define("attendance", {
   userId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
   },
   monday: {
     type: DataTypes.ENUM("P", "U", "E", "L"),

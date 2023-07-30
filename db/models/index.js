@@ -62,7 +62,7 @@ Group.belongsTo(AssignmentStatus);
 Assignment.hasMany(AssignmentStatus);
 AssignmentStatus.belongsTo(Assignment);
 
-User.hasMany(Attendance);
+User.hasOne(Attendance);
 Attendance.belongsTo(User);
 
 module.exports = {
