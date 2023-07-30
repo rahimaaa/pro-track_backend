@@ -116,12 +116,24 @@ This is an example of how you may give instructions on setting up your project l
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
+Install postgres and connect it to the repo through the specifying the username, password and the database name you set, put it in the env file
+```
+USER_NAME= 
+PASSWORD=
+DATABASE=
+```
 
-Run npm i in the terminal for both the backend and frontend to install all the dependencies
+Run npm i in the terminal to install all the dependencies
 * npm
   ```sh
   npm i
   ```
+  
+  Seed your database
+  ```
+  node seed.js
+  ```
+  
 
 <!--### Installation
 
