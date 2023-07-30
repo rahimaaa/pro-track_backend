@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { Attendance, User } = require("../db/models");
-const { isAdmin } = require("./middleware/isAdmin");
-const { use } = require("passport");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -26,14 +24,10 @@ router.get("/:id", async (req, res, next) => {
   try {
     const user = await Attendance.findOne({ where: { id: req.params.id } });
     if (!user) {
-      // If the users is not found, send a response with status code 404
-      //And the error message (Users not found)
       return res.status(404).json({ error: "Users not found" });
     }
-    // Sending a response with the retrieved users
     res.json(user);
   } catch (error) {
-    // Pass any error to the error handling
     next(error);
   }
 });
@@ -41,12 +35,6 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const { userId } = req.body;
-    // const existingUser = await Attendance.findOne({
-    //   where: { userId: userId },
-    // });
-    // if (existingUser) {
-    //   return res.status(409).send({ message: "User already exists!" });
-    // }
     const newAttendance = await Attendance.create({
       userId: userId,
     });
@@ -63,7 +51,6 @@ router.put("/", async (req, res, next) => {
     const { userId, day, status } = req.body;
     const userAttendance = await Attendance.findOne({
       where: { userId: userId },
-      // returning: true,
     });
 
     // Check if the record exists
