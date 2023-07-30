@@ -8,7 +8,7 @@ const Group = db.define("group", {
 
  },
  groupId: {
-  type: DataTypes.INTEGER,
+  type: DataTypes.STRING,
  },
  assignmentStatusId: {
     type: DataTypes.INTEGER,
