@@ -778,7 +778,7 @@ const seed = async () => {
     await Feed.bulkCreate(seedFeed);
     await Group.bulkCreate(seedGroup);
     await Zoom.bulkCreate(seedZoom);
-    await Attendance.bulkCreate(seedAttendance);
+    // await Attendance.bulkCreate(seedAttendance);
     console.log("Seeding complete");
   } catch (error) {
     console.error("Seeding error:", error);
