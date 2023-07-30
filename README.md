@@ -27,7 +27,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/rahimaaa/pro-track_frontend](https://github.com/TashiXD/pro-track_frontend/blob/main/src/images/logo.png">
+  <a href="https://github.com/rahimaaa/pro-track_frontend/main/src/images/logo.png">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
